@@ -65,69 +65,78 @@ const difficultyColors = {
 
 <Layout title={`Ladder ${id} - ${ladder.name} | A2OJ Refreshed`}>
 	<main class="min-h-screen bg-slate-50 dark:bg-slate-950 full-page-grid">
-		<!-- Header with Animated Gradient -->
-		<div class="relative animated-gradient text-white overflow-hidden">
-			<!-- Grain texture overlay -->
-			<div class="absolute inset-0 grain"></div>
+		<!-- Engineering-Style Header -->
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6">
+			<!-- Back Link -->
+			<a href="/" class="inline-flex items-center engineering-back-link mb-8">
+				<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+				</svg>
+				<span>BACK TO LADDERS</span>
+			</a>
 			
-			<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-				<a href="/" class="inline-flex items-center text-white/90 hover:text-white mb-6 transition-colors drop-shadow">
-					<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-					</svg>
-					Back to Ladders
-				</a>
-				<div class="flex flex-col md:flex-row md:items-center md:justify-between">
-					<div>
-						<h1 class="text-4xl md:text-5xl font-bold mb-2 drop-shadow-lg">
-							Ladder {id}: {ladder.name}
-						</h1>
-						<p class="text-lg text-white/95 mb-4 drop-shadow">
-							{ladder.description}
-						</p>
-						<div class="flex items-center gap-4">
-							<span class="px-4 py-1 glass rounded-full text-sm font-medium shadow-lg backdrop-blur-xl">
-								Difficulty Level: {ladder.difficulty}
-							</span>
-							<span class="px-4 py-1 glass rounded-full text-sm font-medium shadow-lg backdrop-blur-xl">
-								{problems.length} Problems
-							</span>
+			<!-- Main Header Box -->
+			<div class="engineering-header-card">
+				<div class="engineering-card-corner engineering-card-corner-tl"></div>
+				<div class="engineering-card-corner engineering-card-corner-tr"></div>
+				<div class="engineering-card-corner engineering-card-corner-bl"></div>
+				<div class="engineering-card-corner engineering-card-corner-br"></div>
+				
+				<div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+					<div class="flex-1">
+						<span class="engineering-card-label">LADDER {String(id).padStart(2, '0')}</span>
+						<h1 class="engineering-page-title">{ladder.name}</h1>
+						<p class="engineering-page-subtitle">{ladder.description}</p>
+					</div>
+					
+					<div class="flex items-center gap-4">
+						<div class="engineering-stat-box">
+							<span class="engineering-stat-label">DIFFICULTY</span>
+							<span class="engineering-stat-value text-teal-600 dark:text-teal-400">LVL {ladder.difficulty}</span>
+						</div>
+						<div class="engineering-stat-box">
+							<span class="engineering-stat-label">PROBLEMS</span>
+							<span class="engineering-stat-value text-teal-600 dark:text-teal-400">{problems.length}</span>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			<!-- Decorative blur circles -->
-			<div class="absolute top-0 right-1/4 w-80 h-80 bg-teal-500/30 rounded-full blur-3xl"></div>
-			<div class="absolute bottom-0 left-1/3 w-80 h-80 bg-purple-500/30 rounded-full blur-3xl"></div>
 		</div>
 
 		<!-- Progress Section -->
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8">
-			<div class="relative glass dark:glass-dark rounded-2xl shadow-2xl p-6 border-white/30 dark:border-white/10 overflow-hidden">
-				<!-- Subtle grain effect -->
-				<div class="absolute inset-0 opacity-30">
-					<div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+			<div class="section-header mb-6">
+				<div class="section-header-line"></div>
+				<div class="section-header-box">
+					<span class="section-header-label">PROGRESS</span>
+					<h2 class="section-header-title text-lg">Your Statistics</h2>
 				</div>
+				<div class="section-header-line flex-1"></div>
+				<div class="section-header-corner"></div>
+			</div>
+			
+			<div class="engineering-card">
+				<div class="engineering-card-corner engineering-card-corner-tl"></div>
+				<div class="engineering-card-corner engineering-card-corner-tr"></div>
+				<div class="engineering-card-corner engineering-card-corner-bl"></div>
+				<div class="engineering-card-corner engineering-card-corner-br"></div>
 				
-				<div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+				<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
 					<div class="flex-1">
-						<div class="flex items-center justify-between mb-2">
-							<h2 class="text-lg font-semibold text-slate-900 dark:text-white">Your Progress</h2>
-							<span class="text-2xl font-bold text-gradient">{solvedCount} / {problems.length}</span>
+						<div class="flex items-center justify-between mb-3">
+							<span class="engineering-card-label">SOLVED</span>
+							<span class="engineering-progress-count">{solvedCount}<span class="text-slate-400 dark:text-slate-500"> / {problems.length}</span></span>
 						</div>
-					<div class="w-full bg-slate-200/50 dark:bg-slate-700/50 rounded-full h-3 backdrop-blur-sm">
-						<div 
-							class="bg-gradient-accent h-3 rounded-full transition-all duration-500 shadow-lg"
-							style={`width: ${progressPercent}%`}
-						></div>
-					</div>
-					</div>
-					<div class="flex items-center gap-4">
-						<div class="text-center px-6 py-2 bg-teal-50/50 dark:bg-teal-900/30 backdrop-blur-sm rounded-xl border border-teal-200/30 dark:border-teal-700/30">
-							<div class="text-2xl font-bold text-teal-600 dark:text-teal-400">{progressPercent}%</div>
-							<div class="text-xs text-slate-600 dark:text-slate-400">Complete</div>
+						<div class="engineering-progress-bar">
+							<div 
+								class="engineering-progress-fill"
+								style={`width: ${progressPercent}%`}
+							></div>
 						</div>
+					</div>
+					<div class="engineering-stat-box engineering-stat-box-accent">
+						<span class="engineering-stat-label">COMPLETION</span>
+						<span class="engineering-stat-value-lg text-teal-600 dark:text-teal-400">{progressPercent}%</span>
 					</div>
 				</div>
 			</div>
@@ -135,90 +144,91 @@ const difficultyColors = {
 
 		<!-- Problems Table -->
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-			<div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-slate-200 dark:border-slate-800 overflow-hidden">
-				<!-- Table Header -->
+			<div class="section-header mb-6">
+				<div class="section-header-line"></div>
+				<div class="section-header-box">
+					<span class="section-header-label">PROBLEM SET</span>
+					<h2 class="section-header-title text-lg">All Problems</h2>
+				</div>
+				<div class="section-header-line flex-1"></div>
+				<div class="section-header-corner"></div>
+			</div>
+			
+			<div class="engineering-table-container">
+				<div class="engineering-card-corner engineering-card-corner-tl"></div>
+				<div class="engineering-card-corner engineering-card-corner-tr"></div>
+				<div class="engineering-card-corner engineering-card-corner-bl"></div>
+				<div class="engineering-card-corner engineering-card-corner-br"></div>
+				
 				<div class="overflow-x-auto">
 					<table class="w-full">
-						<thead class="bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
-							<tr>
-								<th class="px-6 py-4 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider w-16">
-									#
+						<thead>
+							<tr class="engineering-table-header">
+								<th class="px-6 py-4 text-left w-16">
+									<span class="engineering-table-th">#</span>
 								</th>
-								<th class="px-6 py-4 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-									Problem
+								<th class="px-6 py-4 text-left">
+									<span class="engineering-table-th">PROBLEM</span>
 								</th>
-								<th class="difficulty-header px-6 py-4 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider w-24">
-									Difficulty
+								<th class="difficulty-header px-6 py-4 text-left w-28">
+									<span class="engineering-table-th">DIFFICULTY</span>
 								</th>
-								<th class="tags-header px-6 py-4 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-									Tags
+								<th class="tags-header px-6 py-4 text-left">
+									<span class="engineering-table-th">TAGS</span>
 								</th>
-								<th class="px-6 py-4 text-center text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider w-24">
-									Status
+								<th class="px-6 py-4 text-center w-24">
+									<span class="engineering-table-th">STATUS</span>
 								</th>
 							</tr>
 						</thead>
-						<tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+						<tbody class="engineering-table-body">
 							{problems.map((problem) => (
-								<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-									<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">
-										{problem.id}
+								<tr class="engineering-table-row">
+									<td class="px-6 py-4">
+										<span class="engineering-table-index">{String(problem.id).padStart(2, '0')}</span>
 									</td>
 									<td class="px-6 py-4">
 										<a 
 											href={`https://codeforces.com/problemset/problem/${problem.contestId}/${problem.problemId}`}
 											target="_blank"
 											rel="noopener noreferrer"
-											class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 font-medium transition-colors flex items-center group"
+											class="engineering-table-link group"
 										>
 											{problem.name}
-											<svg class="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
 											</svg>
 										</a>
-										<div class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-											Contest {problem.contestId} • Problem {problem.problemId}
+										<div class="engineering-table-meta">
+											CF-{problem.contestId}/{problem.problemId}
 										</div>
 									</td>
 									<td class="difficulty-cell px-6 py-4">
-										<div class="flex items-center">
-											{[...Array(5)].map((_, i) => (
-												<svg 
-													class={`w-4 h-4 ${i < problem.difficulty ? difficultyColors[problem.difficulty] : 'text-slate-300 dark:text-slate-700'}`}
-													fill="currentColor" 
-													viewBox="0 0 20 20"
-												>
-													<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-												</svg>
-											))}
+										<div class="engineering-difficulty">
+											<span class="engineering-difficulty-bar" style={`width: ${problem.difficulty * 20}%`}></span>
+											<span class="engineering-difficulty-text">LVL {problem.difficulty}</span>
 										</div>
 									</td>
 									<td class="tags-cell px-6 py-4">
 										<div class="flex flex-wrap gap-1">
 											{problem.tags.slice(0, 3).map((tag) => (
-												<span class="px-2 py-1 text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded">
-													{tag}
-												</span>
+												<span class="engineering-tag">{tag}</span>
 											))}
 											{problem.tags.length > 3 && (
-												<span class="px-2 py-1 text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded">
-													+{problem.tags.length - 3}
-												</span>
+												<span class="engineering-tag engineering-tag-more">+{problem.tags.length - 3}</span>
 											)}
 										</div>
 									</td>
 									<td class="px-6 py-4 text-center">
 										{problem.solved ? (
-											<div class="inline-flex items-center justify-center w-8 h-8 bg-emerald-100 dark:bg-emerald-900/30 rounded-full">
-												<svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<div class="engineering-status engineering-status-solved">
+												<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 												</svg>
 											</div>
 										) : (
-											<div class="inline-flex items-center justify-center w-8 h-8 bg-slate-100 dark:bg-slate-800 rounded-full">
-												<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-												</svg>
+											<div class="engineering-status engineering-status-pending">
+												<span class="w-2 h-2 bg-current rounded-full"></span>
 											</div>
 										)}
 									</td>
@@ -232,30 +242,52 @@ const difficultyColors = {
 
 		<!-- Quick Stats -->
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-			<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-				<div class="bg-white dark:bg-slate-900 rounded-lg shadow p-6 border border-slate-200 dark:border-slate-800 text-center">
-					<div class="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-1">
+			<div class="section-header mb-6">
+				<div class="section-header-line"></div>
+				<div class="section-header-box">
+					<span class="section-header-label">ANALYTICS</span>
+					<h2 class="section-header-title text-lg">Quick Stats</h2>
+				</div>
+				<div class="section-header-line flex-1"></div>
+				<div class="section-header-corner"></div>
+			</div>
+			
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+				<div class="engineering-stat-card">
+					<div class="engineering-card-corner engineering-card-corner-tl"></div>
+					<div class="engineering-card-corner engineering-card-corner-br"></div>
+					<span class="engineering-card-label">EASY</span>
+					<div class="engineering-stat-card-value text-teal-600 dark:text-teal-400">
 						{problems.filter(p => p.difficulty === 1).length}
 					</div>
-					<div class="text-sm text-slate-600 dark:text-slate-400">Easy Problems</div>
+					<span class="engineering-card-unit">PROBLEMS</span>
 				</div>
-				<div class="bg-white dark:bg-slate-900 rounded-lg shadow p-6 border border-slate-200 dark:border-slate-800 text-center">
-					<div class="text-3xl font-bold text-cyan-600 dark:text-cyan-400 mb-1">
+				<div class="engineering-stat-card">
+					<div class="engineering-card-corner engineering-card-corner-tl"></div>
+					<div class="engineering-card-corner engineering-card-corner-br"></div>
+					<span class="engineering-card-label">MEDIUM</span>
+					<div class="engineering-stat-card-value text-cyan-600 dark:text-cyan-400">
 						{problems.filter(p => p.difficulty === 2).length}
 					</div>
-					<div class="text-sm text-slate-600 dark:text-slate-400">Medium Problems</div>
+					<span class="engineering-card-unit">PROBLEMS</span>
 				</div>
-				<div class="bg-white dark:bg-slate-900 rounded-lg shadow p-6 border border-slate-200 dark:border-slate-800 text-center">
-					<div class="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-1">
+				<div class="engineering-stat-card">
+					<div class="engineering-card-corner engineering-card-corner-tl"></div>
+					<div class="engineering-card-corner engineering-card-corner-br"></div>
+					<span class="engineering-card-label">HARD</span>
+					<div class="engineering-stat-card-value text-amber-600 dark:text-amber-400">
 						{problems.filter(p => p.difficulty === 3).length}
 					</div>
-					<div class="text-sm text-slate-600 dark:text-slate-400">Hard Problems</div>
+					<span class="engineering-card-unit">PROBLEMS</span>
 				</div>
-				<div class="bg-white dark:bg-slate-900 rounded-lg shadow p-6 border border-slate-200 dark:border-slate-800 text-center">
-					<div class="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-1">
-						{Math.round((solvedCount / problems.length) * 100)}%
+				<div class="engineering-stat-card">
+					<div class="engineering-card-corner engineering-card-corner-tl"></div>
+					<div class="engineering-card-corner engineering-card-corner-br"></div>
+					<span class="engineering-card-label">COMPLETE</span>
+					<div class="engineering-stat-card-value text-teal-600 dark:text-teal-400">
+						{progressPercent}%
 					</div>
-					<div class="text-sm text-slate-600 dark:text-slate-400">Completion</div>
+					<span class="engineering-card-unit">SOLVED</span>
 				</div>
 			</div>
 		</div>
