@@ -1,0 +1,251 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+	return [
+		{ params: { id: '4' } },
+		{ params: { id: '5' } },
+		{ params: { id: '6' } },
+		{ params: { id: '7' } },
+		{ params: { id: '11' } },
+		{ params: { id: '12' } },
+		{ params: { id: '13' } },
+		{ params: { id: '14' } },
+		{ params: { id: '15' } },
+		{ params: { id: '16' } },
+		{ params: { id: '17' } },
+		{ params: { id: '18' } },
+	];
+}
+
+const { id } = Astro.params;
+
+// Dummy data for a ladder
+const ladder = {
+	id: 11,
+	name: 'Rating < 1300',
+	description: 'For beginners, unrated users or users with Codeforces Rating < 1300',
+	difficulty: 2,
+};
+
+const problems = [
+	{ id: 1, name: 'Young Physicist', contestId: 69, problemId: 'A', difficulty: 1, solved: false, tags: ['math', 'implementation'] },
+	{ id: 2, name: 'Beautiful Matrix', contestId: 263, problemId: 'A', difficulty: 1, solved: true, tags: ['implementation'] },
+	{ id: 3, name: 'Queue at the School', contestId: 266, problemId: 'B', difficulty: 1, solved: false, tags: ['constructive algorithms', 'graph matchings', 'implementation'] },
+	{ id: 4, name: 'Borze', contestId: 32, problemId: 'B', difficulty: 1, solved: true, tags: ['expression parsing', 'implementation'] },
+	{ id: 5, name: 'Beautiful Year', contestId: 271, problemId: 'A', difficulty: 1, solved: false, tags: ['brute force'] },
+	{ id: 6, name: 'Lights Out', contestId: 275, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation'] },
+	{ id: 7, name: 'Word', contestId: 59, problemId: 'A', difficulty: 1, solved: true, tags: ['implementation', 'strings'] },
+	{ id: 8, name: 'Word Capitalization', contestId: 281, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation', 'strings'] },
+	{ id: 9, name: 'Nearly Lucky Number', contestId: 110, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation'] },
+	{ id: 10, name: 'Stones on the Table', contestId: 266, problemId: 'A', difficulty: 1, solved: true, tags: ['implementation'] },
+	{ id: 11, name: 'Panoramix\'s Prediction', contestId: 80, problemId: 'A', difficulty: 1, solved: false, tags: ['brute force', 'math'] },
+	{ id: 12, name: 'Ultra-Fast Mathematician', contestId: 61, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation'] },
+	{ id: 13, name: 'Perfect Permutation', contestId: 233, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation'] },
+	{ id: 14, name: 'Arrival of the General', contestId: 144, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation'] },
+	{ id: 15, name: 'Drinks', contestId: 200, problemId: 'B', difficulty: 1, solved: false, tags: ['implementation', 'math'] },
+	{ id: 16, name: 'Insomnia cure', contestId: 148, problemId: 'A', difficulty: 1, solved: false, tags: ['constructive algorithms', 'implementation', 'math'] },
+	{ id: 17, name: 'Cupboards', contestId: 248, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation'] },
+	{ id: 18, name: 'I_love_%username%', contestId: 155, problemId: 'A', difficulty: 1, solved: false, tags: ['brute force', 'implementation'] },
+	{ id: 19, name: 'Team', contestId: 231, problemId: 'A', difficulty: 1, solved: true, tags: ['brute force', 'greedy'] },
+	{ id: 20, name: 'Helpful Maths', contestId: 339, problemId: 'A', difficulty: 1, solved: false, tags: ['greedy', 'implementation', 'sortings', 'strings'] },
+];
+
+const solvedCount = problems.filter(p => p.solved).length;
+const progressPercent = Math.round((solvedCount / problems.length) * 100);
+
+const difficultyColors = {
+	1: 'text-emerald-600 dark:text-emerald-400',
+	2: 'text-cyan-600 dark:text-cyan-400',
+	3: 'text-purple-600 dark:text-purple-400',
+	4: 'text-orange-600 dark:text-orange-400',
+};
+---
+
+<Layout title={`Ladder ${id} - ${ladder.name} | A2OJ Refreshed`}>
+	<main class="min-h-screen bg-slate-50 dark:bg-slate-950">
+		<!-- Header -->
+		<div class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+				<a href="/" class="inline-flex items-center text-white/80 hover:text-white mb-6 transition-colors">
+					<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+					</svg>
+					Back to Ladders
+				</a>
+				<div class="flex flex-col md:flex-row md:items-center md:justify-between">
+					<div>
+						<h1 class="text-4xl md:text-5xl font-bold mb-2">
+							Ladder {id}: {ladder.name}
+						</h1>
+						<p class="text-lg text-white/90 mb-4">
+							{ladder.description}
+						</p>
+						<div class="flex items-center gap-4">
+							<span class="px-4 py-1 bg-white/20 rounded-full text-sm font-medium">
+								Difficulty Level: {ladder.difficulty}
+							</span>
+							<span class="px-4 py-1 bg-white/20 rounded-full text-sm font-medium">
+								{problems.length} Problems
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Progress Section -->
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8">
+			<div class="bg-white dark:bg-slate-900 rounded-xl shadow-xl p-6 border border-slate-200 dark:border-slate-800">
+				<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+					<div class="flex-1">
+						<div class="flex items-center justify-between mb-2">
+							<h2 class="text-lg font-semibold text-slate-900 dark:text-white">Your Progress</h2>
+							<span class="text-2xl font-bold text-gradient">{solvedCount} / {problems.length}</span>
+						</div>
+						<div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-3">
+							<div 
+								class="bg-gradient-to-r from-indigo-500 to-purple-600 h-3 rounded-full transition-all duration-500"
+								style={`width: ${progressPercent}%`}
+							></div>
+						</div>
+					</div>
+					<div class="flex items-center gap-4">
+						<div class="text-center px-6 py-2 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg">
+							<div class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{progressPercent}%</div>
+							<div class="text-xs text-slate-600 dark:text-slate-400">Complete</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Problems Table -->
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+			<div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-slate-200 dark:border-slate-800 overflow-hidden">
+				<!-- Table Header -->
+				<div class="overflow-x-auto">
+					<table class="w-full">
+						<thead class="bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+							<tr>
+								<th class="px-6 py-4 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider w-16">
+									#
+								</th>
+								<th class="px-6 py-4 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+									Problem
+								</th>
+								<th class="px-6 py-4 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider w-24">
+									Difficulty
+								</th>
+								<th class="px-6 py-4 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+									Tags
+								</th>
+								<th class="px-6 py-4 text-center text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider w-24">
+									Status
+								</th>
+							</tr>
+						</thead>
+						<tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+							{problems.map((problem) => (
+								<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+									<td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">
+										{problem.id}
+									</td>
+									<td class="px-6 py-4">
+										<a 
+											href={`https://codeforces.com/problemset/problem/${problem.contestId}/${problem.problemId}`}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium transition-colors flex items-center group"
+										>
+											{problem.name}
+											<svg class="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+											</svg>
+										</a>
+										<div class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+											Contest {problem.contestId} • Problem {problem.problemId}
+										</div>
+									</td>
+									<td class="px-6 py-4">
+										<div class="flex items-center">
+											{[...Array(5)].map((_, i) => (
+												<svg 
+													class={`w-4 h-4 ${i < problem.difficulty ? difficultyColors[problem.difficulty] : 'text-slate-300 dark:text-slate-700'}`}
+													fill="currentColor" 
+													viewBox="0 0 20 20"
+												>
+													<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+												</svg>
+											))}
+										</div>
+									</td>
+									<td class="px-6 py-4">
+										<div class="flex flex-wrap gap-1">
+											{problem.tags.slice(0, 3).map((tag) => (
+												<span class="px-2 py-1 text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded">
+													{tag}
+												</span>
+											))}
+											{problem.tags.length > 3 && (
+												<span class="px-2 py-1 text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded">
+													+{problem.tags.length - 3}
+												</span>
+											)}
+										</div>
+									</td>
+									<td class="px-6 py-4 text-center">
+										{problem.solved ? (
+											<div class="inline-flex items-center justify-center w-8 h-8 bg-emerald-100 dark:bg-emerald-900/30 rounded-full">
+												<svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+												</svg>
+											</div>
+										) : (
+											<div class="inline-flex items-center justify-center w-8 h-8 bg-slate-100 dark:bg-slate-800 rounded-full">
+												<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+												</svg>
+											</div>
+										)}
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!-- Quick Stats -->
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+				<div class="bg-white dark:bg-slate-900 rounded-lg shadow p-6 border border-slate-200 dark:border-slate-800 text-center">
+					<div class="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-1">
+						{problems.filter(p => p.difficulty === 1).length}
+					</div>
+					<div class="text-sm text-slate-600 dark:text-slate-400">Easy Problems</div>
+				</div>
+				<div class="bg-white dark:bg-slate-900 rounded-lg shadow p-6 border border-slate-200 dark:border-slate-800 text-center">
+					<div class="text-3xl font-bold text-cyan-600 dark:text-cyan-400 mb-1">
+						{problems.filter(p => p.difficulty === 2).length}
+					</div>
+					<div class="text-sm text-slate-600 dark:text-slate-400">Medium Problems</div>
+				</div>
+				<div class="bg-white dark:bg-slate-900 rounded-lg shadow p-6 border border-slate-200 dark:border-slate-800 text-center">
+					<div class="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-1">
+						{problems.filter(p => p.difficulty === 3).length}
+					</div>
+					<div class="text-sm text-slate-600 dark:text-slate-400">Hard Problems</div>
+				</div>
+				<div class="bg-white dark:bg-slate-900 rounded-lg shadow p-6 border border-slate-200 dark:border-slate-800 text-center">
+					<div class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-1">
+						{Math.round((solvedCount / problems.length) * 100)}%
+					</div>
+					<div class="text-sm text-slate-600 dark:text-slate-400">Completion</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
