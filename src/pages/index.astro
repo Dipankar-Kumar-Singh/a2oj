@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Settings from '../components/Settings.astro';
+import quotes from '../data/quotes.json';
 
 const ladders = [
 	{
@@ -103,10 +104,34 @@ const divisionLadders = [
 
 <Layout title="A2OJ Refreshed - Practice Ladders">
 	<main class="min-h-screen full-page-grid">
-		<!-- Compact Hero Section - Engineering Blueprint Style -->
+		<!-- Hero Section with Quote and Controls -->
 		<div class="engineering-hero-compact relative">
 			<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-				<div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+				
+				<!-- Rotating Quote Section -->
+				<div class="quote-container" id="quote-container">
+					<blockquote class="quote-text" id="quote-text">
+						"{quotes[0].quote}"
+					</blockquote>
+					<div class="quote-attribution">
+						<span class="quote-author" id="quote-author">— {quotes[0].author}</span>
+						<a 
+							href={quotes[0].source_url} 
+							target="_blank" 
+							rel="noopener noreferrer" 
+							class="quote-source-link"
+							id="quote-source-link"
+							title="View source"
+						>
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+							</svg>
+						</a>
+					</div>
+				</div>
+
+				<!-- Header Row: Project Label + User Input -->
+				<div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
 					<!-- Project Label -->
 					<div class="engineering-hero-label">
 						<span class="engineering-hero-label-text">PROJECT // A2OJ.REFRESHED</span>
@@ -266,7 +291,125 @@ const divisionLadders = [
 	<Settings />
 </Layout>
 
+<!-- Quotes Data for Client-Side Rotation -->
+<script type="application/json" id="quotes-data" set:html={JSON.stringify(quotes)}></script>
+
 <script>
+	// Quote Rotation System
+	interface Quote {
+		quote: string;
+		author: string;
+		context: string;
+		source_url: string;
+	}
+
+	class QuoteRotator {
+		private quotes: Quote[] = [];
+		private currentIndex: number = 0;
+		private rotationInterval: number | null = null;
+		private readonly ROTATION_INTERVAL_MS = 30000; // 30 seconds
+		private readonly STORAGE_KEY = 'quote_rotation_state';
+
+		constructor() {
+			this.loadQuotes();
+			this.loadState();
+			this.displayCurrentQuote();
+			this.startRotation();
+		}
+
+		private loadQuotes(): void {
+			const quotesData = document.getElementById('quotes-data');
+			if (quotesData) {
+				try {
+					this.quotes = JSON.parse(quotesData.textContent || '[]');
+				} catch (e) {
+					console.error('Failed to parse quotes data:', e);
+				}
+			}
+		}
+
+		private loadState(): void {
+			const savedState = localStorage.getItem(this.STORAGE_KEY);
+			if (savedState) {
+				try {
+					const state = JSON.parse(savedState);
+					// Check if we should advance based on time elapsed
+					const now = Date.now();
+					const elapsed = now - (state.lastUpdate || 0);
+					const intervalsPassed = Math.floor(elapsed / this.ROTATION_INTERVAL_MS);
+					
+					if (intervalsPassed > 0 && this.quotes.length > 0) {
+						// Advance by the number of intervals that have passed
+						this.currentIndex = (state.index + intervalsPassed) % this.quotes.length;
+					} else {
+						this.currentIndex = state.index || 0;
+					}
+				} catch (e) {
+					this.currentIndex = 0;
+				}
+			}
+		}
+
+		private saveState(): void {
+			localStorage.setItem(this.STORAGE_KEY, JSON.stringify({
+				index: this.currentIndex,
+				lastUpdate: Date.now()
+			}));
+		}
+
+		private displayCurrentQuote(): void {
+			if (this.quotes.length === 0) return;
+
+			const quote = this.quotes[this.currentIndex];
+			const quoteText = document.getElementById('quote-text');
+			const quoteAuthor = document.getElementById('quote-author');
+			const quoteSourceLink = document.getElementById('quote-source-link') as HTMLAnchorElement;
+
+			if (quoteText && quoteAuthor && quoteSourceLink) {
+				// Fade out
+				const container = document.getElementById('quote-container');
+				if (container) {
+					container.classList.add('quote-fade-out');
+					
+					setTimeout(() => {
+						// Update content
+						quoteText.textContent = `"${quote.quote}"`;
+						quoteAuthor.textContent = `— ${quote.author}`;
+						quoteSourceLink.href = quote.source_url;
+						quoteSourceLink.title = quote.context;
+						
+						// Fade in
+						container.classList.remove('quote-fade-out');
+						container.classList.add('quote-fade-in');
+						
+						setTimeout(() => {
+							container.classList.remove('quote-fade-in');
+						}, 500);
+					}, 300);
+				}
+			}
+
+			this.saveState();
+		}
+
+		private nextQuote(): void {
+			if (this.quotes.length === 0) return;
+			this.currentIndex = (this.currentIndex + 1) % this.quotes.length;
+			this.displayCurrentQuote();
+		}
+
+		private startRotation(): void {
+			this.rotationInterval = window.setInterval(() => {
+				this.nextQuote();
+			}, this.ROTATION_INTERVAL_MS);
+		}
+	}
+
+	// Initialize quote rotator when DOM is ready
+	document.addEventListener('DOMContentLoaded', () => {
+		new QuoteRotator();
+	});
+
 	// Codeforces API Integration
 	interface CodeforcesSubmission {
 		id: number;
