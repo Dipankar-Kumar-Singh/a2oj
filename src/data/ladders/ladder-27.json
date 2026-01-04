@@ -1,0 +1,1410 @@
+{
+  "id": 27,
+  "name": "1700 <= Codeforces Rating <= 1799 (Extra)",
+  "type": "extra",
+  "description": "Extra problems for users satisfying this condition: 1700 <= Codeforces Rating <= 1799 (Extra).",
+  "difficultyLevel": 4,
+  "problemCount": 200,
+  "problems": [
+    {
+      "position": 1,
+      "name": "Circle Line",
+      "contestId": 278,
+      "problemId": "A",
+      "difficulty": 1
+    },
+    {
+      "position": 2,
+      "name": "Restoring Password",
+      "contestId": 94,
+      "problemId": "A",
+      "difficulty": 1
+    },
+    {
+      "position": 3,
+      "name": "Playing with Dice",
+      "contestId": 378,
+      "problemId": "A",
+      "difficulty": 1
+    },
+    {
+      "position": 4,
+      "name": "Colorful Stones (Simplified Edition)",
+      "contestId": 265,
+      "problemId": "A",
+      "difficulty": 1
+    },
+    {
+      "position": 5,
+      "name": "Roma and Lucky Numbers",
+      "contestId": 262,
+      "problemId": "A",
+      "difficulty": 1
+    },
+    {
+      "position": 6,
+      "name": "Kyoya and Photobooks",
+      "contestId": 554,
+      "problemId": "A",
+      "difficulty": 1
+    },
+    {
+      "position": 7,
+      "name": "Valera and X",
+      "contestId": 404,
+      "problemId": "A",
+      "difficulty": 2
+    },
+    {
+      "position": 8,
+      "name": "Game With Sticks",
+      "contestId": 451,
+      "problemId": "A",
+      "difficulty": 2
+    },
+    {
+      "position": 9,
+      "name": "Vasya and Digital Root",
+      "contestId": 355,
+      "problemId": "A",
+      "difficulty": 2
+    },
+    {
+      "position": 10,
+      "name": "Multiplication Table",
+      "contestId": 577,
+      "problemId": "A",
+      "difficulty": 2
+    },
+    {
+      "position": 11,
+      "name": "Calculating Function",
+      "contestId": 486,
+      "problemId": "A",
+      "difficulty": 2
+    },
+    {
+      "position": 12,
+      "name": "Valera and Antique Items",
+      "contestId": 441,
+      "problemId": "A",
+      "difficulty": 2
+    },
+    {
+      "position": 13,
+      "name": "Kefa and First Steps",
+      "contestId": 580,
+      "problemId": "A",
+      "difficulty": 2
+    },
+    {
+      "position": 14,
+      "name": "Toy Cars",
+      "contestId": 545,
+      "problemId": "A",
+      "difficulty": 2
+    },
+    {
+      "position": 15,
+      "name": "Joysticks",
+      "contestId": 651,
+      "problemId": "A",
+      "difficulty": 2
+    },
+    {
+      "position": 16,
+      "name": "Little Frog",
+      "contestId": 53,
+      "problemId": "C",
+      "difficulty": 2
+    },
+    {
+      "position": 17,
+      "name": "Sinking Ship",
+      "contestId": 63,
+      "problemId": "A",
+      "difficulty": 2
+    },
+    {
+      "position": 18,
+      "name": "Case of the Zeros and Ones",
+      "contestId": 556,
+      "problemId": "A",
+      "difficulty": 2
+    },
+    {
+      "position": 19,
+      "name": "Roadside Trees (Simplified Edition)",
+      "contestId": 265,
+      "problemId": "B",
+      "difficulty": 2
+    },
+    {
+      "position": 20,
+      "name": "Ciel and Dancing",
+      "contestId": 322,
+      "problemId": "A",
+      "difficulty": 2
+    },
+    {
+      "position": 21,
+      "name": "Currency System in Geraldion",
+      "contestId": 560,
+      "problemId": "A",
+      "difficulty": 2
+    },
+    {
+      "position": 22,
+      "name": "Prizes, Prizes, more Prizes",
+      "contestId": 208,
+      "problemId": "D",
+      "difficulty": 3
+    },
+    {
+      "position": 23,
+      "name": "Bear and Poker",
+      "contestId": 573,
+      "problemId": "A",
+      "difficulty": 3
+    },
+    {
+      "position": 24,
+      "name": "Fox and Number Game",
+      "contestId": 389,
+      "problemId": "A",
+      "difficulty": 3
+    },
+    {
+      "position": 25,
+      "name": "A and B and Team Training",
+      "contestId": 519,
+      "problemId": "C",
+      "difficulty": 3
+    },
+    {
+      "position": 26,
+      "name": "Misha and Changing Handles",
+      "contestId": 501,
+      "problemId": "B",
+      "difficulty": 3
+    },
+    {
+      "position": 27,
+      "name": "Cifera",
+      "contestId": 114,
+      "problemId": "A",
+      "difficulty": 3
+    },
+    {
+      "position": 28,
+      "name": "Lucky Tickets",
+      "contestId": 43,
+      "problemId": "C",
+      "difficulty": 3
+    },
+    {
+      "position": 29,
+      "name": "Bar",
+      "contestId": 56,
+      "problemId": "A",
+      "difficulty": 3
+    },
+    {
+      "position": 30,
+      "name": "Bear and Elections",
+      "contestId": 574,
+      "problemId": "A",
+      "difficulty": 3
+    },
+    {
+      "position": 31,
+      "name": "Lexicographically Maximum Subsequence",
+      "contestId": 196,
+      "problemId": "A",
+      "difficulty": 3
+    },
+    {
+      "position": 32,
+      "name": "Strings of Power",
+      "contestId": 318,
+      "problemId": "B",
+      "difficulty": 3
+    },
+    {
+      "position": 33,
+      "name": "Lucky Permutation Triple",
+      "contestId": 303,
+      "problemId": "A",
+      "difficulty": 3
+    },
+    {
+      "position": 34,
+      "name": "Good Number",
+      "contestId": 365,
+      "problemId": "A",
+      "difficulty": 3
+    },
+    {
+      "position": 35,
+      "name": "Case of Fake Numbers",
+      "contestId": 556,
+      "problemId": "B",
+      "difficulty": 3
+    },
+    {
+      "position": 36,
+      "name": "Art Union",
+      "contestId": 416,
+      "problemId": "B",
+      "difficulty": 3
+    },
+    {
+      "position": 37,
+      "name": "War of the Corporations",
+      "contestId": 625,
+      "problemId": "B",
+      "difficulty": 3
+    },
+    {
+      "position": 38,
+      "name": "Fortune Telling",
+      "contestId": 59,
+      "problemId": "B",
+      "difficulty": 3
+    },
+    {
+      "position": 39,
+      "name": "Sereja and Algorithm",
+      "contestId": 367,
+      "problemId": "A",
+      "difficulty": 3
+    },
+    {
+      "position": 40,
+      "name": "Fedor and New Game",
+      "contestId": 467,
+      "problemId": "B",
+      "difficulty": 3
+    },
+    {
+      "position": 41,
+      "name": "Ohana Cleans Up",
+      "contestId": 554,
+      "problemId": "B",
+      "difficulty": 3
+    },
+    {
+      "position": 42,
+      "name": "Students and Shoelaces",
+      "contestId": 129,
+      "problemId": "B",
+      "difficulty": 3
+    },
+    {
+      "position": 43,
+      "name": "Xor-tree",
+      "contestId": 429,
+      "problemId": "A",
+      "difficulty": 3
+    },
+    {
+      "position": 44,
+      "name": "Maxim and Discounts",
+      "contestId": 261,
+      "problemId": "A",
+      "difficulty": 3
+    },
+    {
+      "position": 45,
+      "name": "Kyoya and Colored Balls",
+      "contestId": 553,
+      "problemId": "A",
+      "difficulty": 3
+    },
+    {
+      "position": 46,
+      "name": "Heap Operations",
+      "contestId": 681,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 47,
+      "name": "Colliders",
+      "contestId": 154,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 48,
+      "name": "Day at the Beach",
+      "contestId": 599,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 49,
+      "name": "History",
+      "contestId": 137,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 50,
+      "name": "Buns",
+      "contestId": 106,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 51,
+      "name": "Sereja and Contest",
+      "contestId": 314,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 52,
+      "name": "Division into Teams",
+      "contestId": 149,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 53,
+      "name": "Dima and Two Sequences",
+      "contestId": 272,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 54,
+      "name": "Marina and Vasya",
+      "contestId": 584,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 55,
+      "name": "George and Number",
+      "contestId": 387,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 56,
+      "name": "More Cowbell",
+      "contestId": 604,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 57,
+      "name": "Approximating a Constant Range",
+      "contestId": 602,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 58,
+      "name": "The Big Race",
+      "contestId": 592,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 59,
+      "name": "Magic Formulas",
+      "contestId": 424,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 60,
+      "name": "Polo the Penguin and XOR operation",
+      "contestId": 288,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 61,
+      "name": "Gerald is into Art",
+      "contestId": 560,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 62,
+      "name": "Alice and Bob",
+      "contestId": 346,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 63,
+      "name": "Plate Game",
+      "contestId": 197,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 64,
+      "name": "Tavas and Karafs",
+      "contestId": 535,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 65,
+      "name": "Dima and Lisa",
+      "contestId": 584,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 66,
+      "name": "Cows and Primitive Roots",
+      "contestId": 284,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 67,
+      "name": "Secret",
+      "contestId": 271,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 68,
+      "name": "Fish Weight",
+      "contestId": 297,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 69,
+      "name": "GCD Table",
+      "contestId": 582,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 70,
+      "name": "DZY Loves Chemistry",
+      "contestId": 445,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 71,
+      "name": "Olympiad",
+      "contestId": 222,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 72,
+      "name": "Preparing Olympiad",
+      "contestId": 550,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 73,
+      "name": "Image Preview",
+      "contestId": 650,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 74,
+      "name": "Alyona and the Tree",
+      "contestId": 682,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 75,
+      "name": "Biridian Forest",
+      "contestId": 329,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 76,
+      "name": "Gena's Code",
+      "contestId": 614,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 77,
+      "name": "Dynasty Puzzles",
+      "contestId": 191,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 78,
+      "name": "Eight Point Sets",
+      "contestId": 334,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 79,
+      "name": "Secret Combination",
+      "contestId": 496,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 80,
+      "name": "Fire Again",
+      "contestId": 35,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 81,
+      "name": "Replacement",
+      "contestId": 570,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 82,
+      "name": "Lazy Student",
+      "contestId": 605,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 83,
+      "name": "Quiz",
+      "contestId": 337,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 84,
+      "name": "Queue",
+      "contestId": 545,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 85,
+      "name": "Wet Shark and Flowers",
+      "contestId": 621,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 86,
+      "name": "Han Solo and Lazer Gun",
+      "contestId": 514,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 87,
+      "name": "Two Heaps",
+      "contestId": 353,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 88,
+      "name": "Vasya and String",
+      "contestId": 676,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 89,
+      "name": "Clear Symmetry",
+      "contestId": 201,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 90,
+      "name": "Hometask",
+      "contestId": 154,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 91,
+      "name": "Case of Matryoshkas",
+      "contestId": 555,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 92,
+      "name": "Report",
+      "contestId": 631,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 93,
+      "name": "Amr and Pins",
+      "contestId": 507,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 94,
+      "name": "Bracket Sequence",
+      "contestId": 223,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 95,
+      "name": "Alternating Current",
+      "contestId": 343,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 96,
+      "name": "Win or Freeze",
+      "contestId": 150,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 97,
+      "name": "Soldier and Badges",
+      "contestId": 546,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 98,
+      "name": "Unordered Subsequence",
+      "contestId": 27,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 99,
+      "name": "Woodcutters",
+      "contestId": 545,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 100,
+      "name": "Perfect Pair",
+      "contestId": 317,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 101,
+      "name": "Tree Construction",
+      "contestId": 675,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 102,
+      "name": "The Values You Can Make",
+      "contestId": 687,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 103,
+      "name": "Magic Five",
+      "contestId": 327,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 104,
+      "name": "Falling Anvils",
+      "contestId": 77,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 105,
+      "name": "Vasily the Bear and Sequence",
+      "contestId": 336,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 106,
+      "name": "Vasiliy's Multiset",
+      "contestId": 706,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 107,
+      "name": "Bits",
+      "contestId": 484,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 108,
+      "name": "Divisible by Seven",
+      "contestId": 375,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 109,
+      "name": "Zuma",
+      "contestId": 607,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 110,
+      "name": "Primes on Interval",
+      "contestId": 237,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 111,
+      "name": "Road Map",
+      "contestId": 34,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 112,
+      "name": "Harmony Analysis",
+      "contestId": 610,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 113,
+      "name": "Rational Resistance",
+      "contestId": 343,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 114,
+      "name": "Prime Swaps",
+      "contestId": 432,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 115,
+      "name": "Cthulhu",
+      "contestId": 103,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 116,
+      "name": "Pasha and Tea",
+      "contestId": 557,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 117,
+      "name": "Find Maximum",
+      "contestId": 353,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 118,
+      "name": "k-Multiple Free Set",
+      "contestId": 274,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 119,
+      "name": "Recycling Bottles",
+      "contestId": 671,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 120,
+      "name": "Bear and Three Musketeers",
+      "contestId": 574,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 121,
+      "name": "Beauty Pageant",
+      "contestId": 246,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 122,
+      "name": "About Bacteria",
+      "contestId": 198,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 123,
+      "name": "Spongebob and Joke",
+      "contestId": 599,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 124,
+      "name": "Bear and Blocks",
+      "contestId": 573,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 125,
+      "name": "Two Substrings",
+      "contestId": 550,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 126,
+      "name": "Chips",
+      "contestId": 333,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 127,
+      "name": "Guest From the Past",
+      "contestId": 625,
+      "problemId": "A",
+      "difficulty": 4
+    },
+    {
+      "position": 128,
+      "name": "Subsegments",
+      "contestId": 69,
+      "problemId": "E",
+      "difficulty": 4
+    },
+    {
+      "position": 129,
+      "name": "Magic Box",
+      "contestId": 231,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 130,
+      "name": "Planets",
+      "contestId": 229,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 131,
+      "name": "Longtail Hedgehog",
+      "contestId": 615,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 132,
+      "name": "Queue",
+      "contestId": 91,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 133,
+      "name": "The Child and Zoo",
+      "contestId": 437,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 134,
+      "name": "Watering Flowers",
+      "contestId": 617,
+      "problemId": "C",
+      "difficulty": 4
+    },
+    {
+      "position": 135,
+      "name": "Polyline",
+      "contestId": 617,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 136,
+      "name": "Money Transfers",
+      "contestId": 675,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 137,
+      "name": "3-cycles",
+      "contestId": 41,
+      "problemId": "E",
+      "difficulty": 5
+    },
+    {
+      "position": 138,
+      "name": "Numbers",
+      "contestId": 213,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 139,
+      "name": "Persistent Bookcase",
+      "contestId": 707,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 140,
+      "name": "Number With The Given Amount Of Divisors",
+      "contestId": 27,
+      "problemId": "E",
+      "difficulty": 5
+    },
+    {
+      "position": 141,
+      "name": "Cipher",
+      "contestId": 156,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 142,
+      "name": "Friends and Subsequences",
+      "contestId": 689,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 143,
+      "name": "Last Chance",
+      "contestId": 137,
+      "problemId": "E",
+      "difficulty": 5
+    },
+    {
+      "position": 144,
+      "name": "Messenger",
+      "contestId": 631,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 145,
+      "name": "Mishka and Interesting sum",
+      "contestId": 703,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 146,
+      "name": "Relay Race",
+      "contestId": 213,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 147,
+      "name": "Black and White Tree",
+      "contestId": 260,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 148,
+      "name": "Sereja and Periods",
+      "contestId": 314,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 149,
+      "name": "Dima and Containers",
+      "contestId": 358,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 150,
+      "name": "Reducing Fractions",
+      "contestId": 222,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 151,
+      "name": "Alyona and Strings",
+      "contestId": 682,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 152,
+      "name": "Police Station",
+      "contestId": 208,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 153,
+      "name": "Pawn",
+      "contestId": 41,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 154,
+      "name": "Permutation Sum",
+      "contestId": 285,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 155,
+      "name": "Ilya and Roads",
+      "contestId": 313,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 156,
+      "name": "Triangles",
+      "contestId": 229,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 157,
+      "name": "Gifts by the List",
+      "contestId": 681,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 158,
+      "name": "Spongebob and Squares",
+      "contestId": 599,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 159,
+      "name": "Flawed Flow",
+      "contestId": 269,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 160,
+      "name": "Hydra",
+      "contestId": 243,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 161,
+      "name": "Police Patrol",
+      "contestId": 427,
+      "problemId": "E",
+      "difficulty": 5
+    },
+    {
+      "position": 162,
+      "name": "Decoding Genome",
+      "contestId": 222,
+      "problemId": "E",
+      "difficulty": 5
+    },
+    {
+      "position": 163,
+      "name": "Points on Plane",
+      "contestId": 576,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 164,
+      "name": "Apple Tree",
+      "contestId": 348,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 165,
+      "name": "Domino Principle",
+      "contestId": 56,
+      "problemId": "E",
+      "difficulty": 5
+    },
+    {
+      "position": 166,
+      "name": "Little Elephant and LCM",
+      "contestId": 258,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 167,
+      "name": "Minesweeper 1D",
+      "contestId": 404,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 168,
+      "name": "Two Strings",
+      "contestId": 223,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 169,
+      "name": "Vanya and Triangles",
+      "contestId": 552,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 170,
+      "name": "Shaass and Lights",
+      "contestId": 294,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 171,
+      "name": "Cycle in Graph",
+      "contestId": 263,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 172,
+      "name": "Compatible Numbers",
+      "contestId": 165,
+      "problemId": "E",
+      "difficulty": 5
+    },
+    {
+      "position": 173,
+      "name": "Ring Road 2",
+      "contestId": 27,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 174,
+      "name": "Running Track",
+      "contestId": 615,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 175,
+      "name": "Famil Door and Brackets",
+      "contestId": 629,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 176,
+      "name": "Sum",
+      "contestId": 257,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 177,
+      "name": "Fox And Jumping",
+      "contestId": 510,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 178,
+      "name": "Journey",
+      "contestId": 721,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 179,
+      "name": "Paths and Trees",
+      "contestId": 545,
+      "problemId": "E",
+      "difficulty": 5
+    },
+    {
+      "position": 180,
+      "name": "Vitaly and Cycle",
+      "contestId": 557,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 181,
+      "name": "Block Tower",
+      "contestId": 327,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 182,
+      "name": "Dispute",
+      "contestId": 242,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 183,
+      "name": "Random Task",
+      "contestId": 431,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 184,
+      "name": "Arthur and Table",
+      "contestId": 557,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 185,
+      "name": "Queue",
+      "contestId": 353,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 186,
+      "name": "Amr and Chemistry",
+      "contestId": 558,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 187,
+      "name": "The Road to Berland is Paved With Good Intentions",
+      "contestId": 228,
+      "problemId": "E",
+      "difficulty": 5
+    },
+    {
+      "position": 188,
+      "name": "Babaei and Birthday Cake",
+      "contestId": 629,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 189,
+      "name": "Kefa and Dishes",
+      "contestId": 580,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 190,
+      "name": "Modulo Sum",
+      "contestId": 577,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 191,
+      "name": "Yet Another Number Game",
+      "contestId": 282,
+      "problemId": "D",
+      "difficulty": 6
+    },
+    {
+      "position": 192,
+      "name": "Edges in MST",
+      "contestId": 160,
+      "problemId": "D",
+      "difficulty": 6
+    },
+    {
+      "position": 193,
+      "name": "Arthur and Brackets",
+      "contestId": 508,
+      "problemId": "E",
+      "difficulty": 6
+    },
+    {
+      "position": 194,
+      "name": "Vanya and Brackets",
+      "contestId": 552,
+      "problemId": "E",
+      "difficulty": 6
+    },
+    {
+      "position": 195,
+      "name": "Devu and Flowers",
+      "contestId": 451,
+      "problemId": "E",
+      "difficulty": 6
+    },
+    {
+      "position": 196,
+      "name": "Anya and Cubes",
+      "contestId": 525,
+      "problemId": "E",
+      "difficulty": 6
+    },
+    {
+      "position": 197,
+      "name": "Vasily the Bear and Beautiful Strings",
+      "contestId": 336,
+      "problemId": "D",
+      "difficulty": 6
+    },
+    {
+      "position": 198,
+      "name": "Little Victor and Set",
+      "contestId": 460,
+      "problemId": "D",
+      "difficulty": 7
+    },
+    {
+      "position": 199,
+      "name": "Axis Walking",
+      "contestId": 327,
+      "problemId": "E",
+      "difficulty": 7
+    },
+    {
+      "position": 200,
+      "name": "Kefa and Watch",
+      "contestId": 580,
+      "problemId": "E",
+      "difficulty": 7
+    }
+  ]
+}

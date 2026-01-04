@@ -2,104 +2,59 @@
 import Layout from '../layouts/Layout.astro';
 import Settings from '../components/Settings.astro';
 import quotes from '../data/quotes.json';
+import laddersIndex from '../data/ladders/index.json';
+import laddersMetadata from '../data/ladders/metadata.json';
 
-const ladders = [
-	{
-		id: 11,
-		name: 'Rating < 1300',
-		description: 'For beginners, unrated users or users with Codeforces Rating < 1300',
-		count: 100,
-		color: 'teal',
-		difficulty: 'Beginner'
-	},
-	{
-		id: 12,
-		name: '1300 ≤ Rating ≤ 1399',
-		description: 'Build fundamentals with problems at the easy-medium level',
-		count: 100,
-		color: 'cyan',
-		difficulty: 'Easy'
-	},
-	{
-		id: 13,
-		name: '1400 ≤ Rating ≤ 1499',
-		description: 'Strengthen problem-solving with moderate difficulty',
-		count: 100,
-		color: 'sky',
-		difficulty: 'Medium'
-	},
-	{
-		id: 14,
-		name: '1500 ≤ Rating ≤ 1599',
-		description: 'Challenging problems for intermediate competitors',
-		count: 100,
-		color: 'amber',
-		difficulty: 'Medium-Hard'
-	},
-	{
-		id: 15,
-		name: '1600 ≤ Rating ≤ 1699',
-		description: 'Advanced problem-solving techniques required',
-		count: 100,
-		color: 'orange',
-		difficulty: 'Hard'
-	},
-	{
-		id: 16,
-		name: '1700 ≤ Rating ≤ 1799',
-		description: 'For experienced competitors seeking mastery',
-		count: 100,
-		color: 'rose',
-		difficulty: 'Very Hard'
-	},
-	{
-		id: 17,
-		name: '1800 ≤ Rating ≤ 1899',
-		description: 'Expert-level problems with advanced algorithms',
-		count: 100,
-		color: 'red',
-		difficulty: 'Expert'
-	},
-	{
-		id: 18,
-		name: '1900 ≤ Rating ≤ 1999',
-		description: 'Master-level problems requiring deep insight',
-		count: 100,
-		color: 'fuchsia',
-		difficulty: 'Master'
-	},
-];
+// Type definitions
+type LadderOverride = {
+	displayName?: string;
+	difficultyLabel?: string;
+	division?: string;
+	problemType?: string;
+	isExtra?: boolean;
+};
 
-const divisionLadders = [
-	{
-		id: 4,
-		name: 'Div. 2, Problem A',
-		description: 'Classic Div. 2 A problems to build speed',
-		count: 100,
-		division: 'Division 2'
-	},
-	{
-		id: 5,
-		name: 'Div. 2, Problem B',
-		description: 'Implementation and observation problems',
-		count: 100,
-		division: 'Division 2'
-	},
-	{
-		id: 6,
-		name: 'Div. 2, Problem C',
-		description: 'Algorithmic thinking and optimization',
-		count: 100,
-		division: 'Division 2'
-	},
-	{
-		id: 7,
-		name: 'Div. 2, Problem D',
-		description: 'Advanced data structures and algorithms',
-		count: 100,
-		division: 'Division 2'
-	},
-];
+// Helper function to get display name and metadata
+function getLadderMeta(id: number): LadderOverride {
+	const overrides = laddersMetadata.ladderOverrides as Record<string, LadderOverride>;
+	return overrides[String(id)] || {};
+}
+
+// Rating-based ladders with metadata
+const ladders = laddersIndex.rating.map((ladder, index) => {
+	const meta = getLadderMeta(ladder.id);
+	return {
+		id: ladder.id,
+		name: meta.displayName || ladder.name,
+		count: ladder.problemCount,
+		difficulty: meta.difficultyLabel || 'Unknown',
+		index: index + 1
+	};
+});
+
+// Division-based ladders with metadata
+const divisionLadders = laddersIndex.division.map((ladder) => {
+	const meta = getLadderMeta(ladder.id);
+	return {
+		id: ladder.id,
+		name: meta.displayName || ladder.name,
+		count: ladder.problemCount,
+		division: meta.division || 'Division',
+		problemType: meta.problemType || ''
+	};
+});
+
+// Extra ladders with metadata
+const extraLadders = laddersIndex.extra.map((ladder, index) => {
+	const meta = getLadderMeta(ladder.id);
+	return {
+		id: ladder.id,
+		name: meta.displayName || ladder.name,
+		count: ladder.problemCount,
+		difficulty: meta.difficultyLabel || 'Unknown',
+		index: index + 1
+	};
+});
 ---
 
 <Layout title="A2OJ Refreshed - Practice Ladders">
@@ -181,7 +136,7 @@ const divisionLadders = [
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-				{ladders.map((ladder, index) => (
+				{ladders.map((ladder) => (
 					<a href={`/ladder/${ladder.id}`} class="block card-hover">
 						<div class="engineering-card">
 							<div class="engineering-card-corner engineering-card-corner-tl"></div>
@@ -191,7 +146,7 @@ const divisionLadders = [
 							
 							<div class="flex justify-between items-start mb-4">
 								<div class="flex-1">
-									<span class="engineering-card-label">LADDER {String(index + 1).padStart(2, '0')}</span>
+									<span class="engineering-card-label">LADDER {String(ladder.index).padStart(2, '0')}</span>
 									<h3 class="engineering-card-title">
 										{ladder.name}
 									</h3>
@@ -237,7 +192,7 @@ const divisionLadders = [
 				</div>
 
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-					{divisionLadders.map((ladder, index) => (
+					{divisionLadders.map((ladder) => (
 						<a href={`/ladder/${ladder.id}`} class="block card-hover">
 							<div class="engineering-card engineering-card-amber">
 								<div class="engineering-card-corner engineering-card-corner-tl"></div>
@@ -253,7 +208,7 @@ const divisionLadders = [
 								<div class="engineering-card-divider mt-3"></div>
 								
 								<div class="flex justify-between items-center mt-3">
-									<span class="engineering-card-badge engineering-card-badge-amber">Problem {String.fromCharCode(65 + index)}</span>
+									<span class="engineering-card-badge engineering-card-badge-amber">Problem {ladder.problemType}</span>
 									<div class="text-right">
 										<div class="engineering-card-count text-amber-600 dark:text-amber-400">
 											{ladder.count}
@@ -265,6 +220,64 @@ const divisionLadders = [
 						</a>
 					))}
 				</div>
+			</div>
+		</div>
+
+		<!-- Extra Ladders Section -->
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
+			<div class="mb-12">
+				<div class="section-header">
+					<div class="section-header-line"></div>
+					<div class="section-header-box">
+						<span class="section-header-label">SECTION 03</span>
+						<h2 class="section-header-title">Extra Practice Ladders</h2>
+					</div>
+					<div class="section-header-line flex-1"></div>
+					<div class="section-header-corner"></div>
+				</div>
+				<p class="text-center text-slate-500 dark:text-slate-400 mt-4 text-sm">
+					200 additional problems per rating range for extended practice
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				{extraLadders.map((ladder) => (
+					<a href={`/ladder/${ladder.id}`} class="block card-hover">
+						<div class="engineering-card engineering-card-purple">
+							<div class="engineering-card-corner engineering-card-corner-tl"></div>
+							<div class="engineering-card-corner engineering-card-corner-tr"></div>
+							<div class="engineering-card-corner engineering-card-corner-bl"></div>
+							<div class="engineering-card-corner engineering-card-corner-br"></div>
+							
+							<div class="flex justify-between items-start mb-4">
+								<div class="flex-1">
+									<span class="engineering-card-label">EXTRA {String(ladder.index).padStart(2, '0')}</span>
+									<h3 class="engineering-card-title">
+										{ladder.name}
+									</h3>
+								</div>
+								<div class="text-right">
+									<div class="engineering-card-count text-purple-600 dark:text-purple-400">
+										{ladder.count}
+									</div>
+									<div class="engineering-card-unit">problems</div>
+								</div>
+							</div>
+							
+							<div class="engineering-card-divider"></div>
+							
+							<div class="flex items-center justify-between mt-4">
+								<span class="engineering-card-badge engineering-card-badge-purple">{ladder.difficulty}</span>
+								<div class="flex items-center gap-2">
+									<div class="w-24 bg-slate-200 dark:bg-slate-700 h-1">
+										<div class="bg-purple-500 h-1" style="width: 0%"></div>
+									</div>
+									<span class="engineering-card-percent">0%</span>
+								</div>
+							</div>
+						</div>
+					</a>
+				))}
 			</div>
 		</div>
 

@@ -1024,6 +1024,17 @@
     box-shadow: 0 4px 20px rgba(252, 211, 77, 0.1);
   }
 
+  /* Purple variant for Extra ladders */
+  .engineering-card.engineering-card-purple:hover {
+    border-color: #a855f7;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.15);
+  }
+
+  .dark .engineering-card.engineering-card-purple:hover {
+    border-color: #c084fc;
+    box-shadow: 0 4px 20px rgba(192, 132, 252, 0.1);
+  }
+
   /* Corner cutouts - technical drawing style */
   .engineering-card-corner {
     position: absolute;
@@ -1152,6 +1163,17 @@
     color: #fcd34d;
   }
 
+  /* Purple badge for extra ladders */
+  .engineering-card-badge-purple {
+    border-color: #a855f7;
+    color: #9333ea;
+  }
+
+  .dark .engineering-card-badge-purple {
+    border-color: #c084fc;
+    color: #c084fc;
+  }
+
   /* Percent display */
   .engineering-card-percent {
     font-size: 11px;
@@ -1202,6 +1224,24 @@
   .dark .engineering-header-card {
     background: rgba(15, 23, 42, 0.9);
     border-color: #475569;
+  }
+
+  /* Header amber variant for division ladders */
+  .engineering-header-card.engineering-header-amber {
+    border-color: #f59e0b;
+  }
+
+  .dark .engineering-header-card.engineering-header-amber {
+    border-color: #fcd34d;
+  }
+
+  /* Header purple variant for extra ladders */
+  .engineering-header-card.engineering-header-purple {
+    border-color: #a855f7;
+  }
+
+  .dark .engineering-header-card.engineering-header-purple {
+    border-color: #c084fc;
   }
 
   /* Page Title */

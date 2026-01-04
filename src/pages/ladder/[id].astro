@@ -1,69 +1,125 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Settings from '../../components/Settings.astro';
+import laddersIndex from '../../data/ladders/index.json';
+import laddersMetadata from '../../data/ladders/metadata.json';
+
+// Type definitions
+interface LadderOverride {
+	displayName?: string;
+	difficultyLabel?: string;
+	division?: string;
+	problemType?: string;
+	isExtra?: boolean;
+}
+
+interface Problem {
+	id: number;
+	name: string;
+	contestId: number;
+	problemId: string;
+	difficulty: number;
+	tags: string[];
+}
+
+interface LadderData {
+	id: number;
+	name: string;
+	type: string;
+	description: string;
+	difficultyLevel: number;
+	problemCount: number;
+	problems: Array<{
+		position: number;
+		name: string;
+		contestId: number;
+		problemId: string;
+		difficulty?: number;
+		tags?: string[];
+	}>;
+}
+
+// Import all ladder JSON files
+const ladderModules = import.meta.glob<{ default: LadderData }>('../../data/ladders/ladder-*.json', { eager: true });
 
 export function getStaticPaths() {
-	return [
-		{ params: { id: '4' } },
-		{ params: { id: '5' } },
-		{ params: { id: '6' } },
-		{ params: { id: '7' } },
-		{ params: { id: '11' } },
-		{ params: { id: '12' } },
-		{ params: { id: '13' } },
-		{ params: { id: '14' } },
-		{ params: { id: '15' } },
-		{ params: { id: '16' } },
-		{ params: { id: '17' } },
-		{ params: { id: '18' } },
+	const ids = [
+		...laddersIndex.rating.map(l => l.id),
+		...laddersIndex.division.map(l => l.id),
+		...laddersIndex.extra.map(l => l.id)
 	];
+	return ids.map(id => ({ params: { id: String(id) } }));
 }
 
 const { id } = Astro.params;
+const ladderId = parseInt(id as string);
 
-// Dummy data for a ladder
+// Find the ladder data from imported modules
+const ladderKey = Object.keys(ladderModules).find(key => key.includes(`ladder-${id}.json`));
+const ladderData: LadderData | null = ladderKey ? ladderModules[ladderKey].default : null;
+
+if (!ladderData) {
+	return Astro.redirect('/404');
+}
+
+// Get metadata for display
+const overrides = laddersMetadata.ladderOverrides as Record<string, LadderOverride>;
+const difficultyLabelsMap = laddersMetadata.difficultyLabels as Record<string, string>;
+const meta: LadderOverride = overrides[id as string] || {};
+
+// Build ladder object with display metadata
 const ladder = {
-	id: 11,
-	name: 'Rating < 1300',
-	description: 'For beginners, unrated users or users with Codeforces Rating < 1300',
-	difficulty: 2,
+	id: ladderData.id,
+	name: meta.displayName || ladderData.name,
+	description: ladderData.description || '',
+	difficulty: ladderData.difficultyLevel || 1,
+	difficultyLabel: meta.difficultyLabel || difficultyLabelsMap[String(ladderData.difficultyLevel)] || 'Unknown',
+	type: ladderData.type,
+	division: meta.division || null,
+	problemType: meta.problemType || null,
+	isExtra: meta.isExtra || false
 };
 
-const problems = [
-	{ id: 1, name: 'Young Physicist', contestId: 69, problemId: 'A', difficulty: 1, solved: false, tags: ['math', 'implementation'] },
-	{ id: 2, name: 'Beautiful Matrix', contestId: 263, problemId: 'A', difficulty: 1, solved: true, tags: ['implementation'] },
-	{ id: 3, name: 'Queue at the School', contestId: 266, problemId: 'B', difficulty: 1, solved: false, tags: ['constructive algorithms', 'graph matchings', 'implementation'] },
-	{ id: 4, name: 'Borze', contestId: 32, problemId: 'B', difficulty: 1, solved: true, tags: ['expression parsing', 'implementation'] },
-	{ id: 5, name: 'Beautiful Year', contestId: 271, problemId: 'A', difficulty: 1, solved: false, tags: ['brute force'] },
-	{ id: 6, name: 'Lights Out', contestId: 275, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation'] },
-	{ id: 7, name: 'Word', contestId: 59, problemId: 'A', difficulty: 1, solved: true, tags: ['implementation', 'strings'] },
-	{ id: 8, name: 'Word Capitalization', contestId: 281, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation', 'strings'] },
-	{ id: 9, name: 'Nearly Lucky Number', contestId: 110, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation'] },
-	{ id: 10, name: 'Stones on the Table', contestId: 266, problemId: 'A', difficulty: 1, solved: true, tags: ['implementation'] },
-	{ id: 11, name: 'Panoramix\'s Prediction', contestId: 80, problemId: 'A', difficulty: 1, solved: false, tags: ['brute force', 'math'] },
-	{ id: 12, name: 'Ultra-Fast Mathematician', contestId: 61, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation'] },
-	{ id: 13, name: 'Perfect Permutation', contestId: 233, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation'] },
-	{ id: 14, name: 'Arrival of the General', contestId: 144, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation'] },
-	{ id: 15, name: 'Drinks', contestId: 200, problemId: 'B', difficulty: 1, solved: false, tags: ['implementation', 'math'] },
-	{ id: 16, name: 'Insomnia cure', contestId: 148, problemId: 'A', difficulty: 1, solved: false, tags: ['constructive algorithms', 'implementation', 'math'] },
-	{ id: 17, name: 'Cupboards', contestId: 248, problemId: 'A', difficulty: 1, solved: false, tags: ['implementation'] },
-	{ id: 18, name: 'I_love_%username%', contestId: 155, problemId: 'A', difficulty: 1, solved: false, tags: ['brute force', 'implementation'] },
-	{ id: 19, name: 'Team', contestId: 231, problemId: 'A', difficulty: 1, solved: true, tags: ['brute force', 'greedy'] },
-	{ id: 20, name: 'Helpful Maths', contestId: 339, problemId: 'A', difficulty: 1, solved: false, tags: ['greedy', 'implementation', 'sortings', 'strings'] },
-];
+// Map problems from scraped data
+const problems: Problem[] = ladderData.problems.map((p) => ({
+	id: p.position,
+	name: p.name,
+	contestId: p.contestId,
+	problemId: p.problemId,
+	difficulty: p.difficulty || 1,
+	tags: p.tags || []
+}));
 
-const solvedCount = problems.filter(p => p.solved).length;
-const progressPercent = Math.round((solvedCount / problems.length) * 100);
+// Calculate initial progress (will be updated client-side)
+const solvedCount = 0;
+const progressPercent = 0;
 
-const difficultyColors = {
+const difficultyColors: Record<number, string> = {
 	1: 'text-teal-600 dark:text-teal-400',
 	2: 'text-cyan-600 dark:text-cyan-400',
 	3: 'text-amber-600 dark:text-amber-400',
 	4: 'text-orange-600 dark:text-orange-400',
+	5: 'text-rose-600 dark:text-rose-400',
 };
+
+// Get ladder number for display
+function getLadderNumber(ladderId: number, type: string): string {
+	if (type === 'rating') {
+		const index = laddersIndex.rating.findIndex(l => l.id === ladderId);
+		return index >= 0 ? String(index + 1).padStart(2, '0') : String(ladderId);
+	} else if (type === 'division') {
+		return meta.division ? `${meta.division.toUpperCase().replace('DIVISION ', 'DIV.')}` : String(ladderId);
+	} else if (type === 'extra') {
+		const index = laddersIndex.extra.findIndex(l => l.id === ladderId);
+		return `EX-${index >= 0 ? String(index + 1).padStart(2, '0') : ladderId}`;
+	}
+	return String(ladderId);
+}
+
+const ladderNumber = getLadderNumber(ladderId, ladder.type);
 ---
 
-<Layout title={`Ladder ${id} - ${ladder.name} | A2OJ Refreshed`}>
+<Layout title={`${ladder.name} | A2OJ Refreshed`}>
 	<main class="min-h-screen bg-slate-50 dark:bg-slate-950 full-page-grid">
 		<!-- Engineering-Style Header -->
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6">
@@ -76,7 +132,7 @@ const difficultyColors = {
 			</a>
 			
 			<!-- Main Header Box -->
-			<div class="engineering-header-card">
+			<div class={`engineering-header-card ${ladder.isExtra ? 'engineering-header-purple' : ladder.type === 'division' ? 'engineering-header-amber' : ''}`}>
 				<div class="engineering-card-corner engineering-card-corner-tl"></div>
 				<div class="engineering-card-corner engineering-card-corner-tr"></div>
 				<div class="engineering-card-corner engineering-card-corner-bl"></div>
@@ -84,19 +140,35 @@ const difficultyColors = {
 				
 				<div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
 					<div class="flex-1">
-						<span class="engineering-card-label">LADDER {String(id).padStart(2, '0')}</span>
+						<span class="engineering-card-label">
+							{ladder.type === 'rating' ? `LADDER ${ladderNumber}` : 
+							 ladder.type === 'division' ? ladderNumber :
+							 `EXTRA ${ladderNumber}`}
+						</span>
 						<h1 class="engineering-page-title">{ladder.name}</h1>
 						<p class="engineering-page-subtitle">{ladder.description}</p>
 					</div>
 					
 					<div class="flex items-center gap-4">
-						<div class="engineering-stat-box">
-							<span class="engineering-stat-label">DIFFICULTY</span>
-							<span class="engineering-stat-value text-teal-600 dark:text-teal-400">LVL {ladder.difficulty}</span>
-						</div>
+						{ladder.type !== 'division' && (
+							<div class="engineering-stat-box">
+								<span class="engineering-stat-label">LEVEL</span>
+								<span class={`engineering-stat-value ${ladder.isExtra ? 'text-purple-600 dark:text-purple-400' : 'text-teal-600 dark:text-teal-400'}`}>
+									{ladder.difficultyLabel}
+								</span>
+							</div>
+						)}
+						{ladder.type === 'division' && ladder.problemType && (
+							<div class="engineering-stat-box">
+								<span class="engineering-stat-label">PROBLEM TYPE</span>
+								<span class="engineering-stat-value text-amber-600 dark:text-amber-400">{ladder.problemType}</span>
+							</div>
+						)}
 						<div class="engineering-stat-box">
 							<span class="engineering-stat-label">PROBLEMS</span>
-							<span class="engineering-stat-value text-teal-600 dark:text-teal-400">{problems.length}</span>
+							<span class={`engineering-stat-value ${ladder.isExtra ? 'text-purple-600 dark:text-purple-400' : ladder.type === 'division' ? 'text-amber-600 dark:text-amber-400' : 'text-teal-600 dark:text-teal-400'}`}>
+								{problems.length}
+							</span>
 						</div>
 					</div>
 				</div>

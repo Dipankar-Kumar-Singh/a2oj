@@ -1,0 +1,163 @@
+{
+  "difficultyLabels": {
+    "1": "Beginner",
+    "2": "Easy",
+    "3": "Medium",
+    "4": "Medium-Hard",
+    "5": "Hard",
+    "6": "Very Hard",
+    "7": "Expert",
+    "8": "Master",
+    "9": "Grandmaster",
+    "10": "Legendary"
+  },
+  "difficultyColors": {
+    "1": "teal",
+    "2": "cyan",
+    "3": "sky",
+    "4": "amber",
+    "5": "orange",
+    "6": "rose",
+    "7": "red",
+    "8": "fuchsia",
+    "9": "purple",
+    "10": "violet"
+  },
+  "ladderOverrides": {
+    "11": {
+      "displayName": "Rating < 1300",
+      "difficultyLabel": "Beginner"
+    },
+    "12": {
+      "displayName": "1300 ≤ Rating ≤ 1399",
+      "difficultyLabel": "Easy"
+    },
+    "13": {
+      "displayName": "1400 ≤ Rating ≤ 1499",
+      "difficultyLabel": "Medium"
+    },
+    "14": {
+      "displayName": "1500 ≤ Rating ≤ 1599",
+      "difficultyLabel": "Medium-Hard"
+    },
+    "15": {
+      "displayName": "1600 ≤ Rating ≤ 1699",
+      "difficultyLabel": "Hard"
+    },
+    "16": {
+      "displayName": "1700 ≤ Rating ≤ 1799",
+      "difficultyLabel": "Very Hard"
+    },
+    "17": {
+      "displayName": "1800 ≤ Rating ≤ 1899",
+      "difficultyLabel": "Expert"
+    },
+    "18": {
+      "displayName": "1900 ≤ Rating ≤ 1999",
+      "difficultyLabel": "Master"
+    },
+    "19": {
+      "displayName": "2000 ≤ Rating ≤ 2099",
+      "difficultyLabel": "Grandmaster"
+    },
+    "20": {
+      "displayName": "2100 ≤ Rating ≤ 2199",
+      "difficultyLabel": "Legendary"
+    },
+    "21": {
+      "displayName": "Rating ≥ 2200",
+      "difficultyLabel": "Legendary"
+    },
+    "4": {
+      "displayName": "Div. 2, Problem A",
+      "division": "Division 2",
+      "problemType": "A"
+    },
+    "5": {
+      "displayName": "Div. 2, Problem B",
+      "division": "Division 2",
+      "problemType": "B"
+    },
+    "6": {
+      "displayName": "Div. 2, Problem C",
+      "division": "Division 2",
+      "problemType": "C"
+    },
+    "7": {
+      "displayName": "Div. 2, Problem D",
+      "division": "Division 2",
+      "problemType": "D"
+    },
+    "8": {
+      "displayName": "Div. 2, Problem E",
+      "division": "Division 2",
+      "problemType": "E"
+    },
+    "9": {
+      "displayName": "Div. 1, Problem D",
+      "division": "Division 1",
+      "problemType": "D"
+    },
+    "10": {
+      "displayName": "Div. 1, Problem E",
+      "division": "Division 1",
+      "problemType": "E"
+    },
+    "22": {
+      "displayName": "Rating < 1300 (Extra)",
+      "difficultyLabel": "Beginner",
+      "isExtra": true
+    },
+    "23": {
+      "displayName": "1300 ≤ Rating ≤ 1399 (Extra)",
+      "difficultyLabel": "Easy",
+      "isExtra": true
+    },
+    "24": {
+      "displayName": "1400 ≤ Rating ≤ 1499 (Extra)",
+      "difficultyLabel": "Medium",
+      "isExtra": true
+    },
+    "25": {
+      "displayName": "1500 ≤ Rating ≤ 1599 (Extra)",
+      "difficultyLabel": "Medium-Hard",
+      "isExtra": true
+    },
+    "26": {
+      "displayName": "1600 ≤ Rating ≤ 1699 (Extra)",
+      "difficultyLabel": "Hard",
+      "isExtra": true
+    },
+    "27": {
+      "displayName": "1700 ≤ Rating ≤ 1799 (Extra)",
+      "difficultyLabel": "Very Hard",
+      "isExtra": true
+    },
+    "28": {
+      "displayName": "1800 ≤ Rating ≤ 1899 (Extra)",
+      "difficultyLabel": "Expert",
+      "isExtra": true
+    },
+    "29": {
+      "displayName": "1900 ≤ Rating ≤ 1999 (Extra)",
+      "difficultyLabel": "Master",
+      "isExtra": true
+    },
+    "30": {
+      "displayName": "2000 ≤ Rating ≤ 2099 (Extra)",
+      "difficultyLabel": "Grandmaster",
+      "isExtra": true
+    },
+    "31": {
+      "displayName": "2100 ≤ Rating ≤ 2199 (Extra)",
+      "difficultyLabel": "Legendary",
+      "isExtra": true
+    },
+    "32": {
+      "displayName": "Rating ≥ 2200 (Extra)",
+      "difficultyLabel": "Legendary",
+      "isExtra": true
+    }
+  }
+}
+

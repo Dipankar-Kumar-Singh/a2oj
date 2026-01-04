@@ -1,0 +1,710 @@
+{
+  "id": 7,
+  "name": "Codeforces Div. 2, D",
+  "type": "division",
+  "description": "List of random Codeforces problems, all of them are Div. 2 D problems. The problems are sorted, the most solved problem comes first. This is a good practice for whoever can solve almost all Div. 2 A, B and C problems, but might have some difficulties while solving the C problems.",
+  "difficultyLevel": 5,
+  "problemCount": 100,
+  "problems": [
+    {
+      "position": 1,
+      "name": "Flowers",
+      "contestId": 474,
+      "problemId": "D",
+      "difficulty": 1
+    },
+    {
+      "position": 2,
+      "name": "Prizes, Prizes, more Prizes",
+      "contestId": 208,
+      "problemId": "D",
+      "difficulty": 3
+    },
+    {
+      "position": 3,
+      "name": "Xenia and Bit Operations",
+      "contestId": 339,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 4,
+      "name": "Vasya and Chess",
+      "contestId": 493,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 5,
+      "name": "Mashmokh and ACM",
+      "contestId": 414,
+      "problemId": "B",
+      "difficulty": 3
+    },
+    {
+      "position": 6,
+      "name": "Multiplication Table",
+      "contestId": 448,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 7,
+      "name": "Unbearable Controversy of Being",
+      "contestId": 489,
+      "problemId": "D",
+      "difficulty": 3
+    },
+    {
+      "position": 8,
+      "name": "Caesar's Legions",
+      "contestId": 118,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 9,
+      "name": "Colorful Graph",
+      "contestId": 246,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 10,
+      "name": "Little Girl and Maximum XOR",
+      "contestId": 276,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 11,
+      "name": "Common Divisors",
+      "contestId": 182,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 12,
+      "name": "Magic Box",
+      "contestId": 231,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 13,
+      "name": "Good Sequences",
+      "contestId": 264,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 14,
+      "name": "Password",
+      "contestId": 126,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 15,
+      "name": "Greg and Graph",
+      "contestId": 295,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 16,
+      "name": "Working out",
+      "contestId": 429,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 17,
+      "name": "Count Good Substrings",
+      "contestId": 451,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 18,
+      "name": "Good Substrings",
+      "contestId": 271,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 19,
+      "name": "Long Path",
+      "contestId": 407,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 20,
+      "name": "Maximum Value",
+      "contestId": 484,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 21,
+      "name": "Greenhouse Effect",
+      "contestId": 269,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 22,
+      "name": "Red-Green Towers",
+      "contestId": 478,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 23,
+      "name": "Maximum Submatrix 2",
+      "contestId": 375,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 24,
+      "name": "Cow Program",
+      "contestId": 283,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 25,
+      "name": "Biridian Forest",
+      "contestId": 329,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 26,
+      "name": "Andrey and Problem",
+      "contestId": 442,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 27,
+      "name": "DZY Loves Modification",
+      "contestId": 446,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 28,
+      "name": "Zero Tree",
+      "contestId": 274,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 29,
+      "name": "Prefixes and Suffixes",
+      "contestId": 432,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 30,
+      "name": "Queue",
+      "contestId": 91,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 31,
+      "name": "Chips",
+      "contestId": 333,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 32,
+      "name": "Valid Sets",
+      "contestId": 486,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 33,
+      "name": "Pair of Numbers",
+      "contestId": 359,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 34,
+      "name": "Planets",
+      "contestId": 229,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 35,
+      "name": "Queue",
+      "contestId": 353,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 36,
+      "name": "Petya and Divisors",
+      "contestId": 111,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 37,
+      "name": "Obsessive String",
+      "contestId": 494,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 38,
+      "name": "Dima and Bacteria",
+      "contestId": 400,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 39,
+      "name": "Psychos in a Line",
+      "contestId": 319,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 40,
+      "name": "Ciel and Duel",
+      "contestId": 321,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 41,
+      "name": "Falling Anvils",
+      "contestId": 77,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 42,
+      "name": "Hit Ball",
+      "contestId": 203,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 43,
+      "name": "Toy Sum",
+      "contestId": 405,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 44,
+      "name": "Lucky Common Subsequence",
+      "contestId": 346,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 45,
+      "name": "Two Paths",
+      "contestId": 14,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 46,
+      "name": "Help General",
+      "contestId": 142,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 47,
+      "name": "Dima and Two Sequences",
+      "contestId": 272,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 48,
+      "name": "How many trees?",
+      "contestId": 9,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 49,
+      "name": "Lucky Number 2",
+      "contestId": 145,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 50,
+      "name": "Cinema",
+      "contestId": 234,
+      "problemId": "D",
+      "difficulty": 6
+    },
+    {
+      "position": 51,
+      "name": "Wizards and Huge Prize",
+      "contestId": 167,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 52,
+      "name": "Apple Tree",
+      "contestId": 348,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 53,
+      "name": "Yaroslav and Time",
+      "contestId": 301,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 54,
+      "name": "Numbers",
+      "contestId": 213,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 55,
+      "name": "Treasure Island",
+      "contestId": 106,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 56,
+      "name": "Book of Evil",
+      "contestId": 337,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 57,
+      "name": "Sereja and Periods",
+      "contestId": 314,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 58,
+      "name": "Infinite Maze",
+      "contestId": 196,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 59,
+      "name": "Playing with Permutations",
+      "contestId": 251,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 60,
+      "name": "Doctor",
+      "contestId": 83,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 61,
+      "name": "Animals",
+      "contestId": 35,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 62,
+      "name": "Mushroom Scientists",
+      "contestId": 185,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 63,
+      "name": "Tennis Game",
+      "contestId": 496,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 64,
+      "name": "Buses",
+      "contestId": 101,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 65,
+      "name": "String",
+      "contestId": 128,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 66,
+      "name": "Shifting",
+      "contestId": 286,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 67,
+      "name": "Boring Partition",
+      "contestId": 238,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 68,
+      "name": "Analyzing Polyline",
+      "contestId": 195,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 69,
+      "name": "Vasya and Types",
+      "contestId": 87,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 70,
+      "name": "Lizards and Basements 2",
+      "contestId": 6,
+      "problemId": "D",
+      "difficulty": 6
+    },
+    {
+      "position": 71,
+      "name": "Constellation",
+      "contestId": 32,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 72,
+      "name": "Pawn",
+      "contestId": 41,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 73,
+      "name": "Journey",
+      "contestId": 43,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 74,
+      "name": "Tanya and Password",
+      "contestId": 508,
+      "problemId": "D",
+      "difficulty": 7
+    },
+    {
+      "position": 75,
+      "name": "Demonstration",
+      "contestId": 191,
+      "problemId": "B",
+      "difficulty": 4
+    },
+    {
+      "position": 76,
+      "name": "Big Maximum Sum",
+      "contestId": 75,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 77,
+      "name": "The Child and Zoo",
+      "contestId": 437,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 78,
+      "name": "Mr. Bender and Square",
+      "contestId": 255,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 79,
+      "name": "Special Grid",
+      "contestId": 435,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 80,
+      "name": "Name That Tune",
+      "contestId": 498,
+      "problemId": "B",
+      "difficulty": 6
+    },
+    {
+      "position": 81,
+      "name": "Ring Road 2",
+      "contestId": 27,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 82,
+      "name": "Russian Roulette",
+      "contestId": 103,
+      "problemId": "C",
+      "difficulty": 5
+    },
+    {
+      "position": 83,
+      "name": "Snake",
+      "contestId": 225,
+      "problemId": "D",
+      "difficulty": 6
+    },
+    {
+      "position": 84,
+      "name": "Upgrading Array",
+      "contestId": 402,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 85,
+      "name": "Edges in MST",
+      "contestId": 160,
+      "problemId": "D",
+      "difficulty": 6
+    },
+    {
+      "position": 86,
+      "name": "Fools and Foolproof Roads",
+      "contestId": 362,
+      "problemId": "D",
+      "difficulty": 6
+    },
+    {
+      "position": 87,
+      "name": "End of Exams",
+      "contestId": 93,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 88,
+      "name": "Restoring Numbers",
+      "contestId": 509,
+      "problemId": "D",
+      "difficulty": 7
+    },
+    {
+      "position": 89,
+      "name": "Cats Transport",
+      "contestId": 311,
+      "problemId": "B",
+      "difficulty": 7
+    },
+    {
+      "position": 90,
+      "name": "Broken Monitor",
+      "contestId": 370,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 91,
+      "name": "The Minimum Number of Variables",
+      "contestId": 279,
+      "problemId": "D",
+      "difficulty": 6
+    },
+    {
+      "position": 92,
+      "name": "Volcanoes",
+      "contestId": 383,
+      "problemId": "B",
+      "difficulty": 7
+    },
+    {
+      "position": 93,
+      "name": "Widget Library",
+      "contestId": 89,
+      "problemId": "B",
+      "difficulty": 5
+    },
+    {
+      "position": 94,
+      "name": "Misha and Permutations Summation",
+      "contestId": 501,
+      "problemId": "D",
+      "difficulty": 4
+    },
+    {
+      "position": 95,
+      "name": "BerDonalds",
+      "contestId": 266,
+      "problemId": "D",
+      "difficulty": 7
+    },
+    {
+      "position": 96,
+      "name": "Tower of Hanoi",
+      "contestId": 392,
+      "problemId": "B",
+      "difficulty": 8
+    },
+    {
+      "position": 97,
+      "name": "Mr. Kitayuta's Technology",
+      "contestId": 505,
+      "problemId": "D",
+      "difficulty": 5
+    },
+    {
+      "position": 98,
+      "name": "Shoe Store",
+      "contestId": 166,
+      "problemId": "D",
+      "difficulty": 7
+    },
+    {
+      "position": 99,
+      "name": "Inna and Sweet Matrix",
+      "contestId": 390,
+      "problemId": "D",
+      "difficulty": 8
+    },
+    {
+      "position": 100,
+      "name": "Help King",
+      "contestId": 98,
+      "problemId": "B",
+      "difficulty": 9
+    }
+  ]
+}

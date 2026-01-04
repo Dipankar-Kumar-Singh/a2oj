@@ -1,0 +1,153 @@
+{
+  "rating": [
+    {
+      "id": 11,
+      "name": "Codeforces Rating < 1300",
+      "problemCount": 100
+    },
+    {
+      "id": 12,
+      "name": "1300 <= Codeforces Rating <= 1399",
+      "problemCount": 100
+    },
+    {
+      "id": 13,
+      "name": "1400 <= Codeforces Rating <= 1499",
+      "problemCount": 100
+    },
+    {
+      "id": 14,
+      "name": "1500 <= Codeforces Rating <= 1599",
+      "problemCount": 100
+    },
+    {
+      "id": 15,
+      "name": "1600 <= Codeforces Rating <= 1699",
+      "problemCount": 100
+    },
+    {
+      "id": 16,
+      "name": "1700 <= Codeforces Rating <= 1799",
+      "problemCount": 100
+    },
+    {
+      "id": 17,
+      "name": "1800 <= Codeforces Rating <= 1899",
+      "problemCount": 100
+    },
+    {
+      "id": 18,
+      "name": "1900 <= Codeforces Rating <= 1999",
+      "problemCount": 100
+    },
+    {
+      "id": 19,
+      "name": "2000 <= Codeforces Rating <= 2099",
+      "problemCount": 100
+    },
+    {
+      "id": 20,
+      "name": "2100 <= Codeforces Rating <= 2199",
+      "problemCount": 100
+    },
+    {
+      "id": 21,
+      "name": "Codeforces Rating >= 2200",
+      "problemCount": 100
+    }
+  ],
+  "division": [
+    {
+      "id": 4,
+      "name": "Codeforces Div. 2, A",
+      "problemCount": 100
+    },
+    {
+      "id": 5,
+      "name": "Codeforces Div. 2, B",
+      "problemCount": 100
+    },
+    {
+      "id": 6,
+      "name": "Codeforces Div. 2, C",
+      "problemCount": 100
+    },
+    {
+      "id": 7,
+      "name": "Codeforces Div. 2, D",
+      "problemCount": 100
+    },
+    {
+      "id": 8,
+      "name": "Codeforces Div. 2, E",
+      "problemCount": 100
+    },
+    {
+      "id": 9,
+      "name": "Codeforces Div. 1, D",
+      "problemCount": 100
+    },
+    {
+      "id": 10,
+      "name": "Codeforces Div. 1, E",
+      "problemCount": 100
+    }
+  ],
+  "extra": [
+    {
+      "id": 22,
+      "name": "Codeforces Rating < 1300 (Extra)",
+      "problemCount": 200
+    },
+    {
+      "id": 23,
+      "name": "1300 <= Codeforces Rating <= 1399 (Extra)",
+      "problemCount": 200
+    },
+    {
+      "id": 24,
+      "name": "1400 <= Codeforces Rating <= 1499 (Extra)",
+      "problemCount": 200
+    },
+    {
+      "id": 25,
+      "name": "1500 <= Codeforces Rating <= 1599 (Extra)",
+      "problemCount": 200
+    },
+    {
+      "id": 26,
+      "name": "1600 <= Codeforces Rating <= 1699 (Extra)",
+      "problemCount": 200
+    },
+    {
+      "id": 27,
+      "name": "1700 <= Codeforces Rating <= 1799 (Extra)",
+      "problemCount": 200
+    },
+    {
+      "id": 28,
+      "name": "1800 <= Codeforces Rating <= 1899 (Extra)",
+      "problemCount": 200
+    },
+    {
+      "id": 29,
+      "name": "1900 <= Codeforces Rating <= 1999 (Extra)",
+      "problemCount": 200
+    },
+    {
+      "id": 30,
+      "name": "2000 <= Codeforces Rating <= 2099 (Extra)",
+      "problemCount": 200
+    },
+    {
+      "id": 31,
+      "name": "2100 <= Codeforces Rating <= 2199 (Extra)",
+      "problemCount": 200
+    },
+    {
+      "id": 32,
+      "name": "Codeforces Rating >= 2200 (Extra)",
+      "problemCount": 200
+    }
+  ]
+}
