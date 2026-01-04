@@ -102,7 +102,7 @@ const divisionLadders = [
 ---
 
 <Layout title="A2OJ Refreshed - Practice Ladders">
-	<main class="min-h-screen">
+	<main class="min-h-screen full-page-grid">
 		<!-- Hero Section with Animated Gradient Background -->
 		<div class="relative animated-gradient text-white overflow-hidden">
 			<!-- Grain texture overlay -->
@@ -137,38 +137,53 @@ const divisionLadders = [
 		</div>
 
 		<!-- Rating-Based Ladders -->
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative engineering-grid">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
 			<div class="mb-12">
-				<h2 class="text-4xl font-bold mb-4 text-slate-900 dark:text-white">
-					<span class="text-gradient">Rating-Based</span> Ladders
-				</h2>
+				<div class="section-header">
+					<div class="section-header-line"></div>
+					<div class="section-header-box">
+						<span class="section-header-label">SECTION 01</span>
+						<h2 class="section-header-title">Rating-Based Ladders</h2>
+					</div>
+					<div class="section-header-line flex-1"></div>
+					<div class="section-header-corner"></div>
+				</div>
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-				{ladders.map((ladder) => (
+				{ladders.map((ladder, index) => (
 					<a href={`/ladder/${ladder.id}`} class="block card-hover">
-						<div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 border border-slate-200 dark:border-slate-800 h-full hover:border-teal-500 dark:hover:border-teal-400 transition-all">
+						<div class="engineering-card">
+							<div class="engineering-card-corner engineering-card-corner-tl"></div>
+							<div class="engineering-card-corner engineering-card-corner-tr"></div>
+							<div class="engineering-card-corner engineering-card-corner-bl"></div>
+							<div class="engineering-card-corner engineering-card-corner-br"></div>
+							
 							<div class="flex justify-between items-start mb-4">
 								<div class="flex-1">
-									<h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">
+									<span class="engineering-card-label">LADDER {String(index + 1).padStart(2, '0')}</span>
+									<h3 class="engineering-card-title">
 										{ladder.name}
 									</h3>
-									<span class={`inline-block px-3 py-1 text-xs font-semibold rounded-full bg-${ladder.color}-100 text-${ladder.color}-700 dark:bg-${ladder.color}-900/30 dark:text-${ladder.color}-400`}>
-										{ladder.difficulty}
-									</span>
 								</div>
 								<div class="text-right">
-									<div class="text-2xl font-bold text-teal-600 dark:text-teal-400">
+									<div class="engineering-card-count text-teal-600 dark:text-teal-400">
 										{ladder.count}
 									</div>
-									<div class="text-xs text-slate-500">problems</div>
+									<div class="engineering-card-unit">problems</div>
 								</div>
 							</div>
-							<div class="flex items-center justify-between">
-								<div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
-									<div class="bg-gradient-accent h-2 rounded-full" style="width: 0%"></div>
+							
+							<div class="engineering-card-divider"></div>
+							
+							<div class="flex items-center justify-between mt-4">
+								<span class="engineering-card-badge">{ladder.difficulty}</span>
+								<div class="flex items-center gap-2">
+									<div class="w-24 bg-slate-200 dark:bg-slate-700 h-1">
+										<div class="bg-teal-500 h-1" style="width: 0%"></div>
+									</div>
+									<span class="engineering-card-percent">0%</span>
 								</div>
-								<span class="ml-3 text-sm text-slate-500 whitespace-nowrap">0%</span>
 							</div>
 						</div>
 					</a>
@@ -177,31 +192,44 @@ const divisionLadders = [
 		</div>
 
 		<!-- Division-Based Ladders -->
-		<div class="bg-slate-100 dark:bg-slate-900/50 py-16 relative engineering-grid">
+		<div class="py-16 relative">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="mb-12">
-					<h2 class="text-4xl font-bold mb-4 text-slate-900 dark:text-white">
-						<span class="text-gradient">Division-Based</span> Ladders
-					</h2>
+					<div class="section-header">
+						<div class="section-header-line"></div>
+						<div class="section-header-box">
+							<span class="section-header-label">SECTION 02</span>
+							<h2 class="section-header-title">Division-Based Ladders</h2>
+						</div>
+						<div class="section-header-line flex-1"></div>
+						<div class="section-header-corner"></div>
+					</div>
 				</div>
 
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-					{divisionLadders.map((ladder) => (
+					{divisionLadders.map((ladder, index) => (
 						<a href={`/ladder/${ladder.id}`} class="block card-hover">
-							<div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 border border-slate-200 dark:border-slate-800 h-full hover:border-amber-500 dark:hover:border-amber-400 transition-all">
-								<div class="mb-4">
-									<div class="text-sm text-amber-600 dark:text-amber-400 font-semibold mb-1">
-										{ladder.division}
+							<div class="engineering-card engineering-card-amber">
+								<div class="engineering-card-corner engineering-card-corner-tl"></div>
+								<div class="engineering-card-corner engineering-card-corner-tr"></div>
+								<div class="engineering-card-corner engineering-card-corner-bl"></div>
+								<div class="engineering-card-corner engineering-card-corner-br"></div>
+								
+								<span class="engineering-card-label">{ladder.division.toUpperCase()}</span>
+								<h3 class="engineering-card-title text-lg">
+									{ladder.name}
+								</h3>
+								
+								<div class="engineering-card-divider mt-3"></div>
+								
+								<div class="flex justify-between items-center mt-3">
+									<span class="engineering-card-badge engineering-card-badge-amber">Problem {String.fromCharCode(65 + index)}</span>
+									<div class="text-right">
+										<div class="engineering-card-count text-amber-600 dark:text-amber-400">
+											{ladder.count}
+										</div>
+										<div class="engineering-card-unit">problems</div>
 									</div>
-									<h3 class="text-lg font-bold text-slate-900 dark:text-white">
-										{ladder.name}
-									</h3>
-								</div>
-								<div class="text-right">
-									<div class="text-2xl font-bold text-amber-600 dark:text-amber-400">
-										{ladder.count}
-									</div>
-									<div class="text-xs text-slate-500">problems</div>
 								</div>
 							</div>
 						</a>

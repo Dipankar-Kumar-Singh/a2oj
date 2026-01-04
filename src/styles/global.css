@@ -12,6 +12,125 @@
     --accent-primary: #14b8a6; /* Teal */
     --accent-secondary: #f59e0b; /* Amber */
   }
+
+  /* ═══════════════════════════════════════════════════════════════
+     ROYAL PREMIUM DARK MODE - Deep Navy with Gold Accents
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Deep navy base - rich and royal */
+  .dark body,
+  .dark main {
+    background: linear-gradient(180deg, #0f172a 0%, #0c1222 50%, #080d19 100%) !important;
+  }
+
+  /* Cards with elegant glass effect and warm glow */
+  .dark .bg-white {
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+    border: 1px solid rgba(251, 191, 36, 0.15) !important;
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.4),
+      0 0 40px rgba(251, 191, 36, 0.03),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  }
+
+  /* Table container with subtle depth */
+  .dark .bg-slate-100 {
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+  }
+
+  .dark .bg-slate-50 {
+    background: transparent !important;
+  }
+
+  /* Elegant hover states with golden warmth */
+  .dark .hover\:bg-slate-50:hover {
+    background: linear-gradient(90deg, rgba(251, 191, 36, 0.08) 0%, rgba(251, 191, 36, 0.03) 100%) !important;
+  }
+
+  /* Table header with royal gradient */
+  .dark thead {
+    background: linear-gradient(90deg, rgba(30, 41, 59, 0.98) 0%, rgba(51, 65, 85, 0.95) 50%, rgba(30, 41, 59, 0.98) 100%) !important;
+    border-bottom: 1px solid rgba(251, 191, 36, 0.2) !important;
+  }
+
+  /* Refined dividers with gold tint */
+  .dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+  .dark .divide-slate-800 > :not([hidden]) ~ :not([hidden]) {
+    border-color: rgba(148, 163, 184, 0.15) !important;
+  }
+
+  /* Subtle borders */
+  .dark .border-slate-200,
+  .dark .border-slate-800 {
+    border-color: rgba(148, 163, 184, 0.2) !important;
+  }
+
+  /* Progress bar with depth */
+  .dark .bg-slate-700 {
+    background: rgba(51, 65, 85, 0.6) !important;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     MAXIMUM VISIBILITY - Crystal Clear Text
+     ═══════════════════════════════════════════════════════════════ */
+
+  .dark .text-slate-400 {
+    color: #e2e8f0 !important; /* Very bright for great readability */
+  }
+
+  .dark .text-slate-500 {
+    color: #cbd5e1 !important; /* Clear secondary text */
+  }
+
+  .dark .text-slate-600 {
+    color: #e2e8f0 !important;
+  }
+
+  .dark .text-slate-700 {
+    color: #f1f5f9 !important;
+  }
+
+  .dark .text-slate-900 {
+    color: #ffffff !important;
+  }
+
+  /* Pure white headings for maximum impact */
+  .dark h1, .dark h2, .dark h3, .dark h4 {
+    color: #ffffff !important;
+    text-shadow: 0 0 40px rgba(251, 191, 36, 0.1);
+  }
+
+  /* Bright teal links in dark mode */
+  .dark .text-teal-600 {
+    color: #5eead4 !important; /* Brighter teal */
+  }
+
+  .dark .text-teal-400 {
+    color: #5eead4 !important;
+  }
+
+  /* Bright amber in dark mode */
+  .dark .text-amber-600 {
+    color: #fcd34d !important; /* Brighter amber */
+  }
+
+  .dark .text-amber-400 {
+    color: #fcd34d !important;
+  }
+
+  /* Footer text visibility */
+  .dark footer .text-slate-400 {
+    color: #94a3b8 !important;
+  }
+
+  /* Links with golden glow on hover */
+  .dark a {
+    transition: all 0.3s ease;
+  }
+
+  .dark a:hover {
+    text-shadow: 0 0 20px rgba(20, 184, 166, 0.5);
+  }
 }
 
 @layer utilities {
@@ -24,10 +143,14 @@
   }
   
   .glass-dark {
-    background: rgba(15, 23, 42, 0.7);
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.15);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 60px rgba(251, 191, 36, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
 
   /* Engineering Grid texture overlay - Blueprint/Schematic style */
@@ -71,7 +194,94 @@
     z-index: 1;
   }
 
-  /* Engineering Grid for light backgrounds */
+  /* Full Page Grid - covers the entire page */
+  .full-page-grid {
+    position: relative;
+  }
+
+  .full-page-grid::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: 
+      /* Major grid lines */
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 49px,
+        rgba(100, 116, 139, 0.10) 49px,
+        rgba(100, 116, 139, 0.10) 50px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 49px,
+        rgba(100, 116, 139, 0.10) 49px,
+        rgba(100, 116, 139, 0.10) 50px
+      ),
+      /* Minor grid lines */
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 9px,
+        rgba(100, 116, 139, 0.03) 9px,
+        rgba(100, 116, 139, 0.03) 10px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 9px,
+        rgba(100, 116, 139, 0.03) 9px,
+        rgba(100, 116, 139, 0.03) 10px
+      );
+  }
+
+  .full-page-grid > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Full Page Grid for dark mode - golden tint */
+  .dark .full-page-grid::before {
+    background-image: 
+      /* Major grid lines with warm gold tint */
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 49px,
+        rgba(251, 191, 36, 0.08) 49px,
+        rgba(251, 191, 36, 0.08) 50px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 49px,
+        rgba(251, 191, 36, 0.08) 49px,
+        rgba(251, 191, 36, 0.08) 50px
+      ),
+      /* Minor grid lines - subtle */
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 9px,
+        rgba(148, 163, 184, 0.03) 9px,
+        rgba(148, 163, 184, 0.03) 10px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 9px,
+        rgba(148, 163, 184, 0.03) 9px,
+        rgba(148, 163, 184, 0.03) 10px
+      );
+  }
+
+  /* Engineering Grid for light backgrounds (kept for backwards compatibility) */
   .engineering-grid {
     background-image: 
       /* Major grid lines */
@@ -106,38 +316,39 @@
       );
   }
 
-  /* Engineering Grid for dark backgrounds */
+  /* Engineering Grid for premium dark backgrounds */
   .dark .engineering-grid {
+    background: transparent;
     background-image: 
-      /* Major grid lines */
+      /* Major grid lines with warm gold tint */
       repeating-linear-gradient(
         0deg,
         transparent 0px,
         transparent 49px,
-        rgba(148, 163, 184, 0.08) 49px,
-        rgba(148, 163, 184, 0.08) 50px
+        rgba(251, 191, 36, 0.06) 49px,
+        rgba(251, 191, 36, 0.06) 50px
       ),
       repeating-linear-gradient(
         90deg,
         transparent 0px,
         transparent 49px,
-        rgba(148, 163, 184, 0.08) 49px,
-        rgba(148, 163, 184, 0.08) 50px
+        rgba(251, 191, 36, 0.06) 49px,
+        rgba(251, 191, 36, 0.06) 50px
       ),
-      /* Minor grid lines */
+      /* Minor grid lines - subtle slate */
       repeating-linear-gradient(
         0deg,
         transparent 0px,
         transparent 9px,
-        rgba(148, 163, 184, 0.03) 9px,
-        rgba(148, 163, 184, 0.03) 10px
+        rgba(148, 163, 184, 0.04) 9px,
+        rgba(148, 163, 184, 0.04) 10px
       ),
       repeating-linear-gradient(
         90deg,
         transparent 0px,
         transparent 9px,
-        rgba(148, 163, 184, 0.03) 9px,
-        rgba(148, 163, 184, 0.03) 10px
+        rgba(148, 163, 184, 0.04) 9px,
+        rgba(148, 163, 184, 0.04) 10px
       );
   }
 
@@ -156,8 +367,292 @@
 }
 
 @layer utilities {
+  /* Engineering-style Section Headers */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .section-header-line {
+    height: 1px;
+    width: 40px;
+    background: linear-gradient(90deg, transparent 0%, #64748b 100%);
+  }
+
+  .section-header-line.flex-1 {
+    flex: 1;
+    background: linear-gradient(90deg, #64748b 0%, transparent 100%);
+  }
+
+  .dark .section-header-line {
+    background: linear-gradient(90deg, transparent 0%, #475569 100%);
+  }
+
+  .dark .section-header-line.flex-1 {
+    background: linear-gradient(90deg, #475569 0%, transparent 100%);
+  }
+
+  .section-header-box {
+    padding: 12px 24px;
+    border: 1px solid #94a3b8;
+    position: relative;
+    background: rgba(248, 250, 252, 0.8);
+    backdrop-filter: blur(8px);
+  }
+
+  .dark .section-header-box {
+    border-color: #475569;
+    background: rgba(15, 23, 42, 0.8);
+  }
+
+  /* Corner cutouts for engineering look */
+  .section-header-box::before,
+  .section-header-box::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 1px solid #64748b;
+  }
+
+  .section-header-box::before {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .section-header-box::after {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
+  }
+
+  .dark .section-header-box::before,
+  .dark .section-header-box::after {
+    border-color: #64748b;
+  }
+
+  .section-header-corner {
+    width: 12px;
+    height: 12px;
+    border-right: 2px solid #64748b;
+    border-top: 2px solid #64748b;
+  }
+
+  .dark .section-header-corner {
+    border-color: #475569;
+  }
+
+  .section-header-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: #64748b;
+    margin-bottom: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .dark .section-header-label {
+    color: #94a3b8;
+  }
+
+  .section-header-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .dark .section-header-title {
+    color: #f1f5f9;
+  }
+
   .text-gradient {
     @apply bg-gradient-to-r from-teal-500 via-cyan-500 to-amber-500 bg-clip-text text-transparent;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     ENGINEERING-STYLE CARDS - Technical Drawing Aesthetic
+     ═══════════════════════════════════════════════════════════════ */
+  
+  .engineering-card {
+    position: relative;
+    padding: 20px;
+    background: rgba(248, 250, 252, 0.9);
+    border: 1px solid #94a3b8;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+  }
+
+  .engineering-card:hover {
+    border-color: #14b8a6;
+    box-shadow: 0 4px 20px rgba(20, 184, 166, 0.15);
+  }
+
+  .engineering-card.engineering-card-amber:hover {
+    border-color: #f59e0b;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15);
+  }
+
+  .dark .engineering-card {
+    background: rgba(15, 23, 42, 0.9);
+    border-color: #475569;
+  }
+
+  .dark .engineering-card:hover {
+    border-color: #5eead4;
+    box-shadow: 0 4px 20px rgba(94, 234, 212, 0.1);
+  }
+
+  .dark .engineering-card.engineering-card-amber:hover {
+    border-color: #fcd34d;
+    box-shadow: 0 4px 20px rgba(252, 211, 77, 0.1);
+  }
+
+  /* Corner cutouts - technical drawing style */
+  .engineering-card-corner {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #64748b;
+  }
+
+  .dark .engineering-card-corner {
+    border-color: #64748b;
+  }
+
+  .engineering-card-corner-tl {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .engineering-card-corner-tr {
+    top: -1px;
+    right: -1px;
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .engineering-card-corner-bl {
+    bottom: -1px;
+    left: -1px;
+    border-right: none;
+    border-top: none;
+  }
+
+  .engineering-card-corner-br {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
+  }
+
+  /* Card label - monospaced, small */
+  .engineering-card-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: #64748b;
+    margin-bottom: 6px;
+    font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  }
+
+  .dark .engineering-card-label {
+    color: #94a3b8;
+  }
+
+  /* Card title */
+  .engineering-card-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  .dark .engineering-card-title {
+    color: #f1f5f9;
+  }
+
+  /* Card count - large number */
+  .engineering-card-count {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+    line-height: 1;
+  }
+
+  /* Card unit label */
+  .engineering-card-unit {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: #64748b;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  }
+
+  .dark .engineering-card-unit {
+    color: #94a3b8;
+  }
+
+  /* Horizontal divider line */
+  .engineering-card-divider {
+    height: 1px;
+    background: linear-gradient(90deg, #94a3b8 0%, transparent 100%);
+  }
+
+  .dark .engineering-card-divider {
+    background: linear-gradient(90deg, #475569 0%, transparent 100%);
+  }
+
+  /* Badge - difficulty level */
+  .engineering-card-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid #94a3b8;
+    color: #64748b;
+    font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  }
+
+  .dark .engineering-card-badge {
+    border-color: #475569;
+    color: #94a3b8;
+  }
+
+  .engineering-card-badge-amber {
+    border-color: #f59e0b;
+    color: #d97706;
+  }
+
+  .dark .engineering-card-badge-amber {
+    border-color: #fcd34d;
+    color: #fcd34d;
+  }
+
+  /* Percent display */
+  .engineering-card-percent {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  }
+
+  .dark .engineering-card-percent {
+    color: #94a3b8;
   }
   
   .card-hover {
