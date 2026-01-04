@@ -674,6 +674,72 @@
     box-shadow: 0 6px 20px rgba(251, 191, 36, 0.15);
   }
 
+  /* Sync Button Styles */
+  .engineering-sync-button {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(248, 250, 252, 0.95);
+    border: 1px solid #94a3b8;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .engineering-sync-button:hover {
+    background: rgba(20, 184, 166, 0.1);
+    border-color: #14b8a6;
+    color: #14b8a6;
+    transform: translateY(-1px);
+  }
+
+  .engineering-sync-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .engineering-sync-button.syncing svg {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .dark .engineering-sync-button {
+    background: rgba(15, 23, 42, 0.9);
+    border-color: rgba(251, 191, 36, 0.2);
+    color: #94a3b8;
+  }
+
+  .dark .engineering-sync-button:hover {
+    background: rgba(251, 191, 36, 0.1);
+    border-color: #fcd34d;
+    color: #fcd34d;
+  }
+
+  .engineering-sync-time {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6875rem;
+    color: #64748b;
+    letter-spacing: 0.02em;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .dark .engineering-sync-time {
+    color: #94a3b8;
+  }
+
   .engineering-hero-stats {
     display: inline-flex;
     align-items: center;

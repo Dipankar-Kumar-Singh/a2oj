@@ -183,7 +183,10 @@ const difficultyColors = {
 						</thead>
 						<tbody class="engineering-table-body">
 							{problems.map((problem) => (
-								<tr class="engineering-table-row">
+								<tr 
+									class="engineering-table-row"
+									data-problem-id={`${problem.contestId}${problem.problemId}`}
+								>
 									<td class="px-6 py-4">
 										<span class="engineering-table-index">{String(problem.id).padStart(2, '0')}</span>
 									</td>
@@ -219,18 +222,10 @@ const difficultyColors = {
 											)}
 										</div>
 									</td>
-									<td class="px-6 py-4 text-center">
-										{problem.solved ? (
-											<div class="engineering-status engineering-status-solved">
-												<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-												</svg>
-											</div>
-										) : (
-											<div class="engineering-status engineering-status-pending">
-												<span class="w-2 h-2 bg-current rounded-full"></span>
-											</div>
-										)}
+									<td class="px-6 py-4 text-center status-cell">
+										<div class="engineering-status engineering-status-pending">
+											<span class="w-2 h-2 bg-current rounded-full"></span>
+										</div>
 									</td>
 								</tr>
 							))}
@@ -297,3 +292,85 @@ const difficultyColors = {
 	<Settings />
 </Layout>
 
+<script>
+	// Load solved problems from localStorage and update UI
+	interface SolvedData {
+		handle: string;
+		solved: string[];
+		lastUpdated: string;
+	}
+
+	function loadSolvedProblems(): string[] {
+		const solvedStr = localStorage.getItem('cf_solved');
+		if (!solvedStr) return [];
+		try {
+			return JSON.parse(solvedStr);
+		} catch {
+			return [];
+		}
+	}
+
+	function updateProblemStatus(problemId: string, row: HTMLElement): void {
+		const statusCell = row.querySelector('.status-cell');
+		if (!statusCell) return;
+
+		// Replace pending indicator with solved checkmark
+		statusCell.innerHTML = `
+			<div class="engineering-status engineering-status-solved">
+				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+				</svg>
+			</div>
+		`;
+	}
+
+	function updateProgressBar(solvedCount: number, totalCount: number): void {
+		const progressPercent = Math.round((solvedCount / totalCount) * 100);
+		
+		// Update progress fill
+		const progressFill = document.querySelector('.engineering-progress-fill') as HTMLElement;
+		if (progressFill) {
+			progressFill.style.width = `${progressPercent}%`;
+		}
+		
+		// Update progress text
+		const progressText = document.querySelectorAll('.engineering-progress-stat-value');
+		if (progressText.length >= 2) {
+			progressText[0].textContent = solvedCount.toString();
+			progressText[1].textContent = `${progressPercent}%`;
+		}
+		
+		// Update completion stat
+		const completeStatValue = document.querySelector('.engineering-stat-card:last-child .engineering-stat-card-value');
+		if (completeStatValue) {
+			completeStatValue.textContent = `${progressPercent}%`;
+		}
+	}
+
+	// Initialize on page load
+	document.addEventListener('DOMContentLoaded', () => {
+		const solvedProblems = loadSolvedProblems();
+		
+		if (solvedProblems.length === 0) {
+			console.log('No solved problems data found');
+			return;
+		}
+		
+		// Update each problem row
+		const problemRows = document.querySelectorAll('[data-problem-id]');
+		let solvedCount = 0;
+		
+		problemRows.forEach((row) => {
+			const problemId = row.getAttribute('data-problem-id');
+			if (problemId && solvedProblems.includes(problemId)) {
+				updateProblemStatus(problemId, row as HTMLElement);
+				solvedCount++;
+			}
+		});
+		
+		// Update progress indicators
+		updateProgressBar(solvedCount, problemRows.length);
+		
+		console.log(`Updated ${solvedCount}/${problemRows.length} problems as solved`);
+	});
+</script>
