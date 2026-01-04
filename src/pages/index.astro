@@ -330,23 +330,17 @@ const divisionLadders = [
 
 		private loadState(): void {
 			const savedState = localStorage.getItem(this.STORAGE_KEY);
-			if (savedState) {
+			if (savedState && this.quotes.length > 0) {
 				try {
 					const state = JSON.parse(savedState);
-					// Check if we should advance based on time elapsed
-					const now = Date.now();
-					const elapsed = now - (state.lastUpdate || 0);
-					const intervalsPassed = Math.floor(elapsed / this.ROTATION_INTERVAL_MS);
-					
-					if (intervalsPassed > 0 && this.quotes.length > 0) {
-						// Advance by the number of intervals that have passed
-						this.currentIndex = (state.index + intervalsPassed) % this.quotes.length;
-					} else {
-						this.currentIndex = state.index || 0;
-					}
+					// Always advance to next quote on page refresh
+					this.currentIndex = ((state.index || 0) + 1) % this.quotes.length;
 				} catch (e) {
 					this.currentIndex = 0;
 				}
+			} else {
+				// First visit - start at index 0
+				this.currentIndex = 0;
 			}
 		}
 
