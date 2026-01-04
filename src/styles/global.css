@@ -199,6 +199,29 @@
     position: relative;
   }
 
+  /* Engineering Doodles Layer - Dramatic, varied sizes with fading */
+  .full-page-grid::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='1000' viewBox='0 0 1200 1000'%3E%3Cdefs%3E%3ClinearGradient id='fade1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2364748b' stop-opacity='0.15'/%3E%3Cstop offset='100%25' stop-color='%2364748b' stop-opacity='0.02'/%3E%3C/linearGradient%3E%3ClinearGradient id='fade2' x1='100%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2364748b' stop-opacity='0.12'/%3E%3Cstop offset='100%25' stop-color='%2364748b' stop-opacity='0.01'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3C!-- GIANT ROCKET - Top left, dramatic, fading --%3E%3Cg stroke='url(%23fade1)' stroke-width='2'%3E%3Cpath d='M-20 280 L-20 180 Q-20 120 20 80 L60 40 L100 80 Q140 120 140 180 L140 280' /%3E%3Cpath d='M-20 280 L-60 340 L-20 320 L60 320 L140 320 L180 340 L140 280' /%3E%3Cpath d='M20 180 L100 180 M20 210 L100 210 M20 240 L100 240' /%3E%3Ccircle cx='60' cy='130' r='25' /%3E%3Cpath d='M30 320 L30 380 M60 320 L60 400 M90 320 L90 380' /%3E%3Cpath d='M20 360 Q60 420 100 360' stroke-dasharray='8,4' /%3E%3C/g%3E%3C!-- MASSIVE ATOM - Center right, very prominent --%3E%3Cg stroke='%2364748b' opacity='0.18'%3E%3Cellipse cx='950' cy='200' rx='140' ry='45' stroke-width='2.5' transform='rotate(-25 950 200)' /%3E%3Cellipse cx='950' cy='200' rx='140' ry='45' stroke-width='2' transform='rotate(25 950 200)' /%3E%3Cellipse cx='950' cy='200' rx='140' ry='45' stroke-width='1.5' transform='rotate(75 950 200)' /%3E%3Ccircle cx='950' cy='200' r='18' fill='%2364748b' opacity='0.3' /%3E%3Ccircle cx='870' cy='150' r='6' fill='%2364748b' opacity='0.4' /%3E%3Ccircle cx='1030' cy='250' r='6' fill='%2364748b' opacity='0.4' /%3E%3Ccircle cx='920' cy='280' r='5' fill='%2364748b' opacity='0.3' /%3E%3C/g%3E%3C!-- LARGE GOLDEN RATIO SPIRAL - Bottom left --%3E%3Cg stroke='url(%23fade2)' stroke-width='2'%3E%3Cpath d='M50 850 Q50 750 150 750 Q250 750 250 650 Q250 550 350 550 Q450 550 450 650' /%3E%3Crect x='50' y='750' width='100' height='100' stroke-width='1' opacity='0.5' /%3E%3Crect x='150' y='650' width='100' height='100' stroke-width='1' opacity='0.4' /%3E%3Crect x='250' y='550' width='100' height='100' stroke-width='1' opacity='0.3' /%3E%3Crect x='350' y='550' width='100' height='100' stroke-width='1' opacity='0.2' /%3E%3Ctext x='80' y='830' font-family='serif' font-size='16' font-style='italic' fill='%2364748b' opacity='0.15' stroke='none'%3Eφ = 1.618%3C/text%3E%3C/g%3E%3C!-- GIANT INTEGRAL - Right side, partially visible --%3E%3Ctext x='1100' y='500' font-family='serif' font-size='180' fill='%2364748b' opacity='0.06' stroke='none'%3E∫%3C/text%3E%3C!-- MEDIUM E=mc² - Upper middle, clean --%3E%3Ctext x='400' y='120' font-family='Georgia, serif' font-size='42' font-style='italic' fill='%2364748b' opacity='0.1' stroke='none'%3EE = mc²%3C/text%3E%3C!-- DNA HELIX - Large, left side --%3E%3Cg stroke='%2364748b' stroke-width='2' opacity='0.08'%3E%3Cpath d='M180 400 Q220 450 180 500 Q140 550 180 600 Q220 650 180 700 Q140 750 180 800' /%3E%3Cpath d='M240 400 Q200 450 240 500 Q280 550 240 600 Q200 650 240 700 Q280 750 240 800' /%3E%3Cpath d='M180 430 L240 430 M180 530 L240 530 M180 630 L240 630 M180 730 L240 730' stroke-width='1.5' /%3E%3C/g%3E%3C!-- SCHEMATIC CIRCUIT - Bottom right, technical --%3E%3Cg stroke='%2364748b' stroke-width='1.5' opacity='0.12'%3E%3Cpath d='M850 750 L900 750 L900 700 L950 700 L950 750 L1000 750' /%3E%3Cpath d='M900 700 L900 650 L950 650' /%3E%3Crect x='920' y='730' width='30' height='15' /%3E%3Crect x='870' y='680' width='20' height='30' /%3E%3Ccircle cx='850' cy='750' r='5' fill='%2364748b' opacity='0.5' /%3E%3Ccircle cx='1000' cy='750' r='5' fill='%2364748b' opacity='0.5' /%3E%3Ccircle cx='950' cy='650' r='5' fill='%2364748b' opacity='0.5' /%3E%3Cpath d='M1000 750 L1050 750 L1050 800 M1050 800 L1100 800 L1100 750' /%3E%3C/g%3E%3C!-- SIGMA - Large, fading --%3E%3Ctext x='700' y='450' font-family='serif' font-size='120' fill='%2364748b' opacity='0.05' stroke='none'%3EΣ%3C/text%3E%3C!-- Small scattered formulas - varying opacity --%3E%3Ctext x='550' y='280' font-family='serif' font-size='14' fill='%2364748b' opacity='0.15' stroke='none'%3E∇ × E = -∂B/∂t%3C/text%3E%3Ctext x='300' y='550' font-family='serif' font-size='11' fill='%2364748b' opacity='0.08' stroke='none'%3Eiℏ∂ψ/∂t = Ĥψ%3C/text%3E%3Ctext x='750' y='650' font-family='monospace' font-size='9' fill='%2364748b' opacity='0.1' stroke='none'%3Ef(n) = f(n-1) + f(n-2)%3C/text%3E%3C!-- PLANETARY ORBITS - Upper right --%3E%3Cg stroke='%2364748b' opacity='0.06'%3E%3Cellipse cx='1050' cy='80' rx='80' ry='30' stroke-width='1' /%3E%3Cellipse cx='1050' cy='80' rx='120' ry='45' stroke-width='0.8' /%3E%3Cellipse cx='1050' cy='80' rx='160' ry='60' stroke-width='0.5' /%3E%3Ccircle cx='1050' cy='80' r='8' fill='%2364748b' opacity='0.2' /%3E%3C/g%3E%3C!-- GEAR SYSTEM - Medium, mechanical --%3E%3Cg stroke='%2364748b' stroke-width='1.5' opacity='0.1'%3E%3Ccircle cx='600' cy='800' r='50' /%3E%3Ccircle cx='600' cy='800' r='20' /%3E%3Cpath d='M600 745 L600 755 M600 845 L600 855 M545 800 L555 800 M645 800 L655 800' stroke-width='3' /%3E%3Cpath d='M560 760 L567 767 M633 833 L640 840 M560 840 L567 833 M633 767 L640 760' stroke-width='3' /%3E%3Ccircle cx='680' cy='850' r='35' /%3E%3Ccircle cx='680' cy='850' r='12' /%3E%3C/g%3E%3C!-- VECTOR FIELD ARROWS - Scattered, dynamic --%3E%3Cg stroke='%2364748b' stroke-width='1' opacity='0.08'%3E%3Cpath d='M480 180 L510 160 M510 160 L505 168 M510 160 L502 162' /%3E%3Cpath d='M520 200 L550 175 M550 175 L544 183 M550 175 L542 178' /%3E%3Cpath d='M470 220 L495 195 M495 195 L489 203 M495 195 L487 198' /%3E%3Cpath d='M850 400 L890 370 M890 370 L882 377 M890 370 L883 363' /%3E%3Cpath d='M870 430 L905 395 M905 395 L897 402 M905 395 L898 388' /%3E%3C/g%3E%3C!-- DELTA prominent --%3E%3Ctext x='380' y='750' font-family='serif' font-size='80' fill='%2364748b' opacity='0.04' stroke='none'%3EΔ%3C/text%3E%3C!-- Small Pi --%3E%3Ctext x='800' y='550' font-family='serif' font-size='28' font-style='italic' fill='%2364748b' opacity='0.12' stroke='none'%3Eπ%3C/text%3E%3C!-- Infinity flowing --%3E%3Ctext x='500' y='900' font-family='serif' font-size='60' fill='%2364748b' opacity='0.06' stroke='none'%3E∞%3C/text%3E%3C!-- Tiny scattered dots - star field effect --%3E%3Cg fill='%2364748b'%3E%3Ccircle cx='320' cy='180' r='1.5' opacity='0.1' /%3E%3Ccircle cx='450' cy='350' r='1' opacity='0.08' /%3E%3Ccircle cx='680' cy='280' r='1.5' opacity='0.12' /%3E%3Ccircle cx='820' cy='180' r='1' opacity='0.06' /%3E%3Ccircle cx='550' cy='450' r='2' opacity='0.1' /%3E%3Ccircle cx='920' cy='550' r='1.5' opacity='0.08' /%3E%3Ccircle cx='350' cy='650' r='1' opacity='0.1' /%3E%3Ccircle cx='750' cy='850' r='1.5' opacity='0.06' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-size: 1200px 1000px;
+    background-repeat: repeat;
+  }
+
+  .dark .full-page-grid::after {
+    opacity: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='1000' viewBox='0 0 1200 1000'%3E%3Cdefs%3E%3ClinearGradient id='gfade1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23fbbf24' stop-opacity='0.2'/%3E%3Cstop offset='100%25' stop-color='%23fbbf24' stop-opacity='0.02'/%3E%3C/linearGradient%3E%3ClinearGradient id='gfade2' x1='100%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23fbbf24' stop-opacity='0.15'/%3E%3Cstop offset='100%25' stop-color='%23fbbf24' stop-opacity='0.01'/%3E%3C/linearGradient%3E%3CradialGradient id='glow' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23fbbf24' stop-opacity='0.3'/%3E%3Cstop offset='100%25' stop-color='%23fbbf24' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cg fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3C!-- GIANT ROCKET - Top left, dramatic golden glow --%3E%3Cg stroke='url(%23gfade1)' stroke-width='2.5'%3E%3Cpath d='M-20 280 L-20 180 Q-20 120 20 80 L60 40 L100 80 Q140 120 140 180 L140 280' /%3E%3Cpath d='M-20 280 L-60 340 L-20 320 L60 320 L140 320 L180 340 L140 280' /%3E%3Cpath d='M20 180 L100 180 M20 210 L100 210 M20 240 L100 240' /%3E%3Ccircle cx='60' cy='130' r='25' /%3E%3Cpath d='M30 320 L30 380 M60 320 L60 400 M90 320 L90 380' /%3E%3Cpath d='M20 360 Q60 420 100 360' stroke-dasharray='8,4' /%3E%3C/g%3E%3C!-- Rocket exhaust glow --%3E%3Cellipse cx='60' cy='400' rx='40' ry='60' fill='url(%23glow)' /%3E%3C!-- MASSIVE ATOM - Center right, golden orbits --%3E%3Cg stroke='%23fbbf24' opacity='0.2'%3E%3Cellipse cx='950' cy='200' rx='140' ry='45' stroke-width='2.5' transform='rotate(-25 950 200)' /%3E%3Cellipse cx='950' cy='200' rx='140' ry='45' stroke-width='2' transform='rotate(25 950 200)' /%3E%3Cellipse cx='950' cy='200' rx='140' ry='45' stroke-width='1.5' transform='rotate(75 950 200)' /%3E%3Ccircle cx='950' cy='200' r='18' fill='%23fbbf24' opacity='0.4' /%3E%3Ccircle cx='870' cy='150' r='6' fill='%23fbbf24' opacity='0.5' /%3E%3Ccircle cx='1030' cy='250' r='6' fill='%23fbbf24' opacity='0.5' /%3E%3Ccircle cx='920' cy='280' r='5' fill='%23fbbf24' opacity='0.4' /%3E%3C/g%3E%3C!-- LARGE GOLDEN RATIO SPIRAL - Bottom left --%3E%3Cg stroke='url(%23gfade2)' stroke-width='2'%3E%3Cpath d='M50 850 Q50 750 150 750 Q250 750 250 650 Q250 550 350 550 Q450 550 450 650' /%3E%3Crect x='50' y='750' width='100' height='100' stroke-width='1' opacity='0.6' /%3E%3Crect x='150' y='650' width='100' height='100' stroke-width='1' opacity='0.5' /%3E%3Crect x='250' y='550' width='100' height='100' stroke-width='1' opacity='0.4' /%3E%3Crect x='350' y='550' width='100' height='100' stroke-width='1' opacity='0.3' /%3E%3Ctext x='80' y='830' font-family='serif' font-size='16' font-style='italic' fill='%23fbbf24' opacity='0.2' stroke='none'%3Eφ = 1.618%3C/text%3E%3C/g%3E%3C!-- GIANT INTEGRAL - Right side --%3E%3Ctext x='1100' y='500' font-family='serif' font-size='180' fill='%23fbbf24' opacity='0.08' stroke='none'%3E∫%3C/text%3E%3C!-- MEDIUM E=mc² - Upper middle, iconic --%3E%3Ctext x='400' y='120' font-family='Georgia, serif' font-size='42' font-style='italic' fill='%23fbbf24' opacity='0.15' stroke='none'%3EE = mc²%3C/text%3E%3C!-- DNA HELIX - Large, golden --%3E%3Cg stroke='%23fbbf24' stroke-width='2' opacity='0.1'%3E%3Cpath d='M180 400 Q220 450 180 500 Q140 550 180 600 Q220 650 180 700 Q140 750 180 800' /%3E%3Cpath d='M240 400 Q200 450 240 500 Q280 550 240 600 Q200 650 240 700 Q280 750 240 800' /%3E%3Cpath d='M180 430 L240 430 M180 530 L240 530 M180 630 L240 630 M180 730 L240 730' stroke-width='1.5' /%3E%3C/g%3E%3C!-- SCHEMATIC CIRCUIT - Bottom right --%3E%3Cg stroke='%23fbbf24' stroke-width='1.5' opacity='0.15'%3E%3Cpath d='M850 750 L900 750 L900 700 L950 700 L950 750 L1000 750' /%3E%3Cpath d='M900 700 L900 650 L950 650' /%3E%3Crect x='920' y='730' width='30' height='15' /%3E%3Crect x='870' y='680' width='20' height='30' /%3E%3Ccircle cx='850' cy='750' r='5' fill='%23fbbf24' opacity='0.6' /%3E%3Ccircle cx='1000' cy='750' r='5' fill='%23fbbf24' opacity='0.6' /%3E%3Ccircle cx='950' cy='650' r='5' fill='%23fbbf24' opacity='0.6' /%3E%3Cpath d='M1000 750 L1050 750 L1050 800 M1050 800 L1100 800 L1100 750' /%3E%3C/g%3E%3C!-- SIGMA - Large --%3E%3Ctext x='700' y='450' font-family='serif' font-size='120' fill='%23fbbf24' opacity='0.06' stroke='none'%3EΣ%3C/text%3E%3C!-- Small scattered formulas --%3E%3Ctext x='550' y='280' font-family='serif' font-size='14' fill='%23fbbf24' opacity='0.18' stroke='none'%3E∇ × E = -∂B/∂t%3C/text%3E%3Ctext x='300' y='550' font-family='serif' font-size='11' fill='%23fbbf24' opacity='0.1' stroke='none'%3Eiℏ∂ψ/∂t = Ĥψ%3C/text%3E%3Ctext x='750' y='650' font-family='monospace' font-size='9' fill='%23fbbf24' opacity='0.12' stroke='none'%3Ef(n) = f(n-1) + f(n-2)%3C/text%3E%3C!-- PLANETARY ORBITS - Upper right --%3E%3Cg stroke='%23fbbf24' opacity='0.08'%3E%3Cellipse cx='1050' cy='80' rx='80' ry='30' stroke-width='1' /%3E%3Cellipse cx='1050' cy='80' rx='120' ry='45' stroke-width='0.8' /%3E%3Cellipse cx='1050' cy='80' rx='160' ry='60' stroke-width='0.5' /%3E%3Ccircle cx='1050' cy='80' r='8' fill='%23fbbf24' opacity='0.3' /%3E%3C/g%3E%3C!-- GEAR SYSTEM - Medium --%3E%3Cg stroke='%23fbbf24' stroke-width='1.5' opacity='0.12'%3E%3Ccircle cx='600' cy='800' r='50' /%3E%3Ccircle cx='600' cy='800' r='20' /%3E%3Cpath d='M600 745 L600 755 M600 845 L600 855 M545 800 L555 800 M645 800 L655 800' stroke-width='3' /%3E%3Cpath d='M560 760 L567 767 M633 833 L640 840 M560 840 L567 833 M633 767 L640 760' stroke-width='3' /%3E%3Ccircle cx='680' cy='850' r='35' /%3E%3Ccircle cx='680' cy='850' r='12' /%3E%3C/g%3E%3C!-- VECTOR FIELD ARROWS --%3E%3Cg stroke='%23fbbf24' stroke-width='1' opacity='0.1'%3E%3Cpath d='M480 180 L510 160 M510 160 L505 168 M510 160 L502 162' /%3E%3Cpath d='M520 200 L550 175 M550 175 L544 183 M550 175 L542 178' /%3E%3Cpath d='M470 220 L495 195 M495 195 L489 203 M495 195 L487 198' /%3E%3Cpath d='M850 400 L890 370 M890 370 L882 377 M890 370 L883 363' /%3E%3Cpath d='M870 430 L905 395 M905 395 L897 402 M905 395 L898 388' /%3E%3C/g%3E%3C!-- DELTA prominent --%3E%3Ctext x='380' y='750' font-family='serif' font-size='80' fill='%23fbbf24' opacity='0.05' stroke='none'%3EΔ%3C/text%3E%3C!-- Pi symbol --%3E%3Ctext x='800' y='550' font-family='serif' font-size='28' font-style='italic' fill='%23fbbf24' opacity='0.15' stroke='none'%3Eπ%3C/text%3E%3C!-- Infinity --%3E%3Ctext x='500' y='900' font-family='serif' font-size='60' fill='%23fbbf24' opacity='0.08' stroke='none'%3E∞%3C/text%3E%3C!-- Star field dots --%3E%3Cg fill='%23fbbf24'%3E%3Ccircle cx='320' cy='180' r='1.5' opacity='0.15' /%3E%3Ccircle cx='450' cy='350' r='1' opacity='0.1' /%3E%3Ccircle cx='680' cy='280' r='1.5' opacity='0.18' /%3E%3Ccircle cx='820' cy='180' r='1' opacity='0.08' /%3E%3Ccircle cx='550' cy='450' r='2' opacity='0.12' /%3E%3Ccircle cx='920' cy='550' r='1.5' opacity='0.1' /%3E%3Ccircle cx='350' cy='650' r='1' opacity='0.12' /%3E%3Ccircle cx='750' cy='850' r='1.5' opacity='0.08' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-size: 1200px 1000px;
+    background-repeat: repeat;
+  }
+
   .full-page-grid::before {
     content: '';
     position: fixed;
@@ -367,6 +390,360 @@
 }
 
 @layer utilities {
+  /* ═══════════════════════════════════════════════════════════════
+     ENGINEERING HERO SECTION - Technical Blueprint Header
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* Compact Hero - Slim header bar */
+  .engineering-hero-compact {
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 1px solid rgba(100, 116, 139, 0.2);
+  }
+
+  .dark .engineering-hero-compact {
+    background: linear-gradient(180deg, #0f172a 0%, #1a2744 100%);
+    border-bottom: 1px solid rgba(251, 191, 36, 0.15);
+  }
+
+  .engineering-hero-label {
+    display: inline-block;
+    padding: 8px 24px;
+    border: 1px solid #94a3b8;
+    background: rgba(248, 250, 252, 0.9);
+    position: relative;
+  }
+
+  .dark .engineering-hero-label {
+    border-color: rgba(251, 191, 36, 0.3);
+    background: rgba(15, 23, 42, 0.8);
+  }
+
+  .engineering-hero-label::before,
+  .engineering-hero-label::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 1px solid #94a3b8;
+  }
+
+  .dark .engineering-hero-label::before,
+  .dark .engineering-hero-label::after {
+    border-color: rgba(251, 191, 36, 0.3);
+  }
+
+  .engineering-hero-label::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+  .engineering-hero-label::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+  .engineering-hero-label-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: #64748b;
+  }
+
+  .dark .engineering-hero-label-text {
+    color: #fcd34d;
+  }
+
+  .engineering-hero-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    line-height: 1;
+  }
+
+  @media (min-width: 768px) {
+    .engineering-hero-title {
+      font-size: 5rem;
+    }
+  }
+
+  .dark .engineering-hero-title {
+    color: #ffffff;
+    text-shadow: 0 0 60px rgba(251, 191, 36, 0.15);
+  }
+
+  .engineering-hero-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.125rem;
+    color: #64748b;
+    margin-bottom: 3rem;
+    letter-spacing: 0.02em;
+  }
+
+  .dark .engineering-hero-subtitle {
+    color: #94a3b8;
+  }
+
+  .engineering-hero-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 640px) {
+    .engineering-hero-input-container {
+      flex-direction: row;
+    }
+  }
+
+  .engineering-hero-input-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .engineering-input-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    color: #64748b;
+    margin-bottom: 4px;
+    margin-left: 4px;
+  }
+
+  .dark .engineering-input-label {
+    color: #fcd34d;
+  }
+
+  .engineering-input {
+    font-family: 'Space Mono', monospace;
+    padding: 14px 24px;
+    width: 100%;
+    min-width: 320px;
+    background: rgba(248, 250, 252, 0.95);
+    border: 1px solid #94a3b8;
+    color: #1e293b;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
+  }
+
+  .engineering-input:focus {
+    outline: none;
+    border-color: #14b8a6;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
+  }
+
+  .dark .engineering-input {
+    background: rgba(15, 23, 42, 0.9);
+    border-color: rgba(251, 191, 36, 0.2);
+    color: #e2e8f0;
+  }
+
+  .dark .engineering-input:focus {
+    border-color: #fcd34d;
+    box-shadow: 0 0 0 3px rgba(252, 211, 77, 0.15);
+  }
+
+  .engineering-input::placeholder {
+    color: #94a3b8;
+  }
+
+  .dark .engineering-input::placeholder {
+    color: #64748b;
+  }
+
+  .engineering-button {
+    font-family: 'Space Mono', monospace;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+    border: 1px solid rgba(20, 184, 166, 0.5);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .engineering-button:hover {
+    background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3);
+  }
+
+  .dark .engineering-button {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.05) 100%);
+    border: 1px solid rgba(251, 191, 36, 0.4);
+    color: #fcd34d;
+  }
+
+  .dark .engineering-button:hover {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.25) 0%, rgba(251, 191, 36, 0.1) 100%);
+    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);
+  }
+
+  .engineering-button-icon {
+    font-size: 0.75rem;
+  }
+
+  /* Compact Input Styles */
+  .engineering-hero-input-box-compact {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .engineering-input-compact {
+    font-family: 'Space Mono', monospace;
+    padding: 10px 16px;
+    height: 42px;
+    width: 240px;
+    background: rgba(248, 250, 252, 0.95);
+    border: 1px solid #94a3b8;
+    color: #1e293b;
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  .engineering-input-compact:focus {
+    outline: none;
+    border-color: #14b8a6;
+    box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.15);
+  }
+
+  .dark .engineering-input-compact {
+    background: rgba(15, 23, 42, 0.9);
+    border-color: rgba(251, 191, 36, 0.2);
+    color: #e2e8f0;
+  }
+
+  .dark .engineering-input-compact:focus {
+    border-color: #fcd34d;
+    box-shadow: 0 0 0 2px rgba(252, 211, 77, 0.1);
+  }
+
+  .engineering-input-compact::placeholder {
+    color: #94a3b8;
+    font-size: 0.75rem;
+  }
+
+  .dark .engineering-input-compact::placeholder {
+    color: #64748b;
+  }
+
+  .engineering-button-compact {
+    font-family: 'Space Mono', monospace;
+    padding: 0 20px;
+    height: 42px;
+    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+    border: 1px solid rgba(20, 184, 166, 0.5);
+    color: white;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+
+  .engineering-button-compact:hover {
+    background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(20, 184, 166, 0.25);
+  }
+
+  .dark .engineering-button-compact {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.05) 100%);
+    border: 1px solid rgba(251, 191, 36, 0.4);
+    color: #fcd34d;
+  }
+
+  .dark .engineering-button-compact:hover {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.25) 0%, rgba(251, 191, 36, 0.1) 100%);
+    box-shadow: 0 6px 20px rgba(251, 191, 36, 0.15);
+  }
+
+  .engineering-hero-stats {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid #94a3b8;
+    background: rgba(248, 250, 252, 0.9);
+  }
+
+  .dark .engineering-hero-stats {
+    border-color: rgba(251, 191, 36, 0.2);
+    background: rgba(15, 23, 42, 0.8);
+  }
+
+  .engineering-hero-stat {
+    padding: 12px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .engineering-hero-stat-divider {
+    width: 1px;
+    height: 40px;
+    background: #94a3b8;
+  }
+
+  .dark .engineering-hero-stat-divider {
+    background: rgba(251, 191, 36, 0.2);
+  }
+
+  .engineering-hero-stat-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #14b8a6;
+  }
+
+  .dark .engineering-hero-stat-value {
+    color: #5eead4;
+  }
+
+  .engineering-hero-stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    color: #64748b;
+  }
+
+  .dark .engineering-hero-stat-label {
+    color: #94a3b8;
+  }
+
+  /* Corner markers for hero */
+  .engineering-hero-corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #94a3b8;
+  }
+
+  .dark .engineering-hero-corner {
+    border-color: rgba(251, 191, 36, 0.25);
+  }
+
+  .engineering-hero-corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+  .engineering-hero-corner-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+  .engineering-hero-corner-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+  .engineering-hero-corner-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
   /* Engineering-style Section Headers */
   .section-header {
     display: flex;

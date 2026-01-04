@@ -103,37 +103,32 @@ const divisionLadders = [
 
 <Layout title="A2OJ Refreshed - Practice Ladders">
 	<main class="min-h-screen full-page-grid">
-		<!-- Hero Section with Animated Gradient Background -->
-		<div class="relative animated-gradient text-white overflow-hidden">
-			<!-- Grain texture overlay -->
-			<div class="absolute inset-0 grain"></div>
-			
-			<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-				<div class="text-center">
-					<h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in drop-shadow-lg">
-						A2OJ Refreshed
-					</h1>
-					<p class="text-xl md:text-2xl text-white/95 mb-8 max-w-3xl mx-auto font-light drop-shadow">
-						Structured practice ladders for Codeforces problems.
-					</p>
+		<!-- Compact Hero Section - Engineering Blueprint Style -->
+		<div class="engineering-hero-compact relative">
+			<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+				<div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+					<!-- Project Label -->
+					<div class="engineering-hero-label">
+						<span class="engineering-hero-label-text">PROJECT // A2OJ.REFRESHED</span>
+					</div>
 					
-					<!-- Frosted Glass Input Container -->
-					<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-						<input 
-							type="text" 
-							placeholder="Enter your Codeforces handle"
-							class="px-6 py-3 rounded-xl text-slate-900 w-full sm:w-80 focus:outline-none focus:ring-4 focus:ring-white/40 transition-all font-medium glass shadow-2xl"
-						/>
-						<button class="px-8 py-3 glass rounded-xl font-semibold hover:bg-white/90 transition-all hover:scale-105 shadow-2xl backdrop-blur-xl">
-							Track Progress
+					<!-- User Handle Input -->
+					<div class="flex items-end gap-3">
+						<div class="engineering-hero-input-box-compact">
+							<span class="engineering-input-label">USER.HANDLE</span>
+							<input 
+								type="text" 
+								placeholder="Enter your Codeforces handle"
+								class="engineering-input-compact"
+							/>
+						</div>
+						<button class="engineering-button-compact">
+							<span class="engineering-button-icon">▶</span>
+							Track
 						</button>
 					</div>
 				</div>
 			</div>
-			
-			<!-- Decorative blur circles -->
-			<div class="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl"></div>
-			<div class="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/30 rounded-full blur-3xl"></div>
 		</div>
 
 		<!-- Rating-Based Ladders -->
