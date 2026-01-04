@@ -1,0 +1,209 @@
+---
+// Settings component with global state
+---
+
+<div id="settings-panel" class="fixed bottom-6 right-6 z-50">
+  <!-- Settings Button -->
+  <button 
+    id="settings-toggle"
+    class="bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 p-3 rounded-full shadow-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
+    aria-label="Toggle settings"
+  >
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  </button>
+
+  <!-- Settings Menu -->
+  <div 
+    id="settings-menu"
+    class="absolute bottom-16 right-0 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-800 p-4 w-64 hidden"
+  >
+    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Settings</h3>
+    
+    <!-- Theme Toggle -->
+    <div class="mb-4 pb-4 border-b border-slate-200 dark:border-slate-800">
+      <label class="flex items-center justify-between cursor-pointer group">
+        <span class="text-sm text-slate-700 dark:text-slate-300 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+          Dark Mode
+        </span>
+        <div class="relative">
+          <input 
+            type="checkbox" 
+            id="toggle-theme"
+            class="sr-only peer"
+          />
+          <div class="w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full peer peer-checked:bg-teal-500 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 transition-all"></div>
+          <div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all peer-checked:translate-x-5"></div>
+        </div>
+      </label>
+    </div>
+
+    <h4 class="text-sm font-semibold text-slate-900 dark:text-white mb-3">Display</h4>
+    
+    <!-- Hide Tags Toggle -->
+    <label class="flex items-center justify-between mb-4 cursor-pointer group">
+      <span class="text-sm text-slate-700 dark:text-slate-300 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+        Hide Tags
+      </span>
+      <div class="relative">
+        <input 
+          type="checkbox" 
+          id="toggle-tags"
+          class="sr-only peer"
+        />
+        <div class="w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full peer peer-checked:bg-teal-500 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 transition-all"></div>
+        <div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all peer-checked:translate-x-5"></div>
+      </div>
+    </label>
+
+    <!-- Hide Difficulty Toggle -->
+    <label class="flex items-center justify-between cursor-pointer group">
+      <span class="text-sm text-slate-700 dark:text-slate-300 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+        Hide Difficulty
+      </span>
+      <div class="relative">
+        <input 
+          type="checkbox" 
+          id="toggle-difficulty"
+          class="sr-only peer"
+        />
+        <div class="w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full peer peer-checked:bg-teal-500 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 transition-all"></div>
+        <div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all peer-checked:translate-x-5"></div>
+      </div>
+    </label>
+
+    <p class="text-xs text-slate-500 dark:text-slate-400 mt-4 italic">
+      Settings are saved automatically
+    </p>
+  </div>
+</div>
+
+<script>
+  // Global settings manager
+  class SettingsManager {
+    constructor() {
+      this.hideTags = this.loadSetting('hideTags', true); // Default: hidden
+      this.hideDifficulty = this.loadSetting('hideDifficulty', false);
+      this.darkMode = this.loadSetting('darkMode', this.getSystemTheme());
+      this.init();
+    }
+
+    getSystemTheme() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
+    loadSetting(key, defaultValue) {
+      const saved = localStorage.getItem(key);
+      return saved !== null ? JSON.parse(saved) : defaultValue;
+    }
+
+    saveSetting(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    init() {
+      // Apply initial settings
+      this.applySettings();
+
+      // Setup toggle button
+      const toggleBtn = document.getElementById('settings-toggle');
+      const menu = document.getElementById('settings-menu');
+      
+      toggleBtn?.addEventListener('click', () => {
+        menu?.classList.toggle('hidden');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('#settings-panel')) {
+          menu?.classList.add('hidden');
+        }
+      });
+
+      // Setup theme toggle
+      const themeToggle = document.getElementById('toggle-theme');
+      if (themeToggle) {
+        themeToggle.checked = this.darkMode;
+        themeToggle.addEventListener('change', (e) => {
+          this.darkMode = e.target.checked;
+          this.saveSetting('darkMode', this.darkMode);
+          this.applyTheme();
+        });
+      }
+
+      // Setup tags toggle
+      const tagsToggle = document.getElementById('toggle-tags');
+      if (tagsToggle) {
+        tagsToggle.checked = this.hideTags;
+        tagsToggle.addEventListener('change', (e) => {
+          this.hideTags = e.target.checked;
+          this.saveSetting('hideTags', this.hideTags);
+          this.applySettings();
+        });
+      }
+
+      // Setup difficulty toggle
+      const difficultyToggle = document.getElementById('toggle-difficulty');
+      if (difficultyToggle) {
+        difficultyToggle.checked = this.hideDifficulty;
+        difficultyToggle.addEventListener('change', (e) => {
+          this.hideDifficulty = e.target.checked;
+          this.saveSetting('hideDifficulty', this.hideDifficulty);
+          this.applySettings();
+        });
+      }
+    }
+
+    applyTheme() {
+      if (this.darkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+
+    applySettings() {
+      // Apply theme
+      this.applyTheme();
+
+      // Add/remove classes to hide elements
+      if (this.hideTags) {
+        document.body.classList.add('hide-tags');
+      } else {
+        document.body.classList.remove('hide-tags');
+      }
+
+      if (this.hideDifficulty) {
+        document.body.classList.add('hide-difficulty');
+      } else {
+        document.body.classList.remove('hide-difficulty');
+      }
+    }
+  }
+
+  // Initialize settings when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      new SettingsManager();
+    });
+  } else {
+    new SettingsManager();
+  }
+</script>
+
+<style is:global>
+  /* Hide tags column completely when setting is enabled */
+  body.hide-tags .tags-header,
+  body.hide-tags .tags-cell {
+    display: none !important;
+  }
+
+  /* Hide difficulty column completely when setting is enabled */
+  body.hide-difficulty .difficulty-header,
+  body.hide-difficulty .difficulty-cell {
+    display: none !important;
+  }
+</style>
+

@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@variant dark (.dark *);
+
+@layer base {
+  :root {
+    /* Unique Color Palette - Ocean Sunset Theme */
+    --gradient-start: #14b8a6; /* Teal */
+    --gradient-mid: #06b6d4; /* Cyan */
+    --gradient-end: #f59e0b; /* Amber */
+    
+    --accent-primary: #14b8a6; /* Teal */
+    --accent-secondary: #f59e0b; /* Amber */
+  }
+}
+
+@layer utilities {
+  /* Frosted Glass Effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .glass-dark {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Engineering Grid texture overlay - Blueprint/Schematic style */
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      /* Major grid lines */
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 49px,
+        rgba(255, 255, 255, 0.15) 49px,
+        rgba(255, 255, 255, 0.15) 50px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 49px,
+        rgba(255, 255, 255, 0.15) 49px,
+        rgba(255, 255, 255, 0.15) 50px
+      ),
+      /* Minor grid lines */
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 9px,
+        rgba(255, 255, 255, 0.06) 9px,
+        rgba(255, 255, 255, 0.06) 10px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 9px,
+        rgba(255, 255, 255, 0.06) 9px,
+        rgba(255, 255, 255, 0.06) 10px
+      );
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Engineering Grid for light backgrounds */
+  .engineering-grid {
+    background-image: 
+      /* Major grid lines */
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 49px,
+        rgba(100, 116, 139, 0.12) 49px,
+        rgba(100, 116, 139, 0.12) 50px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 49px,
+        rgba(100, 116, 139, 0.12) 49px,
+        rgba(100, 116, 139, 0.12) 50px
+      ),
+      /* Minor grid lines */
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 9px,
+        rgba(100, 116, 139, 0.04) 9px,
+        rgba(100, 116, 139, 0.04) 10px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 9px,
+        rgba(100, 116, 139, 0.04) 9px,
+        rgba(100, 116, 139, 0.04) 10px
+      );
+  }
+
+  /* Engineering Grid for dark backgrounds */
+  .dark .engineering-grid {
+    background-image: 
+      /* Major grid lines */
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 49px,
+        rgba(148, 163, 184, 0.08) 49px,
+        rgba(148, 163, 184, 0.08) 50px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 49px,
+        rgba(148, 163, 184, 0.08) 49px,
+        rgba(148, 163, 184, 0.08) 50px
+      ),
+      /* Minor grid lines */
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 9px,
+        rgba(148, 163, 184, 0.03) 9px,
+        rgba(148, 163, 184, 0.03) 10px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 9px,
+        rgba(148, 163, 184, 0.03) 9px,
+        rgba(148, 163, 184, 0.03) 10px
+      );
+  }
+
+  /* Animated gradient background */
+  .animated-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-teal-500 via-cyan-500 to-amber-500 bg-clip-text text-transparent;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  .card-hover:hover {
+    @apply -translate-y-1 shadow-xl;
+  }
+  
+  .bg-gradient-hero {
+    @apply bg-gradient-to-br from-teal-400 via-cyan-500 to-amber-400;
+  }
+  
+  .bg-gradient-accent {
+    @apply bg-gradient-to-r from-teal-500 to-cyan-600;
+  }
+}

@@ -1,16 +1,251 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Settings from '../components/Settings.astro';
 
+const ladders = [
+	{
+		id: 11,
+		name: 'Rating < 1300',
+		description: 'For beginners, unrated users or users with Codeforces Rating < 1300',
+		count: 100,
+		color: 'teal',
+		difficulty: 'Beginner'
+	},
+	{
+		id: 12,
+		name: '1300 ≤ Rating ≤ 1399',
+		description: 'Build fundamentals with problems at the easy-medium level',
+		count: 100,
+		color: 'cyan',
+		difficulty: 'Easy'
+	},
+	{
+		id: 13,
+		name: '1400 ≤ Rating ≤ 1499',
+		description: 'Strengthen problem-solving with moderate difficulty',
+		count: 100,
+		color: 'sky',
+		difficulty: 'Medium'
+	},
+	{
+		id: 14,
+		name: '1500 ≤ Rating ≤ 1599',
+		description: 'Challenging problems for intermediate competitors',
+		count: 100,
+		color: 'amber',
+		difficulty: 'Medium-Hard'
+	},
+	{
+		id: 15,
+		name: '1600 ≤ Rating ≤ 1699',
+		description: 'Advanced problem-solving techniques required',
+		count: 100,
+		color: 'orange',
+		difficulty: 'Hard'
+	},
+	{
+		id: 16,
+		name: '1700 ≤ Rating ≤ 1799',
+		description: 'For experienced competitors seeking mastery',
+		count: 100,
+		color: 'rose',
+		difficulty: 'Very Hard'
+	},
+	{
+		id: 17,
+		name: '1800 ≤ Rating ≤ 1899',
+		description: 'Expert-level problems with advanced algorithms',
+		count: 100,
+		color: 'red',
+		difficulty: 'Expert'
+	},
+	{
+		id: 18,
+		name: '1900 ≤ Rating ≤ 1999',
+		description: 'Master-level problems requiring deep insight',
+		count: 100,
+		color: 'fuchsia',
+		difficulty: 'Master'
+	},
+];
+
+const divisionLadders = [
+	{
+		id: 4,
+		name: 'Div. 2, Problem A',
+		description: 'Classic Div. 2 A problems to build speed',
+		count: 100,
+		division: 'Division 2'
+	},
+	{
+		id: 5,
+		name: 'Div. 2, Problem B',
+		description: 'Implementation and observation problems',
+		count: 100,
+		division: 'Division 2'
+	},
+	{
+		id: 6,
+		name: 'Div. 2, Problem C',
+		description: 'Algorithmic thinking and optimization',
+		count: 100,
+		division: 'Division 2'
+	},
+	{
+		id: 7,
+		name: 'Div. 2, Problem D',
+		description: 'Advanced data structures and algorithms',
+		count: 100,
+		division: 'Division 2'
+	},
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="A2OJ Refreshed - Practice Ladders">
+	<main class="min-h-screen">
+		<!-- Hero Section with Animated Gradient Background -->
+		<div class="relative animated-gradient text-white overflow-hidden">
+			<!-- Grain texture overlay -->
+			<div class="absolute inset-0 grain"></div>
+			
+			<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+				<div class="text-center">
+					<h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in drop-shadow-lg">
+						A2OJ Refreshed
+					</h1>
+					<p class="text-xl md:text-2xl text-white/95 mb-8 max-w-3xl mx-auto font-light drop-shadow">
+						Structured practice ladders for Codeforces problems.
+					</p>
+					
+					<!-- Frosted Glass Input Container -->
+					<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+						<input 
+							type="text" 
+							placeholder="Enter your Codeforces handle"
+							class="px-6 py-3 rounded-xl text-slate-900 w-full sm:w-80 focus:outline-none focus:ring-4 focus:ring-white/40 transition-all font-medium glass shadow-2xl"
+						/>
+						<button class="px-8 py-3 glass rounded-xl font-semibold hover:bg-white/90 transition-all hover:scale-105 shadow-2xl backdrop-blur-xl">
+							Track Progress
+						</button>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Decorative blur circles -->
+			<div class="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl"></div>
+			<div class="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/30 rounded-full blur-3xl"></div>
+		</div>
+
+		<!-- Rating-Based Ladders -->
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative engineering-grid">
+			<div class="mb-12">
+				<h2 class="text-4xl font-bold mb-4 text-slate-900 dark:text-white">
+					<span class="text-gradient">Rating-Based</span> Ladders
+				</h2>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				{ladders.map((ladder) => (
+					<a href={`/ladder/${ladder.id}`} class="block card-hover">
+						<div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 border border-slate-200 dark:border-slate-800 h-full hover:border-teal-500 dark:hover:border-teal-400 transition-all">
+							<div class="flex justify-between items-start mb-4">
+								<div class="flex-1">
+									<h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">
+										{ladder.name}
+									</h3>
+									<span class={`inline-block px-3 py-1 text-xs font-semibold rounded-full bg-${ladder.color}-100 text-${ladder.color}-700 dark:bg-${ladder.color}-900/30 dark:text-${ladder.color}-400`}>
+										{ladder.difficulty}
+									</span>
+								</div>
+								<div class="text-right">
+									<div class="text-2xl font-bold text-teal-600 dark:text-teal-400">
+										{ladder.count}
+									</div>
+									<div class="text-xs text-slate-500">problems</div>
+								</div>
+							</div>
+							<div class="flex items-center justify-between">
+								<div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+									<div class="bg-gradient-accent h-2 rounded-full" style="width: 0%"></div>
+								</div>
+								<span class="ml-3 text-sm text-slate-500 whitespace-nowrap">0%</span>
+							</div>
+						</div>
+					</a>
+				))}
+			</div>
+		</div>
+
+		<!-- Division-Based Ladders -->
+		<div class="bg-slate-100 dark:bg-slate-900/50 py-16 relative engineering-grid">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="mb-12">
+					<h2 class="text-4xl font-bold mb-4 text-slate-900 dark:text-white">
+						<span class="text-gradient">Division-Based</span> Ladders
+					</h2>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+					{divisionLadders.map((ladder) => (
+						<a href={`/ladder/${ladder.id}`} class="block card-hover">
+							<div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 border border-slate-200 dark:border-slate-800 h-full hover:border-amber-500 dark:hover:border-amber-400 transition-all">
+								<div class="mb-4">
+									<div class="text-sm text-amber-600 dark:text-amber-400 font-semibold mb-1">
+										{ladder.division}
+									</div>
+									<h3 class="text-lg font-bold text-slate-900 dark:text-white">
+										{ladder.name}
+									</h3>
+								</div>
+								<div class="text-right">
+									<div class="text-2xl font-bold text-amber-600 dark:text-amber-400">
+										{ladder.count}
+									</div>
+									<div class="text-xs text-slate-500">problems</div>
+								</div>
+							</div>
+						</a>
+					))}
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer class="bg-slate-900 text-white py-12">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center">
+					<h3 class="text-2xl font-bold mb-4">A2OJ Refreshed</h3>
+					<p class="text-slate-400 mb-6">
+						Built with ❤️ for the competitive programming community
+					</p>
+					<div class="flex justify-center gap-6 text-sm text-slate-400">
+						<a href="#" class="hover:text-white transition-colors">About</a>
+						<a href="#" class="hover:text-white transition-colors">GitHub</a>
+						<a href="#" class="hover:text-white transition-colors">API</a>
+						<a href="#" class="hover:text-white transition-colors">Contact</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</main>
+
+	<!-- Settings Component -->
+	<Settings />
+</Layout>
+
+<style>
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	
+	.animate-fade-in {
+		animation: fade-in 0.8s ease-out;
+	}
+</style>
