@@ -1,27 +1,15 @@
 {
-  "difficultyLabels": {
-    "1": "Newbie",
-    "2": "Pupil",
-    "3": "Specialist",
-    "4": "Expert",
-    "5": "Candidate Master",
-    "6": "Master",
-    "7": "International Master",
-    "8": "Grandmaster",
-    "9": "Int. Grandmaster",
-    "10": "Legendary GM"
-  },
-  "difficultyColors": {
-    "1": "gray",
-    "2": "green",
-    "3": "cyan",
-    "4": "blue",
-    "5": "violet",
-    "6": "orange",
-    "7": "orange",
-    "8": "red",
-    "9": "red",
-    "10": "red"
+  "ratingLevels": {
+    "1": { "name": "Newbie", "min": 0, "max": 1199, "color": "gray", "textClass": "text-gray-500 dark:text-gray-400" },
+    "2": { "name": "Pupil", "min": 1200, "max": 1399, "color": "green", "textClass": "text-green-600 dark:text-green-400" },
+    "3": { "name": "Specialist", "min": 1400, "max": 1599, "color": "cyan", "textClass": "text-cyan-600 dark:text-cyan-400" },
+    "4": { "name": "Expert", "min": 1600, "max": 1899, "color": "blue", "textClass": "text-blue-600 dark:text-blue-400" },
+    "5": { "name": "Candidate Master", "min": 1900, "max": 2099, "color": "violet", "textClass": "text-violet-600 dark:text-violet-400" },
+    "6": { "name": "Master", "min": 2100, "max": 2299, "color": "orange", "textClass": "text-orange-500 dark:text-orange-400" },
+    "7": { "name": "International Master", "min": 2300, "max": 2399, "color": "orange", "textClass": "text-orange-600 dark:text-orange-400" },
+    "8": { "name": "Grandmaster", "min": 2400, "max": 2599, "color": "red", "textClass": "text-red-600 dark:text-red-400" },
+    "9": { "name": "Int. Grandmaster", "min": 2600, "max": 2999, "color": "red", "textClass": "text-red-500 dark:text-red-400" },
+    "10": { "name": "Legendary GM", "min": 3000, "max": 9999, "color": "red", "textClass": "text-red-700 dark:text-red-300" }
   },
   "ladderOverrides": {
     "11": {

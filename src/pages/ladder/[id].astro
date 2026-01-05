@@ -63,18 +63,27 @@ if (!ladderData) {
 	return Astro.redirect('/404');
 }
 
+// Type for rating level data
+type RatingLevel = { name: string; min: number; max: number; color: string; textClass: string };
+
 // Get metadata for display
 const overrides = laddersMetadata.ladderOverrides as Record<string, LadderOverride>;
-const difficultyLabelsMap = laddersMetadata.difficultyLabels as Record<string, string>;
+const ratingLevels = laddersMetadata.ratingLevels as Record<string, RatingLevel>;
 const meta: LadderOverride = overrides[id as string] || {};
 
+// Sorted rating levels array for iteration (levels 1-10)
+const ratingLevelsSorted = Object.entries(ratingLevels)
+	.map(([level, data]) => ({ level: parseInt(level), ...data }))
+	.sort((a, b) => a.level - b.level);
+
 // Build ladder object with display metadata
+const ladderDifficultyLevel = ladderData.difficultyLevel || 1;
 const ladder = {
 	id: ladderData.id,
 	name: meta.displayName || ladderData.name,
 	description: ladderData.description || '',
-	difficulty: ladderData.difficultyLevel || 1,
-	difficultyLabel: meta.difficultyLabel || difficultyLabelsMap[String(ladderData.difficultyLevel)] || 'Unknown',
+	difficulty: ladderDifficultyLevel,
+	difficultyLabel: meta.difficultyLabel || ratingLevels[String(ladderDifficultyLevel)]?.name || 'Unknown',
 	type: ladderData.type,
 	division: meta.division || null,
 	problemType: meta.problemType || null,
@@ -104,13 +113,95 @@ const maxRating = ratingsWithValues.length > 0 ? Math.max(...ratingsWithValues) 
 const solvedCount = 0;
 const progressPercent = 0;
 
-const difficultyColors: Record<number, string> = {
-	1: 'text-teal-600 dark:text-teal-400',
-	2: 'text-cyan-600 dark:text-cyan-400',
-	3: 'text-amber-600 dark:text-amber-400',
-	4: 'text-orange-600 dark:text-orange-400',
-	5: 'text-rose-600 dark:text-rose-400',
-};
+// Calculate dynamic sliding window of 4 rating categories for analytics
+function getAnalyticsRanges() {
+	const levels = ratingLevelsSorted;
+	
+	// Count problems per rating level
+	const counts = levels.map((lvl, idx) => ({
+		...lvl,
+		idx,
+		count: problems.filter(p => {
+			const r = p.rating || 0;
+			return r >= lvl.min && r <= lvl.max;
+		}).length
+	}));
+	
+	// Find the level with the most problems (peak)
+	let peakIdx = 0;
+	let peakCount = 0;
+	counts.forEach((c, idx) => {
+		if (c.count > peakCount) {
+			peakCount = c.count;
+			peakIdx = idx;
+		}
+	});
+	
+	// Build sliding window: 1 before peak, peak, peak+1, everything after
+	const windowStart = Math.max(0, peakIdx - 1);
+	const displayRanges: Array<{ label: string; count: number; textClass: string }> = [];
+	
+	// Card 1: Everything up to windowStart (inclusive)
+	if (windowStart > 0) {
+		displayRanges.push({
+			label: `≤ ${levels[windowStart].name}`,
+			count: problems.filter(p => (p.rating || 0) <= levels[windowStart].max).length,
+			textClass: levels[windowStart].textClass
+		});
+	} else {
+		displayRanges.push({
+			label: levels[0].name,
+			count: counts[0].count,
+			textClass: levels[0].textClass
+		});
+	}
+	
+	// Card 2: The range after card 1
+	const c2Idx = windowStart > 0 ? windowStart + 1 : 1;
+	if (c2Idx < levels.length) {
+		displayRanges.push({
+			label: levels[c2Idx].name,
+			count: counts[c2Idx].count,
+			textClass: levels[c2Idx].textClass
+		});
+	}
+	
+	// Card 3: Next range after card 2
+	const c3Idx = c2Idx + 1;
+	if (c3Idx < levels.length) {
+		displayRanges.push({
+			label: levels[c3Idx].name,
+			count: counts[c3Idx].count,
+			textClass: levels[c3Idx].textClass
+		});
+	}
+	
+	// Card 4: Everything from c3Idx+1 onwards
+	const c4StartIdx = c3Idx + 1;
+	if (c4StartIdx < levels.length) {
+		displayRanges.push({
+			label: `≥ ${levels[c4StartIdx].name}`,
+			count: problems.filter(p => (p.rating || 0) >= levels[c4StartIdx].min).length,
+			textClass: levels[c4StartIdx].textClass
+		});
+	} else if (c3Idx < levels.length) {
+		const lastIdx = levels.length - 1;
+		displayRanges.push({
+			label: `≥ ${levels[lastIdx].name}`,
+			count: problems.filter(p => (p.rating || 0) >= levels[lastIdx].min).length,
+			textClass: levels[lastIdx].textClass
+		});
+	}
+	
+	// Ensure we have exactly 4 cards
+	while (displayRanges.length < 4) {
+		displayRanges.push({ label: 'N/A', count: 0, textClass: 'text-gray-500' });
+	}
+	
+	return displayRanges.slice(0, 4);
+}
+
+const analyticsRanges = getAnalyticsRanges();
 
 // Get ladder number for display
 function getLadderNumber(ladderId: number, type: string): string {
@@ -482,43 +573,19 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 				<div class="section-header-corner"></div>
 			</div>
 			
+			{/* Tailwind safelist: text-gray-500 dark:text-gray-400 text-green-600 dark:text-green-400 text-cyan-600 dark:text-cyan-400 text-blue-600 dark:text-blue-400 text-violet-600 dark:text-violet-400 text-orange-500 dark:text-orange-400 text-orange-600 text-red-600 dark:text-red-400 text-red-500 text-red-700 dark:text-red-300 */}
 			<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-				<div class="engineering-stat-card">
-					<div class="engineering-card-corner engineering-card-corner-tl"></div>
-					<div class="engineering-card-corner engineering-card-corner-br"></div>
-					<span class="engineering-card-label">RATING &lt; 1400</span>
-					<div class="engineering-stat-card-value text-gray-600 dark:text-gray-400">
-						{problems.filter(p => (p.rating || 0) < 1400).length}
+				{analyticsRanges.map((range) => (
+					<div class="engineering-stat-card">
+						<div class="engineering-card-corner engineering-card-corner-tl"></div>
+						<div class="engineering-card-corner engineering-card-corner-br"></div>
+						<span class="engineering-card-label">{range.label.toUpperCase()}</span>
+						<div class={`engineering-stat-card-value ${range.textClass}`}>
+							{range.count}
+						</div>
+						<span class="engineering-card-unit">PROBLEMS</span>
 					</div>
-					<span class="engineering-card-unit">PROBLEMS</span>
-				</div>
-				<div class="engineering-stat-card">
-					<div class="engineering-card-corner engineering-card-corner-tl"></div>
-					<div class="engineering-card-corner engineering-card-corner-br"></div>
-					<span class="engineering-card-label">1400 - 1799</span>
-					<div class="engineering-stat-card-value text-cyan-600 dark:text-cyan-400">
-						{problems.filter(p => (p.rating || 0) >= 1400 && (p.rating || 0) < 1800).length}
-					</div>
-					<span class="engineering-card-unit">PROBLEMS</span>
-				</div>
-				<div class="engineering-stat-card">
-					<div class="engineering-card-corner engineering-card-corner-tl"></div>
-					<div class="engineering-card-corner engineering-card-corner-br"></div>
-					<span class="engineering-card-label">1800 - 2099</span>
-					<div class="engineering-stat-card-value text-blue-600 dark:text-blue-400">
-						{problems.filter(p => (p.rating || 0) >= 1800 && (p.rating || 0) < 2100).length}
-					</div>
-					<span class="engineering-card-unit">PROBLEMS</span>
-				</div>
-				<div class="engineering-stat-card">
-					<div class="engineering-card-corner engineering-card-corner-tl"></div>
-					<div class="engineering-card-corner engineering-card-corner-br"></div>
-					<span class="engineering-card-label">RATING ≥ 2100</span>
-					<div class="engineering-stat-card-value text-orange-600 dark:text-orange-400">
-						{problems.filter(p => (p.rating || 0) >= 2100).length}
-					</div>
-					<span class="engineering-card-unit">PROBLEMS</span>
-				</div>
+				))}
 			</div>
 		</div>
 	</main>
