@@ -66,23 +66,27 @@ const pageData = { ladderId };
 
 <Layout title={`${ladder.name} | A2OJ Refreshed`}>
 	<main class="min-h-screen bg-slate-50 dark:bg-slate-950 full-page-grid">
-		<!-- Global Control Bar -->
-		<div class="global-control-bar">
-			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-				<div class="global-control-label">
-					<span class="global-control-tag">SYS</span>
-					<span class="global-control-text">CONTROLS</span>
-				</div>
-				<div class="global-controls">
-					<button id="zen-mode-btn" class="global-toggle-btn" title="Zen Mode - Hide all filters">
+		<!-- Engineering-Style Header -->
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
+			<!-- Back Link + Controls Row -->
+			<div class="flex items-center justify-between mb-8">
+				<a href="/" class="inline-flex items-center engineering-back-link">
+					<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+					</svg>
+					<span>BACK TO LADDERS</span>
+				</a>
+				
+				<!-- Settings Controls -->
+				<div class="flex items-center gap-2">
+					<button id="zen-mode-btn" class="engineering-icon-btn with-label" title="Zen Mode - Hide all filters">
 						<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
 							<circle cx="12" cy="12" r="9" />
 							<circle cx="12" cy="12" r="3" />
 						</svg>
-						<span class="global-toggle-label">ZEN</span>
+						<span class="btn-label">ZEN</span>
 					</button>
-					<div class="global-control-divider"></div>
-					<button id="theme-toggle" class="global-toggle-btn" title="Toggle Dark Mode">
+					<button id="theme-toggle" class="engineering-icon-btn" title="Toggle Dark Mode">
 						<svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
 							<circle cx="12" cy="12" r="4" />
 							<path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414" />
@@ -90,22 +94,9 @@ const pageData = { ladderId };
 						<svg class="w-4 h-4 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
 							<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
 						</svg>
-						<span class="global-toggle-label dark-label">LIGHT</span>
-						<span class="global-toggle-label light-label hidden">DARK</span>
 					</button>
 				</div>
 			</div>
-		</div>
-		
-		<!-- Engineering-Style Header -->
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
-			<!-- Back Link -->
-			<a href="/" class="inline-flex items-center engineering-back-link mb-8">
-				<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-				</svg>
-				<span>BACK TO LADDERS</span>
-			</a>
 			
 			<!-- Main Header Box -->
 			<div class={`engineering-header-card ${ladder.isExtra ? 'engineering-header-purple' : ladder.type === 'division' ? 'engineering-header-amber' : ''}`}>
@@ -286,14 +277,30 @@ const pageData = { ladderId };
 						</div>
 				</div>
 				
-				<div id="tag-filter-group" class="filter-group">
+				<div id="tag-filter-group" class="filter-group tag-filter-container">
 						<span class="filter-group-label">FILTER BY TAG</span>
-						<select id="tag-filter" class="tag-filter-select">
-							<option value="">All Tags</option>
-							{allTags.map((tag) => (
-								<option value={tag}>{tag}</option>
-							))}
-						</select>
+						<div class="tag-multi-select">
+							<button id="tag-filter-toggle" class="tag-filter-trigger" type="button">
+								<span class="tag-filter-text">All Tags</span>
+								<svg class="w-3 h-3 ml-1 chevron-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+								</svg>
+							</button>
+							<div id="tag-filter-dropdown" class="tag-filter-dropdown hidden">
+								<div class="tag-match-mode">
+									<button type="button" class="tag-match-btn active" data-mode="all">All of</button>
+									<button type="button" class="tag-match-btn" data-mode="any">Any of</button>
+								</div>
+								<div class="tag-options-list">
+									{allTags.map((tag) => (
+										<label class="tag-option">
+											<input type="checkbox" value={tag} class="tag-checkbox" />
+											<span class="tag-option-text">{tag}</span>
+										</label>
+									))}
+								</div>
+							</div>
+						</div>
 					</div>
 					
 					<button id="clear-filters" class="clear-filters-btn">

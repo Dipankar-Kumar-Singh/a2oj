@@ -53,37 +53,6 @@ const pageData = { ladderProblems };
 
 <Layout title="A2OJ Refreshed - Practice Ladders">
 	<main class="min-h-screen full-page-grid">
-		<!-- Global Control Bar -->
-		<div class="global-control-bar">
-			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-				<div class="global-control-label">
-					<span class="global-control-tag">SYS</span>
-					<span class="global-control-text">CONTROLS</span>
-				</div>
-				<div class="global-controls">
-					<button id="zen-mode-btn" class="global-toggle-btn" title="Zen Mode - Simplified view on ladder pages">
-						<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-							<circle cx="12" cy="12" r="9" />
-							<circle cx="12" cy="12" r="3" />
-						</svg>
-						<span class="global-toggle-label">ZEN</span>
-					</button>
-					<div class="global-control-divider"></div>
-					<button id="theme-toggle" class="global-toggle-btn" title="Toggle Dark Mode">
-						<svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-							<circle cx="12" cy="12" r="4" />
-							<path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414" />
-						</svg>
-						<svg class="w-4 h-4 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-							<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-						</svg>
-						<span class="global-toggle-label dark-label">LIGHT</span>
-						<span class="global-toggle-label light-label hidden">DARK</span>
-					</button>
-				</div>
-			</div>
-		</div>
-		
 		<!-- Hero Section with Quote and Controls -->
 		<div class="engineering-hero-compact relative">
 			<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -141,6 +110,17 @@ const pageData = { ladderProblems };
 							</button>
 							<span id="last-sync" class="engineering-sync-time"></span>
 						</div>
+						
+						<!-- Theme Toggle -->
+						<button id="theme-toggle" class="engineering-icon-btn" title="Toggle Dark Mode">
+							<svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+								<circle cx="12" cy="12" r="4" />
+								<path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414" />
+							</svg>
+							<svg class="w-4 h-4 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+								<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+							</svg>
+						</button>
 					</div>
 				</div>
 			</div>

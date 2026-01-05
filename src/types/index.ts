@@ -114,7 +114,8 @@ export interface ColumnVisibility {
 export interface PageFilters {
   readonly minRating: number | null;
   readonly maxRating: number | null;
-  readonly selectedTag: string;
+  readonly selectedTags: string[];
+  readonly tagMatchMode: 'any' | 'all';
   readonly sortOrder: 'none' | 'asc' | 'desc';
 }
 
@@ -165,7 +166,8 @@ export const DEFAULT_COLUMN_VISIBILITY: ColumnVisibility = {
 export const DEFAULT_PAGE_FILTERS: PageFilters = {
   minRating: null,
   maxRating: null,
-  selectedTag: '',
+  selectedTags: [],
+  tagMatchMode: 'all',
   sortOrder: 'none',
 } as const;
 

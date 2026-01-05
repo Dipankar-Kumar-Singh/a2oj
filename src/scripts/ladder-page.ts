@@ -157,12 +157,12 @@ function updateColumnVisibility(): void {
 function savePageFilters(): void {
   const ratingMinEl = document.getElementById('rating-min') as HTMLInputElement | null;
   const ratingMaxEl = document.getElementById('rating-max') as HTMLInputElement | null;
-  const tagFilterEl = document.getElementById('tag-filter') as HTMLSelectElement | null;
 
   const filters: PageFilters = {
     minRating: ratingMinEl?.value ? parseInt(ratingMinEl.value, 10) : null,
     maxRating: ratingMaxEl?.value ? parseInt(ratingMaxEl.value, 10) : null,
-    selectedTag: tagFilterEl?.value ?? '',
+    selectedTags: getSelectedTags(),
+    tagMatchMode: getTagMatchMode(),
     sortOrder: state.currentSort,
   };
 
@@ -178,7 +178,6 @@ function loadPageFilters(): void {
 
     const ratingMinEl = document.getElementById('rating-min') as HTMLInputElement | null;
     const ratingMaxEl = document.getElementById('rating-max') as HTMLInputElement | null;
-    const tagFilterEl = document.getElementById('tag-filter') as HTMLSelectElement | null;
 
     if (ratingMinEl && filters.minRating !== null) {
       ratingMinEl.value = String(filters.minRating);
@@ -186,9 +185,23 @@ function loadPageFilters(): void {
     if (ratingMaxEl && filters.maxRating !== null) {
       ratingMaxEl.value = String(filters.maxRating);
     }
-    if (tagFilterEl && filters.selectedTag) {
-      tagFilterEl.value = filters.selectedTag;
-    }
+
+    // Load multi-select tags
+    const selectedTags = filters.selectedTags ?? [];
+    const checkboxes = document.querySelectorAll<HTMLInputElement>('.tag-checkbox');
+    checkboxes.forEach((cb) => {
+      cb.checked = selectedTags.includes(cb.value);
+    });
+
+    // Load match mode
+    const matchMode = filters.tagMatchMode ?? 'all';
+    const matchBtns = document.querySelectorAll<HTMLButtonElement>('.tag-match-btn');
+    matchBtns.forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.mode === matchMode);
+    });
+
+    updateTagFilterDisplay();
+
     if (filters.sortOrder) {
       state.currentSort = filters.sortOrder;
     }
@@ -201,11 +214,11 @@ function applyFiltersAndSort(): void {
 
   const ratingMinEl = document.getElementById('rating-min') as HTMLInputElement | null;
   const ratingMaxEl = document.getElementById('rating-max') as HTMLInputElement | null;
-  const tagFilterEl = document.getElementById('tag-filter') as HTMLSelectElement | null;
 
   const ratingMin = ratingMinEl?.value ? parseInt(ratingMinEl.value, 10) : 0;
   const ratingMax = ratingMaxEl?.value ? parseInt(ratingMaxEl.value, 10) : 99999;
-  const selectedTag = tagFilterEl?.value ?? '';
+  const selectedTags = getSelectedTags();
+  const tagMatchMode = getTagMatchMode();
 
   let rows = Array.from(tableBody.querySelectorAll<HTMLElement>('.engineering-table-row'));
 
@@ -222,10 +235,14 @@ function applyFiltersAndSort(): void {
       visible = false;
     }
 
-    if (state.columnVisibility.tags && selectedTag && visible) {
-      const tagList = tags.split(',');
-      if (!tagList.includes(selectedTag)) {
-        visible = false;
+    if (state.columnVisibility.tags && selectedTags.length > 0 && visible) {
+      const tagList = tags.split(',').filter(Boolean);
+      if (tagMatchMode === 'all') {
+        // All selected tags must be present
+        visible = selectedTags.every((tag) => tagList.includes(tag));
+      } else {
+        // Any selected tag must be present
+        visible = selectedTags.some((tag) => tagList.includes(tag));
       }
     }
 
@@ -428,11 +445,100 @@ function initRatingFilter(): void {
   });
 }
 
-function initTagFilter(): void {
-  const tagFilter = document.getElementById('tag-filter') as HTMLSelectElement | null;
-  if (tagFilter) {
-    tagFilter.addEventListener('change', () => applyFiltersAndSort());
+function getSelectedTags(): string[] {
+  const checkboxes = document.querySelectorAll<HTMLInputElement>('.tag-checkbox:checked');
+  return Array.from(checkboxes).map((cb) => cb.value);
+}
+
+function getTagMatchMode(): 'any' | 'all' {
+  const activeBtn = document.querySelector<HTMLButtonElement>('.tag-match-btn.active');
+  return (activeBtn?.dataset.mode as 'any' | 'all') ?? 'all';
+}
+
+function updateTagFilterDisplay(): void {
+  const textEl = document.querySelector<HTMLElement>('.tag-filter-text');
+  if (!textEl) return;
+
+  const selectedTags = getSelectedTags();
+  if (selectedTags.length === 0) {
+    textEl.textContent = 'All Tags';
+  } else if (selectedTags.length === 1) {
+    textEl.textContent = selectedTags[0];
+  } else {
+    textEl.textContent = `${selectedTags.length} tags`;
   }
+}
+
+function closeTagDropdown(): void {
+  const toggleBtn = document.getElementById('tag-filter-toggle');
+  const dropdown = document.getElementById('tag-filter-dropdown');
+  dropdown?.classList.add('hidden');
+  toggleBtn?.classList.remove('open');
+}
+
+function openTagDropdown(): void {
+  const toggleBtn = document.getElementById('tag-filter-toggle');
+  const dropdown = document.getElementById('tag-filter-dropdown');
+  dropdown?.classList.remove('hidden');
+  toggleBtn?.classList.add('open');
+}
+
+function toggleTagDropdown(): void {
+  const dropdown = document.getElementById('tag-filter-dropdown');
+  if (dropdown?.classList.contains('hidden')) {
+    openTagDropdown();
+  } else {
+    closeTagDropdown();
+  }
+}
+
+function initTagFilter(): void {
+  const toggleBtn = document.getElementById('tag-filter-toggle');
+  const dropdown = document.getElementById('tag-filter-dropdown');
+  if (!toggleBtn || !dropdown) return;
+
+  // Start hidden
+  dropdown.classList.add('hidden');
+
+  // Toggle dropdown on button click
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleTagDropdown();
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as Node;
+    if (!dropdown.contains(target) && !toggleBtn.contains(target)) {
+      closeTagDropdown();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeTagDropdown();
+    }
+  });
+
+  // Match mode toggle
+  const matchBtns = dropdown.querySelectorAll<HTMLButtonElement>('.tag-match-btn');
+  matchBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      matchBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFiltersAndSort();
+    });
+  });
+
+  // Checkbox changes
+  const checkboxes = dropdown.querySelectorAll<HTMLInputElement>('.tag-checkbox');
+  checkboxes.forEach((cb) => {
+    cb.addEventListener('change', () => {
+      updateTagFilterDisplay();
+      applyFiltersAndSort();
+    });
+  });
 }
 
 function initSortButtons(): void {
@@ -469,8 +575,19 @@ function initClearFilters(): void {
     if (ratingMin) ratingMin.value = '';
     if (ratingMax) ratingMax.value = '';
 
-    const tagFilter = document.getElementById('tag-filter') as HTMLSelectElement | null;
-    if (tagFilter) tagFilter.value = '';
+    // Clear multi-select tags
+    const checkboxes = document.querySelectorAll<HTMLInputElement>('.tag-checkbox');
+    checkboxes.forEach((cb) => {
+      cb.checked = false;
+    });
+
+    // Reset match mode to default (all)
+    const matchBtns = document.querySelectorAll<HTMLButtonElement>('.tag-match-btn');
+    matchBtns.forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.mode === 'all');
+    });
+
+    updateTagFilterDisplay();
 
     state.currentSort = 'none';
     resetToOriginalOrder();
