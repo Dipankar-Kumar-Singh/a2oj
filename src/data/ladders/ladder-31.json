@@ -11,1400 +11,2536 @@
       "name": "Toy Army",
       "contestId": 84,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 900,
+      "tags": [
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 2,
       "name": "Spit Problem",
       "contestId": 29,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 1000,
+      "tags": [
+        "brute force"
+      ]
     },
     {
       "position": 3,
       "name": "Reconnaissance",
       "contestId": 32,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "brute force"
+      ]
     },
     {
       "position": 4,
       "name": "Circle Line",
       "contestId": 278,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 5,
       "name": "George and Accommodation",
       "contestId": 467,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 6,
       "name": "Memory and Crow",
       "contestId": 712,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 7,
       "name": "Wizards' Duel",
       "contestId": 591,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 900,
+      "tags": [
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 8,
       "name": "Rewards",
       "contestId": 448,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 9,
       "name": "Crazy Computer",
       "contestId": 716,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 10,
       "name": "Multiplication Table",
       "contestId": 577,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "implementation",
+        "number theory"
+      ]
     },
     {
       "position": 11,
       "name": "Beru-taxi",
       "contestId": 706,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 900,
+      "tags": [
+        "brute force",
+        "geometry",
+        "implementation"
+      ]
     },
     {
       "position": 12,
       "name": "Joysticks",
       "contestId": 651,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1100,
+      "tags": [
+        "dp",
+        "greedy",
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 13,
       "name": "Case of the Zeros and Ones",
       "contestId": 556,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 900,
+      "tags": [
+        "greedy"
+      ]
     },
     {
       "position": 14,
       "name": "Lovely Palindromes",
       "contestId": 688,
       "problemId": "B",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "constructive algorithms",
+        "math"
+      ]
     },
     {
       "position": 15,
       "name": "A and B and Chess",
       "contestId": 519,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 900,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 16,
       "name": "Tavas and Nafas",
       "contestId": 535,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "brute force",
+        "implementation"
+      ]
     },
     {
       "position": 17,
       "name": "Drazil and Date",
       "contestId": 515,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "math"
+      ]
     },
     {
       "position": 18,
       "name": "Lecture",
       "contestId": 499,
       "problemId": "B",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "implementation",
+        "strings"
+      ]
     },
     {
       "position": 19,
       "name": "Digital Counter",
       "contestId": 495,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 20,
       "name": "Random Teams",
       "contestId": 478,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1300,
+      "tags": [
+        "combinatorics",
+        "constructive algorithms",
+        "greedy",
+        "math"
+      ]
     },
     {
       "position": 21,
       "name": "Memory and Trident",
       "contestId": 712,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "implementation",
+        "strings"
+      ]
     },
     {
       "position": 22,
       "name": "Magic Spheres",
       "contestId": 606,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1200,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 23,
       "name": "Case of Fake Numbers",
       "contestId": 556,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "brute force",
+        "implementation"
+      ]
     },
     {
       "position": 24,
       "name": "Fedor and New Game",
       "contestId": 467,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "bitmasks",
+        "brute force",
+        "constructive algorithms",
+        "implementation"
+      ]
     },
     {
       "position": 25,
       "name": "Filya and Homework",
       "contestId": 714,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1200,
+      "tags": [
+        "implementation",
+        "sortings"
+      ]
     },
     {
       "position": 26,
       "name": "Xor-tree",
       "contestId": 429,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1300,
+      "tags": [
+        "dfs and similar",
+        "trees"
+      ]
     },
     {
       "position": 27,
       "name": "NP-Hard Problem",
       "contestId": 687,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1500,
+      "tags": [
+        "dfs and similar",
+        "graphs"
+      ]
     },
     {
       "position": 28,
       "name": "A and B and Compilation Errors",
       "contestId": 519,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "data structures",
+        "implementation",
+        "sortings"
+      ]
     },
     {
       "position": 29,
       "name": "Tavas and SaDDas",
       "contestId": 535,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "bitmasks",
+        "brute force",
+        "combinatorics",
+        "implementation"
+      ]
     },
     {
       "position": 30,
       "name": "Two Bases",
       "contestId": 602,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "brute force",
+        "implementation"
+      ]
     },
     {
       "position": 31,
       "name": "Rebranding",
       "contestId": 591,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1200,
+      "tags": [
+        "implementation",
+        "strings"
+      ]
     },
     {
       "position": 32,
       "name": "Lucky Permutation Triple",
       "contestId": 303,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1300,
+      "tags": [
+        "constructive algorithms",
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 33,
       "name": "Meeting of Old Friends",
       "contestId": 714,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 34,
       "name": "A and B and Team Training",
       "contestId": 519,
       "problemId": "C",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1300,
+      "tags": [
+        "greedy",
+        "implementation",
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 35,
       "name": "Square",
       "contestId": 194,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1200,
+      "tags": [
+        "math"
+      ]
     },
     {
       "position": 36,
       "name": "Sorting Railway Cars",
       "contestId": 605,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1600,
+      "tags": [
+        "constructive algorithms",
+        "greedy"
+      ]
     },
     {
       "position": 37,
       "name": "Chat Online",
       "contestId": 469,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1300,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 38,
       "name": "Diverse Permutation",
       "contestId": 482,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1200,
+      "tags": [
+        "constructive algorithms",
+        "greedy"
+      ]
     },
     {
       "position": 39,
       "name": "Alice and Bob",
       "contestId": 346,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "games",
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 40,
       "name": "Vasya and the Bus",
       "contestId": 190,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1100,
+      "tags": [
+        "greedy",
+        "math"
+      ]
     },
     {
       "position": 41,
       "name": "Sereja and Prefixes",
       "contestId": 380,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "binary search",
+        "brute force"
+      ]
     },
     {
       "position": 42,
       "name": "Divisible by Seven",
       "contestId": 375,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 43,
       "name": "Connecting Universities",
       "contestId": 700,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1800,
+      "tags": [
+        "dfs and similar",
+        "dp",
+        "graphs",
+        "trees"
+      ]
     },
     {
       "position": 44,
       "name": "Zero-One",
       "contestId": 135,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1900,
+      "tags": [
+        "constructive algorithms",
+        "games",
+        "greedy"
+      ]
     },
     {
       "position": 45,
       "name": "Ant on the Tree",
       "contestId": 29,
       "problemId": "D",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 2000,
+      "tags": [
+        "constructive algorithms",
+        "dfs and similar",
+        "trees"
+      ]
     },
     {
       "position": 46,
       "name": "Kay and Snowflake",
       "contestId": 685,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1900,
+      "tags": [
+        "data structures",
+        "dfs and similar",
+        "dp",
+        "trees"
+      ]
     },
     {
       "position": 47,
       "name": "DNA Alignment",
       "contestId": 520,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "math",
+        "strings"
+      ]
     },
     {
       "position": 48,
       "name": "Coloring Trees",
       "contestId": 711,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1700,
+      "tags": [
+        "dp"
+      ]
     },
     {
       "position": 49,
       "name": "More Cowbell",
       "contestId": 604,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1400,
+      "tags": [
+        "binary search",
+        "greedy"
+      ]
     },
     {
       "position": 50,
       "name": "Malek Dance Club",
       "contestId": 319,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "combinatorics",
+        "math"
+      ]
     },
     {
       "position": 51,
       "name": "Berzerk",
       "contestId": 786,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 2000,
+      "tags": [
+        "dfs and similar",
+        "dp",
+        "games"
+      ]
     },
     {
       "position": 52,
       "name": "Recycling Bottles",
       "contestId": 671,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1800,
+      "tags": [
+        "dp",
+        "geometry",
+        "greedy",
+        "implementation"
+      ]
     },
     {
       "position": 53,
       "name": "Moodular Arithmetic",
       "contestId": 603,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1800,
+      "tags": [
+        "combinatorics",
+        "dfs and similar",
+        "dsu",
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 54,
       "name": "Keyboard",
       "contestId": 88,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 55,
       "name": "Sysadmin Bob",
       "contestId": 31,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "greedy",
+        "implementation",
+        "strings"
+      ]
     },
     {
       "position": 56,
       "name": "The Child and Set",
       "contestId": 437,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "bitmasks",
+        "greedy",
+        "implementation",
+        "sortings"
+      ]
     },
     {
       "position": 57,
       "name": "Borya and Hanabi",
       "contestId": 442,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1700,
+      "tags": [
+        "bitmasks",
+        "brute force",
+        "implementation"
+      ]
     },
     {
       "position": 58,
       "name": "Ilya and Sticks",
       "contestId": 525,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "greedy",
+        "math",
+        "sortings"
+      ]
     },
     {
       "position": 59,
       "name": "Peter and Snow Blower",
       "contestId": 613,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1900,
+      "tags": [
+        "binary search",
+        "geometry",
+        "ternary search"
+      ]
     },
     {
       "position": 60,
       "name": "Amr and Pins",
       "contestId": 507,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1400,
+      "tags": [
+        "geometry",
+        "math"
+      ]
     },
     {
       "position": 61,
       "name": "Modular Equations",
       "contestId": 495,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 62,
       "name": "Timofey and rectangles",
       "contestId": 763,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 2100,
+      "tags": [
+        "constructive algorithms",
+        "geometry"
+      ]
     },
     {
       "position": 63,
       "name": "Replacement",
       "contestId": 570,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "constructive algorithms",
+        "data structures",
+        "implementation"
+      ]
     },
     {
       "position": 64,
       "name": "Dreamoon and Sets",
       "contestId": 476,
       "problemId": "D",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1900,
+      "tags": [
+        "constructive algorithms",
+        "greedy",
+        "math"
+      ]
     },
     {
       "position": 65,
       "name": "Polyline",
       "contestId": 617,
       "problemId": "D",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1700,
+      "tags": [
+        "constructive algorithms",
+        "implementation"
+      ]
     },
     {
       "position": 66,
       "name": "Music",
       "contestId": 569,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 67,
       "name": "Chips",
       "contestId": 333,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1800,
+      "tags": [
+        "greedy"
+      ]
     },
     {
       "position": 68,
       "name": "The Values You Can Make",
       "contestId": 687,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1900,
+      "tags": [
+        "dp"
+      ]
     },
     {
       "position": 69,
       "name": "Inna and Sequence",
       "contestId": 374,
       "problemId": "D",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 2000,
+      "tags": [
+        "binary search",
+        "data structures",
+        "dp",
+        "trees"
+      ]
     },
     {
       "position": 70,
       "name": "School Marks",
       "contestId": 540,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1700,
+      "tags": [
+        "greedy",
+        "implementation"
+      ]
     },
     {
       "position": 71,
       "name": "Alternating Current",
       "contestId": 343,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "data structures",
+        "greedy",
+        "implementation"
+      ]
     },
     {
       "position": 72,
       "name": "Unordered Subsequence",
       "contestId": 27,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1900,
+      "tags": [
+        "constructive algorithms",
+        "greedy"
+      ]
     },
     {
       "position": 73,
       "name": "Hard problem",
       "contestId": 706,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "dp",
+        "strings"
+      ]
     },
     {
       "position": 74,
       "name": "Subsegments",
       "contestId": 69,
       "problemId": "E",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1800,
+      "tags": [
+        "data structures",
+        "implementation"
+      ]
     },
     {
       "position": 75,
       "name": "Mike and Fun",
       "contestId": 548,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1400,
+      "tags": [
+        "brute force",
+        "dp",
+        "greedy",
+        "implementation"
+      ]
     },
     {
       "position": 76,
       "name": "DZY Loves Chemistry",
       "contestId": 445,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1400,
+      "tags": [
+        "dfs and similar",
+        "dsu",
+        "greedy"
+      ]
     },
     {
       "position": 77,
       "name": "Lazy Student",
       "contestId": 605,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1700,
+      "tags": [
+        "constructive algorithms",
+        "data structures",
+        "graphs"
+      ]
     },
     {
       "position": 78,
       "name": "Approximating a Constant Range",
       "contestId": 602,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1400,
+      "tags": [
+        "dp",
+        "implementation",
+        "two pointers"
+      ]
     },
     {
       "position": 79,
       "name": "24 Game",
       "contestId": 468,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "constructive algorithms",
+        "greedy",
+        "math"
+      ]
     },
     {
       "position": 80,
       "name": "Gena's Code",
       "contestId": 614,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1400,
+      "tags": [
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 81,
       "name": "Complete the Word",
       "contestId": 716,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1300,
+      "tags": [
+        "greedy",
+        "two pointers"
+      ]
     },
     {
       "position": 82,
       "name": "Memory and De-Evolution",
       "contestId": 712,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "greedy",
+        "math"
+      ]
     },
     {
       "position": 83,
       "name": "Sereja and Swaps",
       "contestId": 425,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "brute force",
+        "sortings"
+      ]
     },
     {
       "position": 84,
       "name": "Remainders Game",
       "contestId": 687,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1800,
+      "tags": [
+        "chinese remainder theorem",
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 85,
       "name": "The table",
       "contestId": 226,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2100,
+      "tags": [
+        "constructive algorithms",
+        "greedy"
+      ]
     },
     {
       "position": 86,
       "name": "Let's Play Osu!",
       "contestId": 235,
       "problemId": "B",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2000,
+      "tags": [
+        "dp",
+        "math",
+        "probabilities"
+      ]
     },
     {
       "position": 87,
       "name": "Legacy",
       "contestId": 786,
       "problemId": "B",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2300,
+      "tags": [
+        "data structures",
+        "graphs",
+        "shortest paths"
+      ]
     },
     {
       "position": 88,
       "name": "Games with Rectangle",
       "contestId": 128,
       "problemId": "C",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2000,
+      "tags": [
+        "combinatorics",
+        "dp"
+      ]
     },
     {
       "position": 89,
       "name": "Lieges of Legendre",
       "contestId": 603,
       "problemId": "C",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2200,
+      "tags": [
+        "games",
+        "math"
+      ]
     },
     {
       "position": 90,
       "name": "Ring Road 2",
       "contestId": 27,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2200,
+      "tags": [
+        "2-sat",
+        "dfs and similar",
+        "dsu",
+        "graphs"
+      ]
     },
     {
       "position": 91,
       "name": "Number With The Given Amount Of Divisors",
       "contestId": 27,
       "problemId": "E",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2000,
+      "tags": [
+        "brute force",
+        "dp",
+        "number theory"
+      ]
     },
     {
       "position": 92,
       "name": "Anton and Permutation",
       "contestId": 785,
       "problemId": "E",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2200,
+      "tags": [
+        "brute force",
+        "data structures"
+      ]
     },
     {
       "position": 93,
       "name": "Anton and School - 2",
       "contestId": 785,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2300,
+      "tags": [
+        "combinatorics",
+        "dp",
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 94,
       "name": "Ants",
       "contestId": 317,
       "problemId": "B",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2000,
+      "tags": [
+        "brute force",
+        "implementation"
+      ]
     },
     {
       "position": 95,
       "name": "Maxim and Restaurant",
       "contestId": 261,
       "problemId": "B",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 1900,
+      "tags": [
+        "dp",
+        "math",
+        "probabilities"
+      ]
     },
     {
       "position": 96,
       "name": "3-cycles",
       "contestId": 41,
       "problemId": "E",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 1900,
+      "tags": [
+        "constructive algorithms",
+        "graphs",
+        "greedy"
+      ]
     },
     {
       "position": 97,
       "name": "Surrounded",
       "contestId": 190,
       "problemId": "B",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 1800,
+      "tags": [
+        "geometry"
+      ]
     },
     {
       "position": 98,
       "name": "Dispute",
       "contestId": 242,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2100,
+      "tags": [
+        "dfs and similar",
+        "graphs",
+        "greedy"
+      ]
     },
     {
       "position": 99,
       "name": "Nanami's Digital Board",
       "contestId": 433,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2000,
+      "tags": [
+        "dsu",
+        "implementation"
+      ]
     },
     {
       "position": 100,
       "name": "Searching Rectangles",
       "contestId": 713,
       "problemId": "B",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2200,
+      "tags": [
+        "binary search",
+        "constructive algorithms",
+        "interactive"
+      ]
     },
     {
       "position": 101,
       "name": "Compatible Numbers",
       "contestId": 165,
       "problemId": "E",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2200,
+      "tags": [
+        "bitmasks",
+        "brute force",
+        "dfs and similar",
+        "dp"
+      ]
     },
     {
       "position": 102,
       "name": "Anton and Ira",
       "contestId": 584,
       "problemId": "E",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2300,
+      "tags": [
+        "constructive algorithms",
+        "greedy",
+        "math"
+      ]
     },
     {
       "position": 103,
       "name": "Pluses everywhere",
       "contestId": 520,
       "problemId": "E",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2200,
+      "tags": [
+        "combinatorics",
+        "dp",
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 104,
       "name": "Directed Roads",
       "contestId": 711,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 1900,
+      "tags": [
+        "combinatorics",
+        "dfs and similar",
+        "graphs",
+        "math"
+      ]
     },
     {
       "position": 105,
       "name": "Random Task",
       "contestId": 431,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2100,
+      "tags": [
+        "binary search",
+        "bitmasks",
+        "combinatorics",
+        "dp",
+        "math"
+      ]
     },
     {
       "position": 106,
       "name": "Interesting Game",
       "contestId": 87,
       "problemId": "C",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2000,
+      "tags": [
+        "dp",
+        "games",
+        "math"
+      ]
     },
     {
       "position": 107,
       "name": "Apple Tree",
       "contestId": 348,
       "problemId": "B",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2100,
+      "tags": [
+        "dfs and similar",
+        "number theory",
+        "trees"
+      ]
     },
     {
       "position": 108,
       "name": "Mike and Geometry Problem",
       "contestId": 689,
       "problemId": "E",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2000,
+      "tags": [
+        "combinatorics",
+        "data structures",
+        "dp",
+        "geometry",
+        "implementation"
+      ]
     },
     {
       "position": 109,
       "name": "Maxim and Array",
       "contestId": 721,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2000,
+      "tags": [
+        "constructive algorithms",
+        "data structures",
+        "greedy",
+        "math"
+      ]
     },
     {
       "position": 110,
       "name": "Minimization",
       "contestId": 571,
       "problemId": "B",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2000,
+      "tags": [
+        "dp",
+        "greedy",
+        "sortings"
+      ]
     },
     {
       "position": 111,
       "name": "World Eater Brothers",
       "contestId": 238,
       "problemId": "C",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2100,
+      "tags": [
+        "dfs and similar",
+        "dp",
+        "greedy",
+        "trees"
+      ]
     },
     {
       "position": 112,
       "name": "Memory and Scores",
       "contestId": 712,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2200,
+      "tags": [
+        "combinatorics",
+        "dp",
+        "math"
+      ]
     },
     {
       "position": 113,
       "name": "Vanya and Triangles",
       "contestId": 552,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 1900,
+      "tags": [
+        "brute force",
+        "combinatorics",
+        "data structures",
+        "geometry",
+        "math",
+        "sortings"
+      ]
     },
     {
       "position": 114,
       "name": "Persistent Bookcase",
       "contestId": 707,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2200,
+      "tags": [
+        "bitmasks",
+        "data structures",
+        "dfs and similar",
+        "implementation"
+      ]
     },
     {
       "position": 115,
       "name": "Bamboo Partition",
       "contestId": 830,
       "problemId": "C",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2300,
+      "tags": [
+        "brute force",
+        "data structures",
+        "implementation",
+        "math",
+        "number theory",
+        "sortings",
+        "two pointers"
+      ]
     },
     {
       "position": 116,
       "name": "Lucky Number Representation",
       "contestId": 354,
       "problemId": "E",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2200,
+      "tags": [
+        "constructive algorithms",
+        "dfs and similar",
+        "dp"
+      ]
     },
     {
       "position": 117,
       "name": "Dima and Magic Guitar",
       "contestId": 366,
       "problemId": "E",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2200,
+      "tags": [
+        "brute force",
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 118,
       "name": "Friends and Subsequences",
       "contestId": 689,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2100,
+      "tags": [
+        "binary search",
+        "data structures"
+      ]
     },
     {
       "position": 119,
       "name": "Journey",
       "contestId": 721,
       "problemId": "C",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 1800,
+      "tags": [
+        "dp",
+        "graphs"
+      ]
     },
     {
       "position": 120,
       "name": "Messenger",
       "contestId": 631,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2100,
+      "tags": [
+        "data structures",
+        "hashing",
+        "implementation",
+        "string suffix structures",
+        "strings"
+      ]
     },
     {
       "position": 121,
       "name": "Build String",
       "contestId": 237,
       "problemId": "E",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2000,
+      "tags": [
+        "flows",
+        "graphs"
+      ]
     },
     {
       "position": 122,
       "name": "Complete The Graph",
       "contestId": 715,
       "problemId": "B",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2300,
+      "tags": [
+        "binary search",
+        "constructive algorithms",
+        "graphs",
+        "shortest paths"
+      ]
     },
     {
       "position": 123,
       "name": "Bear and Square Grid",
       "contestId": 679,
       "problemId": "C",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2400,
+      "tags": [
+        "dfs and similar",
+        "dsu",
+        "implementation"
+      ]
     },
     {
       "position": 124,
       "name": "Weak Memory",
       "contestId": 187,
       "problemId": "C",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2000,
+      "tags": [
+        "dfs and similar",
+        "dsu"
+      ]
     },
     {
       "position": 125,
       "name": "Sonya and Problem Wihtout a Legend",
       "contestId": 713,
       "problemId": "C",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2300,
+      "tags": [
+        "dp",
+        "sortings"
+      ]
     },
     {
       "position": 126,
       "name": "Bear and Tower of Cubes",
       "contestId": 679,
       "problemId": "B",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2200,
+      "tags": [
+        "binary search",
+        "dp",
+        "greedy"
+      ]
     },
     {
       "position": 127,
       "name": "Table Compression",
       "contestId": 650,
       "problemId": "C",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2200,
+      "tags": [
+        "dfs and similar",
+        "dp",
+        "dsu",
+        "graphs",
+        "greedy"
+      ]
     },
     {
       "position": 128,
       "name": "Mishka and Interesting sum",
       "contestId": 703,
       "problemId": "D",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 2100,
+      "tags": [
+        "data structures"
+      ]
     },
     {
       "position": 129,
       "name": "Marbles",
       "contestId": 607,
       "problemId": "C",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2500,
+      "tags": [
+        "hashing",
+        "strings"
+      ]
     },
     {
       "position": 130,
       "name": "Divisor Tree",
       "contestId": 337,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2200,
+      "tags": [
+        "brute force",
+        "number theory",
+        "trees"
+      ]
     },
     {
       "position": 131,
       "name": "Quarrel",
       "contestId": 29,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2400,
+      "tags": [
+        "graphs",
+        "shortest paths"
+      ]
     },
     {
       "position": 132,
       "name": "Bear in the Field",
       "contestId": 385,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2300,
+      "tags": [
+        "math",
+        "matrices"
+      ]
     },
     {
       "position": 133,
       "name": "Edges in MST",
       "contestId": 160,
       "problemId": "D",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2300,
+      "tags": [
+        "dfs and similar",
+        "dsu",
+        "graphs",
+        "sortings"
+      ]
     },
     {
       "position": 134,
       "name": "Anya and Cubes",
       "contestId": 525,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2100,
+      "tags": [
+        "binary search",
+        "bitmasks",
+        "brute force",
+        "dp",
+        "math",
+        "meet-in-the-middle"
+      ]
     },
     {
       "position": 135,
       "name": "Trains and Statistic",
       "contestId": 675,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2300,
+      "tags": [
+        "data structures",
+        "dp",
+        "greedy"
+      ]
     },
     {
       "position": 136,
       "name": "Bear and Drawing",
       "contestId": 573,
       "problemId": "C",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2300,
+      "tags": [
+        "constructive algorithms",
+        "dfs and similar",
+        "trees"
+      ]
     },
     {
       "position": 137,
       "name": "Binary Tree on Plane",
       "contestId": 277,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2400,
+      "tags": [
+        "flows",
+        "trees"
+      ]
     },
     {
       "position": 138,
       "name": "Change-free",
       "contestId": 767,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2400,
+      "tags": [
+        "greedy"
+      ]
     },
     {
       "position": 139,
       "name": "Game with Powers",
       "contestId": 317,
       "problemId": "D",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2300,
+      "tags": [
+        "dp",
+        "games"
+      ]
     },
     {
       "position": 140,
       "name": "Sereja and Tree",
       "contestId": 380,
       "problemId": "B",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2400,
+      "tags": [
+        "graphs",
+        "implementation"
+      ]
     },
     {
       "position": 141,
       "name": "Break Up",
       "contestId": 700,
       "problemId": "C",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2600,
+      "tags": [
+        "dfs and similar",
+        "graphs"
+      ]
     },
     {
       "position": 142,
       "name": "George and Cards",
       "contestId": 387,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2200,
+      "tags": [
+        "binary search",
+        "data structures"
+      ]
     },
     {
       "position": 143,
       "name": "Codeword",
       "contestId": 666,
       "problemId": "C",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2500,
+      "tags": [
+        "combinatorics",
+        "strings"
+      ]
     },
     {
       "position": 144,
       "name": "Bear and Floodlight",
       "contestId": 385,
       "problemId": "D",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2200,
+      "tags": [
+        "bitmasks",
+        "dp",
+        "geometry"
+      ]
     },
     {
       "position": 145,
       "name": "The Last Fight Between Human and AI",
       "contestId": 676,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2400,
+      "tags": [
+        "math"
+      ]
     },
     {
       "position": 146,
       "name": "Lovely Matrix",
       "contestId": 274,
       "problemId": "D",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2200,
+      "tags": [
+        "dfs and similar",
+        "graphs",
+        "greedy",
+        "sortings"
+      ]
     },
     {
       "position": 147,
       "name": "Infinite Inversions",
       "contestId": 540,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2100,
+      "tags": [
+        "binary search",
+        "data structures",
+        "implementation",
+        "sortings",
+        "trees"
+      ]
     },
     {
       "position": 148,
       "name": "Beautiful Road",
       "contestId": 87,
       "problemId": "D",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2300,
+      "tags": [
+        "dfs and similar",
+        "dp",
+        "dsu",
+        "graphs",
+        "implementation",
+        "sortings",
+        "trees"
+      ]
     },
     {
       "position": 149,
       "name": "Acyclic Organic Compounds",
       "contestId": 601,
       "problemId": "D",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2400,
+      "tags": [
+        "data structures",
+        "dfs and similar",
+        "dsu",
+        "hashing",
+        "strings",
+        "trees"
+      ]
     },
     {
       "position": 150,
       "name": "Thwarting Demonstrations",
       "contestId": 191,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2200,
+      "tags": [
+        "binary search",
+        "data structures",
+        "trees"
+      ]
     },
     {
       "position": 151,
       "name": "Arthur and Brackets",
       "contestId": 508,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2200,
+      "tags": [
+        "dp",
+        "greedy"
+      ]
     },
     {
       "position": 152,
       "name": "Coin Troubles",
       "contestId": 283,
       "problemId": "C",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2100,
+      "tags": [
+        "dp"
+      ]
     },
     {
       "position": 153,
       "name": "Garlands",
       "contestId": 707,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2400,
+      "tags": [
+        "data structures"
+      ]
     },
     {
       "position": 154,
       "name": "Ant Man",
       "contestId": 704,
       "problemId": "B",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2500,
+      "tags": [
+        "dp",
+        "graphs",
+        "greedy"
+      ]
     },
     {
       "position": 155,
       "name": "ZS and The Birthday Paradox",
       "contestId": 711,
       "problemId": "E",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2300,
+      "tags": [
+        "math",
+        "number theory",
+        "probabilities"
+      ]
     },
     {
       "position": 156,
       "name": "Game on Tree",
       "contestId": 280,
       "problemId": "C",
-      "difficulty": 6
+      "difficulty": 6,
+      "rating": 2200,
+      "tags": [
+        "implementation",
+        "math",
+        "probabilities",
+        "trees"
+      ]
     },
     {
       "position": 157,
       "name": "Axis Walking",
       "contestId": 327,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2300,
+      "tags": [
+        "bitmasks",
+        "combinatorics",
+        "constructive algorithms",
+        "dp",
+        "meet-in-the-middle"
+      ]
     },
     {
       "position": 158,
       "name": "Sereja and Cinema",
       "contestId": 380,
       "problemId": "D",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2500,
+      "tags": [
+        "combinatorics",
+        "math"
+      ]
     },
     {
       "position": 159,
       "name": "Numbers",
       "contestId": 83,
       "problemId": "D",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2400,
+      "tags": [
+        "dp",
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 160,
       "name": "Memory and Casinos",
       "contestId": 712,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2500,
+      "tags": [
+        "data structures",
+        "math",
+        "probabilities"
+      ]
     },
     {
       "position": 161,
       "name": "Color the Carpet",
       "contestId": 297,
       "problemId": "D",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2500,
+      "tags": [
+        "constructive algorithms"
+      ]
     },
     {
       "position": 162,
       "name": "Travelling Through the Snow Queen's Kingdom",
       "contestId": 685,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2800,
+      "tags": [
+        "bitmasks",
+        "brute force",
+        "divide and conquer",
+        "graphs"
+      ]
     },
     {
       "position": 163,
       "name": "Ultimate Weirdness of an Array",
       "contestId": 671,
       "problemId": "C",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2800,
+      "tags": [
+        "data structures",
+        "number theory"
+      ]
     },
     {
       "position": 164,
       "name": "The Child and Polygon",
       "contestId": 437,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2500,
+      "tags": [
+        "dp",
+        "geometry"
+      ]
     },
     {
       "position": 165,
       "name": "Iahub and Xors",
       "contestId": 341,
       "problemId": "D",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2500,
+      "tags": [
+        "data structures"
+      ]
     },
     {
       "position": 166,
       "name": "Petya and Pipes",
       "contestId": 362,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2300,
+      "tags": [
+        "flows",
+        "graphs",
+        "shortest paths"
+      ]
     },
     {
       "position": 167,
       "name": "Dividing Kingdom II",
       "contestId": 687,
       "problemId": "D",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2500,
+      "tags": [
+        "brute force",
+        "data structures",
+        "dsu",
+        "graphs",
+        "sortings"
+      ]
     },
     {
       "position": 168,
       "name": "Animals and Puzzle",
       "contestId": 713,
       "problemId": "D",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2700,
+      "tags": [
+        "binary search",
+        "data structures"
+      ]
     },
     {
       "position": 169,
       "name": "Alphabet Permutations",
       "contestId": 610,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2500,
+      "tags": [
+        "data structures",
+        "strings"
+      ]
     },
     {
       "position": 170,
       "name": "Levko and Strings",
       "contestId": 360,
       "problemId": "C",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2500,
+      "tags": [
+        "combinatorics",
+        "dp"
+      ]
     },
     {
       "position": 171,
       "name": "Linear Kingdom Races",
       "contestId": 115,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2400,
+      "tags": [
+        "data structures",
+        "dp"
+      ]
     },
     {
       "position": 172,
       "name": "Little Victor and Set",
       "contestId": 460,
       "problemId": "D",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2300,
+      "tags": [
+        "brute force",
+        "constructive algorithms",
+        "math"
+      ]
     },
     {
       "position": 173,
       "name": "Minimum Modular",
       "contestId": 303,
       "problemId": "C",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2400,
+      "tags": [
+        "brute force",
+        "graphs",
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 174,
       "name": "Summer Earnings",
       "contestId": 333,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2500,
+      "tags": [
+        "binary search",
+        "bitmasks",
+        "brute force",
+        "geometry",
+        "sortings"
+      ]
     },
     {
       "position": 175,
       "name": "Counter Attack",
       "contestId": 190,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2100,
+      "tags": [
+        "data structures",
+        "dsu",
+        "graphs",
+        "hashing",
+        "sortings"
+      ]
     },
     {
       "position": 176,
       "name": "Digit Tree",
       "contestId": 715,
       "problemId": "C",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2700,
+      "tags": [
+        "dfs and similar",
+        "divide and conquer",
+        "dsu",
+        "trees"
+      ]
     },
     {
       "position": 177,
       "name": "Kay and Eternity",
       "contestId": 685,
       "problemId": "D",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2600,
+      "tags": [
+        "brute force",
+        "implementation",
+        "sortings"
+      ]
     },
     {
       "position": 178,
       "name": "President's Path",
       "contestId": 416,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2500,
+      "tags": [
+        "dp",
+        "graphs",
+        "shortest paths"
+      ]
     },
     {
       "position": 179,
       "name": "String",
       "contestId": 123,
       "problemId": "D",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2300,
+      "tags": [
+        "string suffix structures"
+      ]
     },
     {
       "position": 180,
       "name": "Arpa’s overnight party and Mehrdad’s silent entering",
       "contestId": 741,
       "problemId": "C",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2600,
+      "tags": [
+        "constructive algorithms",
+        "dfs and similar",
+        "graphs"
+      ]
     },
     {
       "position": 181,
       "name": "Sereja and Sets",
       "contestId": 367,
       "problemId": "D",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2400,
+      "tags": [
+        "bitmasks",
+        "dfs and similar"
+      ]
     },
     {
       "position": 182,
       "name": "Working routine",
       "contestId": 706,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2500,
+      "tags": [
+        "data structures",
+        "implementation"
+      ]
     },
     {
       "position": 183,
       "name": "Opening Portals",
       "contestId": 196,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2600,
+      "tags": [
+        "dsu",
+        "graphs",
+        "shortest paths"
+      ]
     },
     {
       "position": 184,
       "name": "Lucky Array",
       "contestId": 121,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2400,
+      "tags": [
+        "data structures"
+      ]
     },
     {
       "position": 185,
       "name": "Sereja and Sets",
       "contestId": 425,
       "problemId": "E",
-      "difficulty": 7
+      "difficulty": 7,
+      "rating": 2500,
+      "tags": [
+        "dp"
+      ]
     },
     {
       "position": 186,
       "name": "Drazil and Morning Exercise",
       "contestId": 516,
       "problemId": "D",
-      "difficulty": 8
+      "difficulty": 8,
+      "rating": 2800,
+      "tags": [
+        "dfs and similar",
+        "dp",
+        "dsu",
+        "trees",
+        "two pointers"
+      ]
     },
     {
       "position": 187,
       "name": "Optimal Point",
       "contestId": 685,
       "problemId": "C",
-      "difficulty": 8
+      "difficulty": 8,
+      "rating": 2900,
+      "tags": [
+        "binary search",
+        "math"
+      ]
     },
     {
       "position": 188,
       "name": "Roads in Yusland",
       "contestId": 671,
       "problemId": "D",
-      "difficulty": 8
+      "difficulty": 8,
+      "rating": 2900,
+      "tags": [
+        "data structures",
+        "dp",
+        "greedy"
+      ]
     },
     {
       "position": 189,
       "name": "Jeff and Removing Periods",
       "contestId": 351,
       "problemId": "D",
-      "difficulty": 8
+      "difficulty": 8,
+      "rating": 2700,
+      "tags": [
+        "data structures"
+      ]
     },
     {
       "position": 190,
       "name": "Parcels",
       "contestId": 480,
       "problemId": "D",
-      "difficulty": 8
+      "difficulty": 8,
+      "rating": 2600,
+      "tags": [
+        "dp",
+        "graphs"
+      ]
     },
     {
       "position": 191,
       "name": "Mission Impassable",
       "contestId": 150,
       "problemId": "D",
-      "difficulty": 8
+      "difficulty": 8,
+      "rating": 2600,
+      "tags": [
+        "dp",
+        "strings"
+      ]
     },
     {
       "position": 192,
       "name": "Mishka and Divisors",
       "contestId": 703,
       "problemId": "E",
-      "difficulty": 8
+      "difficulty": 8,
+      "rating": 2600,
+      "tags": [
+        "dp",
+        "number theory"
+      ]
     },
     {
       "position": 193,
       "name": "Random Function and Tree",
       "contestId": 482,
       "problemId": "D",
-      "difficulty": 8
+      "difficulty": 8,
+      "rating": 2700,
+      "tags": [
+        "combinatorics",
+        "dp",
+        "trees"
+      ]
     },
     {
       "position": 194,
       "name": "Choosing Subtree is Fun",
       "contestId": 372,
       "problemId": "D",
-      "difficulty": 8
+      "difficulty": 8,
+      "rating": 2600,
+      "tags": [
+        "binary search",
+        "data structures",
+        "dfs and similar",
+        "trees",
+        "two pointers"
+      ]
     },
     {
       "position": 195,
       "name": "World of Darkraft - 2",
       "contestId": 464,
       "problemId": "D",
-      "difficulty": 8
+      "difficulty": 8,
+      "rating": 2700,
+      "tags": [
+        "dp",
+        "probabilities"
+      ]
     },
     {
       "position": 196,
       "name": "DZY Loves Games",
       "contestId": 446,
       "problemId": "D",
-      "difficulty": 9
+      "difficulty": 9,
+      "rating": 2800,
+      "tags": [
+        "math",
+        "matrices",
+        "probabilities"
+      ]
     },
     {
       "position": 197,
       "name": "GCD Table",
       "contestId": 338,
       "problemId": "D",
-      "difficulty": 9
+      "difficulty": 9,
+      "rating": 2900,
+      "tags": [
+        "chinese remainder theorem",
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 198,
       "name": "Parking Lot",
       "contestId": 480,
       "problemId": "E",
-      "difficulty": 9
+      "difficulty": 9,
+      "rating": 2800,
+      "tags": [
+        "data structures",
+        "divide and conquer"
+      ]
     },
     {
       "position": 199,
       "name": "Cookie Clicker",
       "contestId": 377,
       "problemId": "E",
-      "difficulty": 9
+      "difficulty": 9,
+      "rating": 2800,
+      "tags": [
+        "dp",
+        "geometry"
+      ]
     },
     {
       "position": 200,
       "name": "Ladies' Shop",
       "contestId": 286,
       "problemId": "E",
-      "difficulty": 9
+      "difficulty": 9,
+      "rating": 2800,
+      "tags": [
+        "constructive algorithms",
+        "fft",
+        "math"
+      ]
     }
   ]
 }

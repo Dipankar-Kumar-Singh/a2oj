@@ -11,700 +11,1236 @@
       "name": "Choosing Teams",
       "contestId": 432,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "greedy",
+        "implementation",
+        "sortings"
+      ]
     },
     {
       "position": 2,
       "name": "Nearly Lucky Number",
       "contestId": 110,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 3,
       "name": "Amusing Joke",
       "contestId": 141,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation",
+        "sortings",
+        "strings"
+      ]
     },
     {
       "position": 4,
       "name": "Drinks",
       "contestId": 200,
       "problemId": "B",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 5,
       "name": "Way Too Long Words",
       "contestId": 71,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "strings"
+      ]
     },
     {
       "position": 6,
       "name": "Presents",
       "contestId": 136,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 7,
       "name": "Lunch Rush",
       "contestId": 276,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 900,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 8,
       "name": "Soft Drinking",
       "contestId": 151,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 9,
       "name": "Boy or Girl",
       "contestId": 236,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "brute force",
+        "implementation",
+        "strings"
+      ]
     },
     {
       "position": 10,
       "name": "Dividing Orange",
       "contestId": 244,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 900,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 11,
       "name": "Queue at the School",
       "contestId": 266,
       "problemId": "B",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "constructive algorithms",
+        "graph matchings",
+        "implementation",
+        "shortest paths"
+      ]
     },
     {
       "position": 12,
       "name": "HQ9+",
       "contestId": 133,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 900,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 13,
       "name": "I_love_\\%username\\%",
       "contestId": 155,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "brute force"
+      ]
     },
     {
       "position": 14,
       "name": "Cakeminator",
       "contestId": 330,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "brute force",
+        "implementation"
+      ]
     },
     {
       "position": 15,
       "name": "Word",
       "contestId": 59,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation",
+        "strings"
+      ]
     },
     {
       "position": 16,
       "name": "Stones on the Table",
       "contestId": 266,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 17,
       "name": "Beautiful Year",
       "contestId": 271,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "brute force"
+      ]
     },
     {
       "position": 18,
       "name": "Team",
       "contestId": 231,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "brute force",
+        "greedy"
+      ]
     },
     {
       "position": 19,
       "name": "Insomnia cure",
       "contestId": 148,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "constructive algorithms",
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 20,
       "name": "Vanya and Cards",
       "contestId": 401,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 21,
       "name": "Tram",
       "contestId": 116,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 22,
       "name": "Petya and Strings",
       "contestId": 112,
       "problemId": "A",
-      "difficulty": 1
+      "difficulty": 1,
+      "rating": 800,
+      "tags": [
+        "implementation",
+        "strings"
+      ]
     },
     {
       "position": 23,
       "name": "Array",
       "contestId": 300,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1100,
+      "tags": [
+        "brute force",
+        "constructive algorithms",
+        "implementation"
+      ]
     },
     {
       "position": 24,
       "name": "Little Elephant and Chess",
       "contestId": 259,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "brute force",
+        "strings"
+      ]
     },
     {
       "position": 25,
       "name": "Dubstep",
       "contestId": 208,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 900,
+      "tags": [
+        "strings"
+      ]
     },
     {
       "position": 26,
       "name": "Permutation",
       "contestId": 137,
       "problemId": "B",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "greedy"
+      ]
     },
     {
       "position": 27,
       "name": "Magic Numbers",
       "contestId": 320,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 900,
+      "tags": [
+        "brute force",
+        "greedy"
+      ]
     },
     {
       "position": 28,
       "name": "Heads or Tails",
       "contestId": 242,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1100,
+      "tags": [
+        "brute force",
+        "implementation"
+      ]
     },
     {
       "position": 29,
       "name": "Present from Lena",
       "contestId": 118,
       "problemId": "B",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "constructive algorithms",
+        "implementation"
+      ]
     },
     {
       "position": 30,
       "name": "Marks",
       "contestId": 152,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 900,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 31,
       "name": "Xenia and Ringroad",
       "contestId": 339,
       "problemId": "B",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 32,
       "name": "Lucky Division",
       "contestId": 122,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "brute force",
+        "number theory"
+      ]
     },
     {
       "position": 33,
       "name": "Twins",
       "contestId": 160,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 900,
+      "tags": [
+        "greedy",
+        "sortings"
+      ]
     },
     {
       "position": 34,
       "name": "Translation",
       "contestId": 41,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 800,
+      "tags": [
+        "implementation",
+        "strings"
+      ]
     },
     {
       "position": 35,
       "name": "Chat room",
       "contestId": 58,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "greedy",
+        "strings"
+      ]
     },
     {
       "position": 36,
       "name": "Football",
       "contestId": 96,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 900,
+      "tags": [
+        "implementation",
+        "strings"
+      ]
     },
     {
       "position": 37,
       "name": "Ilya and Bank Account",
       "contestId": 313,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 900,
+      "tags": [
+        "implementation",
+        "number theory"
+      ]
     },
     {
       "position": 38,
       "name": "Parallelepiped",
       "contestId": 224,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1100,
+      "tags": [
+        "brute force",
+        "geometry",
+        "math"
+      ]
     },
     {
       "position": 39,
       "name": "String Task",
       "contestId": 118,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "implementation",
+        "strings"
+      ]
     },
     {
       "position": 40,
       "name": "k-String",
       "contestId": 219,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "implementation",
+        "strings"
+      ]
     },
     {
       "position": 41,
       "name": "Dragons",
       "contestId": 230,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 1000,
+      "tags": [
+        "greedy",
+        "sortings"
+      ]
     },
     {
       "position": 42,
       "name": "Puzzles",
       "contestId": 337,
       "problemId": "A",
-      "difficulty": 2
+      "difficulty": 2,
+      "rating": 900,
+      "tags": [
+        "greedy"
+      ]
     },
     {
       "position": 43,
       "name": "Playing Cubes",
       "contestId": 257,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1300,
+      "tags": [
+        "games",
+        "greedy",
+        "implementation"
+      ]
     },
     {
       "position": 44,
       "name": "Two Bags of Potatoes",
       "contestId": 239,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1200,
+      "tags": [
+        "greedy",
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 45,
       "name": "Big Segment",
       "contestId": 242,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "implementation",
+        "sortings"
+      ]
     },
     {
       "position": 46,
       "name": "Pashmak and Flowers",
       "contestId": 459,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1300,
+      "tags": [
+        "combinatorics",
+        "implementation",
+        "sortings"
+      ]
     },
     {
       "position": 47,
       "name": "Building Permutation",
       "contestId": 285,
       "problemId": "C",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1200,
+      "tags": [
+        "greedy",
+        "implementation",
+        "sortings"
+      ]
     },
     {
       "position": 48,
       "name": "Boys and Girls",
       "contestId": 253,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "greedy"
+      ]
     },
     {
       "position": 49,
       "name": "Cinema Line",
       "contestId": 349,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "greedy",
+        "implementation"
+      ]
     },
     {
       "position": 50,
       "name": "Rank List",
       "contestId": 166,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "binary search",
+        "implementation",
+        "sortings"
+      ]
     },
     {
       "position": 51,
       "name": "Points on Line",
       "contestId": 251,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1300,
+      "tags": [
+        "binary search",
+        "combinatorics",
+        "two pointers"
+      ]
     },
     {
       "position": 52,
       "name": "Little Girl and Game",
       "contestId": 276,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1300,
+      "tags": [
+        "games",
+        "greedy"
+      ]
     },
     {
       "position": 53,
       "name": "Little Pony and Expected Maximum",
       "contestId": 453,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1600,
+      "tags": [
+        "probabilities"
+      ]
     },
     {
       "position": 54,
       "name": "Cosmic Tables",
       "contestId": 222,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1300,
+      "tags": [
+        "data structures",
+        "implementation"
+      ]
     },
     {
       "position": 55,
       "name": "Lucky Sum of Digits",
       "contestId": 109,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1000,
+      "tags": [
+        "brute force",
+        "implementation"
+      ]
     },
     {
       "position": 56,
       "name": "Ice Skating",
       "contestId": 217,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1200,
+      "tags": [
+        "brute force",
+        "dfs and similar",
+        "dsu",
+        "graphs"
+      ]
     },
     {
       "position": 57,
       "name": "Sereja and Suffixes",
       "contestId": 368,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "data structures",
+        "dp"
+      ]
     },
     {
       "position": 58,
       "name": "Free Cash",
       "contestId": 237,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1000,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 59,
       "name": "Mashmokh and ACM",
       "contestId": 414,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1400,
+      "tags": [
+        "combinatorics",
+        "dp",
+        "number theory"
+      ]
     },
     {
       "position": 60,
       "name": "Domino",
       "contestId": 353,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1200,
+      "tags": [
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 61,
       "name": "Hungry Sequence",
       "contestId": 327,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1200,
+      "tags": [
+        "math"
+      ]
     },
     {
       "position": 62,
       "name": "Ilya and Queries",
       "contestId": 313,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "dp",
+        "implementation"
+      ]
     },
     {
       "position": 63,
       "name": "Fence",
       "contestId": 363,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1100,
+      "tags": [
+        "brute force",
+        "dp"
+      ]
     },
     {
       "position": 64,
       "name": "T-primes",
       "contestId": 230,
       "problemId": "B",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1300,
+      "tags": [
+        "binary search",
+        "implementation",
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 65,
       "name": "Flipping Game",
       "contestId": 327,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1200,
+      "tags": [
+        "brute force",
+        "dp",
+        "implementation"
+      ]
     },
     {
       "position": 66,
       "name": "Cut Ribbon",
       "contestId": 189,
       "problemId": "A",
-      "difficulty": 3
+      "difficulty": 3,
+      "rating": 1300,
+      "tags": [
+        "brute force",
+        "dp"
+      ]
     },
     {
       "position": 67,
       "name": "Counting Kangaroos is Fun",
       "contestId": 372,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "binary search",
+        "greedy",
+        "sortings",
+        "two pointers"
+      ]
     },
     {
       "position": 68,
       "name": "Median",
       "contestId": 166,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "greedy",
+        "math",
+        "sortings"
+      ]
     },
     {
       "position": 69,
       "name": "Ciel and Flowers",
       "contestId": 322,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "combinatorics",
+        "math"
+      ]
     },
     {
       "position": 70,
       "name": "Vanya and Exams",
       "contestId": 492,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1400,
+      "tags": [
+        "greedy",
+        "sortings"
+      ]
     },
     {
       "position": 71,
       "name": "Fixing Typos",
       "contestId": 363,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1400,
+      "tags": [
+        "greedy",
+        "implementation"
+      ]
     },
     {
       "position": 72,
       "name": "LCM Challenge",
       "contestId": 235,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "number theory"
+      ]
     },
     {
       "position": 73,
       "name": "Caesar's Legions",
       "contestId": 118,
       "problemId": "D",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1700,
+      "tags": [
+        "dp"
+      ]
     },
     {
       "position": 74,
       "name": "Xenia and Bit Operations",
       "contestId": 339,
       "problemId": "D",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1700,
+      "tags": [
+        "data structures",
+        "trees"
+      ]
     },
     {
       "position": 75,
       "name": "Little Girl and Maximum Sum",
       "contestId": 276,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "data structures",
+        "greedy",
+        "implementation",
+        "sortings"
+      ]
     },
     {
       "position": 76,
       "name": "Palindrome Transformation",
       "contestId": 486,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1700,
+      "tags": [
+        "brute force",
+        "greedy",
+        "implementation"
+      ]
     },
     {
       "position": 77,
       "name": "Array",
       "contestId": 224,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "bitmasks",
+        "implementation",
+        "two pointers"
+      ]
     },
     {
       "position": 78,
       "name": "Factory",
       "contestId": 485,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1400,
+      "tags": [
+        "implementation",
+        "math",
+        "matrices"
+      ]
     },
     {
       "position": 79,
       "name": "Ping-Pong (Easy Version)",
       "contestId": 320,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "dfs and similar",
+        "graphs"
+      ]
     },
     {
       "position": 80,
       "name": "Routine Problem",
       "contestId": 337,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1400,
+      "tags": [
+        "greedy",
+        "math",
+        "number theory"
+      ]
     },
     {
       "position": 81,
       "name": "Tourist Problem",
       "contestId": 340,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "combinatorics",
+        "implementation",
+        "math"
+      ]
     },
     {
       "position": 82,
       "name": "Color Stripe",
       "contestId": 219,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "brute force",
+        "dp",
+        "greedy"
+      ]
     },
     {
       "position": 83,
       "name": "Maze",
       "contestId": 377,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "dfs and similar"
+      ]
     },
     {
       "position": 84,
       "name": "Valera and Tubes",
       "contestId": 441,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "constructive algorithms",
+        "dfs and similar",
+        "implementation"
+      ]
     },
     {
       "position": 85,
       "name": "Polo the Penguin and Matrix",
       "contestId": 289,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1400,
+      "tags": [
+        "brute force",
+        "dp",
+        "implementation",
+        "sortings",
+        "ternary search"
+      ]
     },
     {
       "position": 86,
       "name": "Boredom",
       "contestId": 455,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "dp"
+      ]
     },
     {
       "position": 87,
       "name": "Funky Numbers",
       "contestId": 192,
       "problemId": "A",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1300,
+      "tags": [
+        "binary search",
+        "brute force",
+        "implementation"
+      ]
     },
     {
       "position": 88,
       "name": "George and Job",
       "contestId": 467,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1700,
+      "tags": [
+        "dp",
+        "implementation"
+      ]
     },
     {
       "position": 89,
       "name": "Xenia and Weights",
       "contestId": 339,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1700,
+      "tags": [
+        "constructive algorithms",
+        "dfs and similar",
+        "dp",
+        "graphs",
+        "greedy",
+        "shortest paths"
+      ]
     },
     {
       "position": 90,
       "name": "Physics Practical",
       "contestId": 253,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1400,
+      "tags": [
+        "binary search",
+        "dp",
+        "sortings",
+        "two pointers"
+      ]
     },
     {
       "position": 91,
       "name": "Little Pony and Sort by Shift",
       "contestId": 454,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1200,
+      "tags": [
+        "implementation"
+      ]
     },
     {
       "position": 92,
       "name": "Bombs",
       "contestId": 350,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "greedy",
+        "implementation",
+        "sortings"
+      ]
     },
     {
       "position": 93,
       "name": "Number of Ways",
       "contestId": 466,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1700,
+      "tags": [
+        "binary search",
+        "brute force",
+        "data structures",
+        "dp",
+        "two pointers"
+      ]
     },
     {
       "position": 94,
       "name": "Team",
       "contestId": 401,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1400,
+      "tags": [
+        "constructive algorithms",
+        "greedy",
+        "implementation"
+      ]
     },
     {
       "position": 95,
       "name": "Another Problem on Strings",
       "contestId": 165,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "binary search",
+        "brute force",
+        "dp",
+        "math",
+        "strings",
+        "two pointers"
+      ]
     },
     {
       "position": 96,
       "name": "Color the Fence",
       "contestId": 349,
       "problemId": "B",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1700,
+      "tags": [
+        "data structures",
+        "dp",
+        "greedy",
+        "implementation"
+      ]
     },
     {
       "position": 97,
       "name": "Tetrahedron",
       "contestId": 166,
       "problemId": "E",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1500,
+      "tags": [
+        "dp",
+        "math",
+        "matrices"
+      ]
     },
     {
       "position": 98,
       "name": "k-Tree",
       "contestId": 431,
       "problemId": "C",
-      "difficulty": 4
+      "difficulty": 4,
+      "rating": 1600,
+      "tags": [
+        "dp",
+        "implementation",
+        "trees"
+      ]
     },
     {
       "position": 99,
       "name": "Vasya and Basketball",
       "contestId": 493,
       "problemId": "C",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 1600,
+      "tags": [
+        "binary search",
+        "brute force",
+        "data structures",
+        "implementation",
+        "sortings",
+        "two pointers"
+      ]
     },
     {
       "position": 100,
       "name": "Gargari and Bishops",
       "contestId": 463,
       "problemId": "C",
-      "difficulty": 5
+      "difficulty": 5,
+      "rating": 1900,
+      "tags": [
+        "greedy",
+        "hashing",
+        "implementation"
+      ]
     }
   ]
 }
