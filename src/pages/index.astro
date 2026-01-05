@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Settings from '../components/Settings.astro';
 import quotes from '../data/quotes.json';
 import laddersIndex from '../data/ladders/index.json';
 import laddersMetadata from '../data/ladders/metadata.json';
@@ -71,6 +70,37 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 
 <Layout title="A2OJ Refreshed - Practice Ladders">
 	<main class="min-h-screen full-page-grid">
+		<!-- Global Control Bar -->
+		<div class="global-control-bar">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+				<div class="global-control-label">
+					<span class="global-control-tag">SYS</span>
+					<span class="global-control-text">CONTROLS</span>
+				</div>
+				<div class="global-controls">
+					<button id="zen-mode-btn" class="global-toggle-btn" title="Zen Mode - Simplified view on ladder pages">
+						<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+							<circle cx="12" cy="12" r="9" />
+							<circle cx="12" cy="12" r="3" />
+						</svg>
+						<span class="global-toggle-label">ZEN</span>
+					</button>
+					<div class="global-control-divider"></div>
+					<button id="theme-toggle" class="global-toggle-btn" title="Toggle Dark Mode">
+						<svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+							<circle cx="12" cy="12" r="4" />
+							<path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414" />
+						</svg>
+						<svg class="w-4 h-4 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+							<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+						</svg>
+						<span class="global-toggle-label dark-label">LIGHT</span>
+						<span class="global-toggle-label light-label hidden">DARK</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		
 		<!-- Hero Section with Quote and Controls -->
 		<div class="engineering-hero-compact relative">
 			<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -377,9 +407,6 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 			</div>
 		</footer>
 	</main>
-
-	<!-- Settings Component -->
-	<Settings />
 </Layout>
 
 <!-- Quotes Data for Client-Side Rotation -->
@@ -772,6 +799,50 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 				lastVisibleTime = Date.now();
 			}
 		});
+
+		// Global Control Bar - Zen Mode Toggle
+		const zenModeBtn = document.getElementById('zen-mode-btn');
+		if (zenModeBtn) {
+			// Load current zen mode state
+			const zenActive = localStorage.getItem('zen_mode_active') === 'true';
+			if (zenActive) {
+				zenModeBtn.classList.add('active');
+			}
+
+			zenModeBtn.addEventListener('click', () => {
+				const isActive = zenModeBtn.classList.toggle('active');
+				localStorage.setItem('zen_mode_active', isActive ? 'true' : 'false');
+			});
+		}
+
+		// Global Control Bar - Theme Toggle
+		const themeToggleBtn = document.getElementById('theme-toggle');
+		if (themeToggleBtn) {
+			const isDark = document.documentElement.classList.contains('dark');
+			updateThemeIcons(isDark);
+
+			themeToggleBtn.addEventListener('click', () => {
+				const isDarkNow = document.documentElement.classList.toggle('dark');
+				localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
+				updateThemeIcons(isDarkNow);
+			});
+		}
+
+		function updateThemeIcons(isDark: boolean) {
+			const sunIcon = document.querySelector('#theme-toggle .sun-icon');
+			const moonIcon = document.querySelector('#theme-toggle .moon-icon');
+			const darkLabel = document.querySelector('#theme-toggle .dark-label');
+			const lightLabel = document.querySelector('#theme-toggle .light-label');
+			
+			if (sunIcon && moonIcon) {
+				sunIcon.classList.toggle('hidden', isDark);
+				moonIcon.classList.toggle('hidden', !isDark);
+			}
+			if (darkLabel && lightLabel) {
+				darkLabel.classList.toggle('hidden', isDark);
+				lightLabel.classList.toggle('hidden', !isDark);
+			}
+		}
 	});
 </script>
 

@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Settings from '../../components/Settings.astro';
 import laddersIndex from '../../data/ladders/index.json';
 import laddersMetadata from '../../data/ladders/metadata.json';
 
@@ -19,6 +18,7 @@ interface Problem {
 	contestId: number;
 	problemId: string;
 	difficulty: number;
+	rating: number | null;
 	tags: string[];
 }
 
@@ -35,6 +35,7 @@ interface LadderData {
 		contestId: number;
 		problemId: string;
 		difficulty?: number;
+		rating?: number;
 		tags?: string[];
 	}>;
 }
@@ -87,8 +88,17 @@ const problems: Problem[] = ladderData.problems.map((p) => ({
 	contestId: p.contestId,
 	problemId: p.problemId,
 	difficulty: p.difficulty || 1,
+	rating: p.rating || null,
 	tags: p.tags || []
 }));
+
+// Get all unique tags for filtering
+const allTags = [...new Set(problems.flatMap(p => p.tags))].sort();
+
+// Get min/max ratings for filtering
+const ratingsWithValues = problems.filter(p => p.rating !== null).map(p => p.rating as number);
+const minRating = ratingsWithValues.length > 0 ? Math.min(...ratingsWithValues) : 800;
+const maxRating = ratingsWithValues.length > 0 ? Math.max(...ratingsWithValues) : 3500;
 
 // Calculate initial progress (will be updated client-side)
 const solvedCount = 0;
@@ -121,8 +131,39 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 
 <Layout title={`${ladder.name} | A2OJ Refreshed`}>
 	<main class="min-h-screen bg-slate-50 dark:bg-slate-950 full-page-grid">
+		<!-- Global Control Bar -->
+		<div class="global-control-bar">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+				<div class="global-control-label">
+					<span class="global-control-tag">SYS</span>
+					<span class="global-control-text">CONTROLS</span>
+				</div>
+				<div class="global-controls">
+					<button id="zen-mode-btn" class="global-toggle-btn" title="Zen Mode - Hide all filters">
+						<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+							<circle cx="12" cy="12" r="9" />
+							<circle cx="12" cy="12" r="3" />
+						</svg>
+						<span class="global-toggle-label">ZEN</span>
+					</button>
+					<div class="global-control-divider"></div>
+					<button id="theme-toggle" class="global-toggle-btn" title="Toggle Dark Mode">
+						<svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+							<circle cx="12" cy="12" r="4" />
+							<path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414" />
+						</svg>
+						<svg class="w-4 h-4 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+							<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+						</svg>
+						<span class="global-toggle-label dark-label">LIGHT</span>
+						<span class="global-toggle-label light-label hidden">DARK</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		
 		<!-- Engineering-Style Header -->
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6">
 			<!-- Back Link -->
 			<a href="/" class="inline-flex items-center engineering-back-link mb-8">
 				<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -224,8 +265,9 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 				</div>
 				<div class="section-header-line flex-1"></div>
 				
-				<!-- Filter Toggle -->
+				<!-- Filter Controls -->
 				<div class="filter-toggle-container">
+					<!-- Hide Solved Toggle -->
 					<button id="hide-solved-toggle" class="filter-toggle-btn" title="Hide solved problems">
 						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -238,6 +280,100 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 				<div class="section-header-corner"></div>
 			</div>
 			
+			<!-- Filter & Sort Controls Panel (collapses in Zen Mode) -->
+			<div id="filter-panel" class="engineering-filter-panel mb-4 filter-panel-animated">
+				<div class="engineering-card-corner engineering-card-corner-tl"></div>
+				<div class="engineering-card-corner engineering-card-corner-br"></div>
+				
+				<div class="flex flex-wrap items-center gap-4">
+					<!-- Column Visibility Toggles -->
+					<div class="filter-group">
+						<span class="filter-group-label">SHOW/HIDE</span>
+						<div class="flex gap-2">
+							<button id="toggle-difficulty" class="column-toggle-btn active" data-column="difficulty" title="Toggle Difficulty column">
+								<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+								</svg>
+								Difficulty
+							</button>
+							<button id="toggle-rating" class="column-toggle-btn active" data-column="rating" title="Toggle Rating column">
+								<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+								</svg>
+								Rating
+							</button>
+							<button id="toggle-tags" class="column-toggle-btn active" data-column="tags" title="Toggle Tags column">
+								<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+								</svg>
+								Tags
+							</button>
+							<button id="toggle-problemid" class="column-toggle-btn active" data-column="problemid" title="Toggle Problem ID (CF-XXX/X)">
+								<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+								</svg>
+								Problem ID
+							</button>
+						</div>
+					</div>
+					
+					<!-- Rating Filter -->
+					<div class="filter-group">
+						<span class="filter-group-label">RATING RANGE</span>
+						<div class="flex items-center gap-2">
+							<input type="number" id="rating-min" class="rating-input" placeholder="0" min="0" max="4000" step="100" />
+							<span class="text-slate-400">—</span>
+							<input type="number" id="rating-max" class="rating-input rating-input-infinity" placeholder="∞" min="0" max="99999" step="100" />
+						</div>
+					</div>
+					
+					<!-- Rating Sort -->
+					<div class="filter-group">
+						<span class="filter-group-label">SORT BY RATING</span>
+						<div class="flex gap-1">
+							<button id="sort-rating-asc" class="sort-btn" title="Sort by rating ascending">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
+								</svg>
+							</button>
+							<button id="sort-rating-desc" class="sort-btn" title="Sort by rating descending">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
+								</svg>
+							</button>
+							<button id="sort-reset" class="sort-btn" title="Reset to original order">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+								</svg>
+							</button>
+						</div>
+					</div>
+					
+					<!-- Tag Filter (only shown when tags column visible) -->
+					<div id="tag-filter-group" class="filter-group">
+						<span class="filter-group-label">FILTER BY TAG</span>
+						<select id="tag-filter" class="tag-filter-select">
+							<option value="">All Tags</option>
+							{allTags.map((tag) => (
+								<option value={tag}>{tag}</option>
+							))}
+						</select>
+					</div>
+					
+					<!-- Clear Filters -->
+					<button id="clear-filters" class="clear-filters-btn">
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+						Clear
+					</button>
+				</div>
+			</div>
+			
 			<div class="engineering-table-container">
 				<div class="engineering-card-corner engineering-card-corner-tl"></div>
 				<div class="engineering-card-corner engineering-card-corner-tr"></div>
@@ -245,7 +381,7 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 				<div class="engineering-card-corner engineering-card-corner-br"></div>
 				
 				<div class="overflow-x-auto">
-					<table class="w-full">
+					<table class="w-full" id="problems-table">
 						<thead>
 							<tr class="engineering-table-header">
 								<th class="px-6 py-4 text-left w-16">
@@ -253,6 +389,9 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 								</th>
 								<th class="px-6 py-4 text-left">
 									<span class="engineering-table-th">PROBLEM</span>
+								</th>
+								<th class="rating-header px-6 py-4 text-left w-24">
+									<span class="engineering-table-th">RATING</span>
 								</th>
 								<th class="difficulty-header px-6 py-4 text-left w-28">
 									<span class="engineering-table-th">DIFFICULTY</span>
@@ -270,6 +409,9 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 								<tr 
 									class="engineering-table-row"
 									data-problem-id={`${problem.contestId}${problem.problemId}`}
+									data-position={problem.id}
+									data-rating={problem.rating || 0}
+									data-tags={problem.tags.join(',')}
 								>
 									<td class="px-6 py-4">
 										<span class="engineering-table-index">{String(problem.id).padStart(2, '0')}</span>
@@ -290,9 +432,18 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 											CF-{problem.contestId}/{problem.problemId}
 										</div>
 									</td>
+									<td class="rating-cell px-6 py-4">
+										{problem.rating ? (
+											<span class={`engineering-rating ${problem.rating < 1200 ? 'rating-newbie' : problem.rating < 1400 ? 'rating-pupil' : problem.rating < 1600 ? 'rating-specialist' : problem.rating < 1900 ? 'rating-expert' : problem.rating < 2100 ? 'rating-cm' : problem.rating < 2300 ? 'rating-master' : 'rating-gm'}`}>
+												{problem.rating}
+											</span>
+										) : (
+											<span class="engineering-rating rating-unrated">—</span>
+										)}
+									</td>
 									<td class="difficulty-cell px-6 py-4">
 										<div class="engineering-difficulty">
-											<span class="engineering-difficulty-bar" style={`width: ${problem.difficulty * 20}%`}></span>
+										<span class="engineering-difficulty-bar" style={`--bar-width: ${problem.difficulty * 20}%`}></span>
 											<span class="engineering-difficulty-text">LVL {problem.difficulty}</span>
 										</div>
 									</td>
@@ -371,36 +522,40 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 			</div>
 		</div>
 	</main>
-
-	<!-- Settings Component -->
-	<Settings />
 </Layout>
 
-<script>
+<script define:vars={{ ladderId }}>
+	// Get ladder ID for per-page filter storage
+	const LADDER_ID = ladderId;
+	
+	// Global storage keys (shared across all pages)
+	const GLOBAL_COLUMN_VISIBILITY_KEY = 'global_column_visibility';
+	const GLOBAL_HIDE_SOLVED_KEY = 'global_hide_solved';
+	
+	// Per-page storage keys (unique per ladder)
+	const getPageFilterKey = () => `ladder_${LADDER_ID}_filters`;
+
 	// Load problem status from localStorage
-	function loadProblemStatus(): { solved: string[]; attempted: string[] } {
+	function loadProblemStatus() {
 		const solvedStr = localStorage.getItem('cf_solved');
 		const attemptedStr = localStorage.getItem('cf_attempted');
 		
-		let solved: string[] = [];
-		let attempted: string[] = [];
+		let solved = [];
+		let attempted = [];
 		
 		try {
 			if (solvedStr) solved = JSON.parse(solvedStr);
-		} catch { /* ignore */ }
+		} catch (e) { /* ignore */ }
 		
 		try {
 			if (attemptedStr) attempted = JSON.parse(attemptedStr);
-		} catch { /* ignore */ }
+		} catch (e) { /* ignore */ }
 		
 		return { solved, attempted };
 	}
 
-	function markAsSolved(row: HTMLElement): void {
-		// Add solved background class to the row
+	function markAsSolved(row) {
 		row.classList.add('problem-row-solved');
-		
-		// Update status cell
 		const statusCell = row.querySelector('.status-cell');
 		if (statusCell) {
 			statusCell.innerHTML = `
@@ -413,11 +568,8 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 		}
 	}
 
-	function markAsAttempted(row: HTMLElement): void {
-		// Add attempted background class to the row
+	function markAsAttempted(row) {
 		row.classList.add('problem-row-attempted');
-		
-		// Update status cell
 		const statusCell = row.querySelector('.status-cell');
 		if (statusCell) {
 			statusCell.innerHTML = `
@@ -430,31 +582,26 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 		}
 	}
 
-	function updateProgressUI(solvedCount: number, attemptedCount: number, totalCount: number): void {
+	function updateProgressUI(solvedCount, attemptedCount, totalCount) {
 		const progressPercent = totalCount > 0 ? Math.round((solvedCount / totalCount) * 100) : 0;
 		
-		// Update progress bar fill
-		const progressFill = document.querySelector('.engineering-progress-fill') as HTMLElement;
+		const progressFill = document.querySelector('.engineering-progress-fill');
 		if (progressFill) {
 			progressFill.style.width = `${progressPercent}%`;
 		}
 		
-		// Update solved count text (e.g., "5 / 100")
-		const progressCount = document.querySelector('.engineering-progress-count') as HTMLElement;
+		const progressCount = document.querySelector('.engineering-progress-count');
 		if (progressCount) {
 			progressCount.innerHTML = `${solvedCount}<span class="text-slate-400 dark:text-slate-500"> / ${totalCount}</span>`;
 		}
 		
-		// Update completion percentage in stat box
-		const completionStat = document.querySelector('.engineering-stat-value-lg') as HTMLElement;
+		const completionStat = document.querySelector('.engineering-stat-value-lg');
 		if (completionStat) {
 			completionStat.textContent = `${progressPercent}%`;
 		}
 		
-		// Update Quick Stats cards
 		const statCards = document.querySelectorAll('.engineering-stat-card');
 		if (statCards.length >= 4) {
-			// Update "COMPLETE" card (last one)
 			const completeCard = statCards[3];
 			const completeValue = completeCard.querySelector('.engineering-stat-card-value');
 			if (completeValue) {
@@ -463,51 +610,467 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 		}
 	}
 
-	// Filter toggle functionality
-	function initFilterToggle(solvedCount: number, totalCount: number): void {
+	// Column visibility state (GLOBAL - shared across all pages)
+	const columnVisibility = {
+		difficulty: true,
+		rating: true,
+		tags: true,
+		problemid: true
+	};
+	
+	// Current sort state (per-page)
+	let currentSort = 'none';
+	
+	// Store original row order
+	let originalRows = [];
+
+	function updateColumnVisibility() {
+		const table = document.getElementById('problems-table');
+		if (!table) return;
+
+		// Difficulty column
+		const difficultyHeader = table.querySelector('.difficulty-header');
+		const difficultyCells = table.querySelectorAll('.difficulty-cell');
+		if (difficultyHeader) {
+			difficultyHeader.style.display = columnVisibility.difficulty ? '' : 'none';
+		}
+		difficultyCells.forEach((cell) => {
+			cell.style.display = columnVisibility.difficulty ? '' : 'none';
+		});
+
+		// Rating column
+		const ratingHeader = table.querySelector('.rating-header');
+		const ratingCells = table.querySelectorAll('.rating-cell');
+		if (ratingHeader) {
+			ratingHeader.style.display = columnVisibility.rating ? '' : 'none';
+		}
+		ratingCells.forEach((cell) => {
+			cell.style.display = columnVisibility.rating ? '' : 'none';
+		});
+
+		// Tags column
+		const tagsHeader = table.querySelector('.tags-header');
+		const tagsCells = table.querySelectorAll('.tags-cell');
+		if (tagsHeader) {
+			tagsHeader.style.display = columnVisibility.tags ? '' : 'none';
+		}
+		tagsCells.forEach((cell) => {
+			cell.style.display = columnVisibility.tags ? '' : 'none';
+		});
+
+		// Show/hide tag filter based on tags visibility
+		const tagFilterGroup = document.getElementById('tag-filter-group');
+		if (tagFilterGroup) {
+			tagFilterGroup.style.display = columnVisibility.tags ? '' : 'none';
+		}
+
+		// Problem ID (CF-XXX/X metadata)
+		const tableBody = document.querySelector('.engineering-table-body');
+		if (tableBody) {
+			if (columnVisibility.problemid) {
+				tableBody.classList.remove('hide-problemid');
+			} else {
+				tableBody.classList.add('hide-problemid');
+			}
+		}
+
+		// Update toggle button states
+		document.querySelectorAll('.column-toggle-btn').forEach((btn) => {
+			const column = btn.getAttribute('data-column');
+			if (column && columnVisibility[column] !== undefined) {
+				btn.classList.toggle('active', columnVisibility[column]);
+			}
+		});
+
+		// Save to GLOBAL localStorage (shared across all pages)
+		localStorage.setItem(GLOBAL_COLUMN_VISIBILITY_KEY, JSON.stringify(columnVisibility));
+	}
+
+	// Save current filter state to per-page localStorage
+	function savePageFilters() {
+		const ratingMinEl = document.getElementById('rating-min');
+		const ratingMaxEl = document.getElementById('rating-max');
+		const tagFilterEl = document.getElementById('tag-filter');
+		
+		const filters = {
+			ratingMin: ratingMinEl?.value || '',
+			ratingMax: ratingMaxEl?.value || '',
+			selectedTag: tagFilterEl?.value || '',
+			sort: currentSort
+		};
+		
+		localStorage.setItem(getPageFilterKey(), JSON.stringify(filters));
+	}
+
+	// Load filter state from per-page localStorage
+	function loadPageFilters() {
+		const saved = localStorage.getItem(getPageFilterKey());
+		if (!saved) return;
+		
+		try {
+			const filters = JSON.parse(saved);
+			
+			const ratingMinEl = document.getElementById('rating-min');
+			const ratingMaxEl = document.getElementById('rating-max');
+			const tagFilterEl = document.getElementById('tag-filter');
+			
+			if (ratingMinEl && filters.ratingMin) ratingMinEl.value = filters.ratingMin;
+			if (ratingMaxEl && filters.ratingMax) ratingMaxEl.value = filters.ratingMax;
+			if (tagFilterEl && filters.selectedTag) tagFilterEl.value = filters.selectedTag;
+			if (filters.sort) currentSort = filters.sort;
+		} catch (e) { /* ignore */ }
+	}
+
+	function applyFiltersAndSort() {
+		const tableBody = document.querySelector('.engineering-table-body');
+		if (!tableBody) return;
+
+		const ratingMinEl = document.getElementById('rating-min');
+		const ratingMaxEl = document.getElementById('rating-max');
+		const tagFilterEl = document.getElementById('tag-filter');
+		const ratingMinVal = ratingMinEl ? ratingMinEl.value : '';
+		const ratingMaxVal = ratingMaxEl ? ratingMaxEl.value : '';
+		const ratingMin = ratingMinVal ? parseInt(ratingMinVal) : 0;
+		const ratingMax = ratingMaxVal ? parseInt(ratingMaxVal) : 99999;
+		const selectedTag = tagFilterEl ? tagFilterEl.value : '';
+
+		// Get all rows
+		let rows = Array.from(tableBody.querySelectorAll('.engineering-table-row'));
+
+		// If no original rows stored, store them
+		if (originalRows.length === 0) {
+			originalRows = [...rows];
+		}
+
+		// Apply rating filter
+		rows.forEach((row) => {
+			const rating = parseInt(row.getAttribute('data-rating') || '0');
+			const tags = row.getAttribute('data-tags') || '';
+			
+			let visible = true;
+			
+			// Rating filter (always apply)
+			if (rating > 0) {
+				if (rating < ratingMin || rating > ratingMax) {
+					visible = false;
+				}
+			}
+			
+			// Tag filter (only when tags visible)
+			if (columnVisibility.tags && selectedTag && visible) {
+				const tagList = tags.split(',');
+				if (!tagList.includes(selectedTag)) {
+					visible = false;
+				}
+			}
+
+			row.classList.toggle('filter-hidden', !visible);
+		});
+
+		// Apply sort if active
+		if (currentSort !== 'none') {
+			rows = rows.filter(row => !row.classList.contains('filter-hidden'));
+			rows.sort((a, b) => {
+				const ratingA = parseInt(a.getAttribute('data-rating') || '0');
+				const ratingB = parseInt(b.getAttribute('data-rating') || '0');
+				return currentSort === 'asc' ? ratingA - ratingB : ratingB - ratingA;
+			});
+
+			// Re-append sorted rows
+			rows.forEach(row => tableBody.appendChild(row));
+			
+			// Append hidden rows at the end
+			originalRows.forEach(row => {
+				if (row.classList.contains('filter-hidden')) {
+					tableBody.appendChild(row);
+				}
+			});
+		}
+
+		// Update filter count display
+		const visibleCount = Array.from(tableBody.querySelectorAll('.engineering-table-row:not(.filter-hidden)')).length;
+		const filterCount = document.getElementById('filter-count');
+		if (filterCount) {
+			const totalRows = originalRows.length || tableBody.querySelectorAll('.engineering-table-row').length;
+			if (visibleCount < totalRows) {
+				filterCount.textContent = `${visibleCount} of ${totalRows}`;
+				filterCount.classList.remove('hidden');
+			} else {
+				filterCount.classList.add('hidden');
+			}
+		}
+
+		// Save filter state for this page
+		savePageFilters();
+	}
+
+	function resetToOriginalOrder() {
+		const tableBody = document.querySelector('.engineering-table-body');
+		if (!tableBody || originalRows.length === 0) return;
+
+		originalRows.forEach(row => tableBody.appendChild(row));
+		currentSort = 'none';
+		updateSortButtonStates();
+	}
+
+	function updateSortButtonStates() {
+		const ascBtn = document.getElementById('sort-rating-asc');
+		const descBtn = document.getElementById('sort-rating-desc');
+		const resetBtn = document.getElementById('sort-reset');
+		if (ascBtn) ascBtn.classList.toggle('active', currentSort === 'asc');
+		if (descBtn) descBtn.classList.toggle('active', currentSort === 'desc');
+		if (resetBtn) resetBtn.classList.toggle('active', currentSort === 'none');
+	}
+
+	function initFilterToggle(solvedCount, totalCount) {
 		const toggleBtn = document.getElementById('hide-solved-toggle');
 		const filterCount = document.getElementById('filter-count');
 		const tableBody = document.querySelector('.engineering-table-body');
 		
 		if (!toggleBtn || !tableBody) return;
 		
-		// Load saved filter state
-		const isHideSolvedActive = localStorage.getItem('hide_solved') === 'true';
+		// Load from GLOBAL storage (shared across all pages)
+		const isHideSolvedActive = localStorage.getItem(GLOBAL_HIDE_SOLVED_KEY) === 'true';
 		
-		function updateFilterState(active: boolean): void {
+		function updateFilterState(active) {
 			if (active) {
-				tableBody?.classList.add('hide-solved');
-				toggleBtn?.classList.add('active');
-				if (filterCount) {
-					const remaining = totalCount - solvedCount;
-					filterCount.textContent = `${remaining} shown`;
-					filterCount.classList.remove('hidden');
-				}
-				// Update button text
-				const textSpan = toggleBtn?.querySelector('.filter-toggle-text');
+				tableBody.classList.add('hide-solved');
+				toggleBtn.classList.add('active');
+				const textSpan = toggleBtn.querySelector('.filter-toggle-text');
 				if (textSpan) textSpan.textContent = 'Show All';
 			} else {
-				tableBody?.classList.remove('hide-solved');
-				toggleBtn?.classList.remove('active');
-				if (filterCount) {
-					filterCount.classList.add('hidden');
-				}
-				// Update button text
-				const textSpan = toggleBtn?.querySelector('.filter-toggle-text');
+				tableBody.classList.remove('hide-solved');
+				toggleBtn.classList.remove('active');
+				const textSpan = toggleBtn.querySelector('.filter-toggle-text');
 				if (textSpan) textSpan.textContent = 'Hide Solved';
 			}
+			applyFiltersAndSort();
 		}
 		
-		// Apply initial state
 		updateFilterState(isHideSolvedActive);
 		
-		// Toggle on click
 		toggleBtn.addEventListener('click', () => {
 			const isActive = tableBody.classList.contains('hide-solved');
 			const newState = !isActive;
 			updateFilterState(newState);
-			localStorage.setItem('hide_solved', String(newState));
+			// Save to GLOBAL storage (shared across all pages)
+			localStorage.setItem(GLOBAL_HIDE_SOLVED_KEY, String(newState));
 		});
+	}
+
+	function initColumnToggles() {
+		// Load saved visibility from GLOBAL storage
+		const saved = localStorage.getItem(GLOBAL_COLUMN_VISIBILITY_KEY);
+		if (saved) {
+			try {
+				const parsed = JSON.parse(saved);
+				Object.assign(columnVisibility, parsed);
+			} catch (e) { /* ignore */ }
+		}
+
+		// Set up toggle buttons
+		document.querySelectorAll('.column-toggle-btn').forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const column = btn.getAttribute('data-column');
+				if (column && columnVisibility[column] !== undefined) {
+					columnVisibility[column] = !columnVisibility[column];
+					updateColumnVisibility();
+					applyFiltersAndSort();
+				}
+			});
+		});
+
+		// Initial update
+		updateColumnVisibility();
+	}
+
+	function initZenMode() {
+		const zenModeBtn = document.getElementById('zen-mode-btn');
+		const filterPanel = document.getElementById('filter-panel');
+		if (!zenModeBtn) return;
+
+		// Store previous state for toggling back
+		let previousState = null;
+		let zenActive = false;
+
+		// Load zen mode state from localStorage
+		const savedZenState = localStorage.getItem('zen_mode_active');
+		if (savedZenState === 'true') {
+			// Apply zen mode immediately without animation on page load
+			zenActive = true;
+			zenModeBtn.classList.add('active');
+			if (filterPanel) filterPanel.classList.add('zen-hidden');
+			
+			// Hide all columns
+			columnVisibility.difficulty = false;
+			columnVisibility.rating = false;
+			columnVisibility.tags = false;
+			columnVisibility.problemid = false;
+			updateColumnVisibility();
+		}
+
+		zenModeBtn.addEventListener('click', () => {
+			if (zenActive) {
+				// Exiting Zen Mode
+				zenActive = false;
+				zenModeBtn.classList.remove('active');
+				localStorage.setItem('zen_mode_active', 'false');
+				
+				// Show filter panel with animation
+				if (filterPanel) filterPanel.classList.remove('zen-hidden');
+				
+				// Restore previous visibility state
+				if (previousState) {
+					Object.assign(columnVisibility, previousState);
+				} else {
+					columnVisibility.difficulty = true;
+					columnVisibility.rating = true;
+					columnVisibility.tags = true;
+					columnVisibility.problemid = true;
+				}
+				updateColumnVisibility();
+				applyFiltersAndSort();
+				
+			} else {
+				// Entering Zen Mode
+				zenActive = true;
+				zenModeBtn.classList.add('active');
+				localStorage.setItem('zen_mode_active', 'true');
+				
+				// Save current state before hiding
+				previousState = { ...columnVisibility };
+				
+				// Hide filter panel with animation
+				if (filterPanel) filterPanel.classList.add('zen-hidden');
+				
+				// Hide all columns
+				columnVisibility.difficulty = false;
+				columnVisibility.rating = false;
+				columnVisibility.tags = false;
+				columnVisibility.problemid = false;
+				updateColumnVisibility();
+				applyFiltersAndSort();
+			}
+		});
+	}
+
+	function initThemeToggle() {
+		const themeToggleBtn = document.getElementById('theme-toggle');
+		if (!themeToggleBtn) return;
+
+		// Check current theme
+		const isDark = document.documentElement.classList.contains('dark');
+		updateThemeButton(isDark);
+
+		themeToggleBtn.addEventListener('click', () => {
+			const isDark = document.documentElement.classList.contains('dark');
+			const newTheme = !isDark;
+
+			if (newTheme) {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+
+			localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+			updateThemeButton(newTheme);
+		});
+	}
+
+	function updateThemeButton(isDark) {
+		const themeToggleBtn = document.getElementById('theme-toggle');
+		if (!themeToggleBtn) return;
+
+		const sunIcon = themeToggleBtn.querySelector('.sun-icon');
+		const moonIcon = themeToggleBtn.querySelector('.moon-icon');
+		const darkLabel = themeToggleBtn.querySelector('.dark-label');
+		const lightLabel = themeToggleBtn.querySelector('.light-label');
+
+		if (isDark) {
+			sunIcon?.classList.add('hidden');
+			moonIcon?.classList.remove('hidden');
+			darkLabel?.classList.add('hidden');
+			lightLabel?.classList.remove('hidden');
+		} else {
+			sunIcon?.classList.remove('hidden');
+			moonIcon?.classList.add('hidden');
+			darkLabel?.classList.remove('hidden');
+			lightLabel?.classList.add('hidden');
+		}
+	}
+
+	function initRatingFilter() {
+		const ratingMin = document.getElementById('rating-min');
+		const ratingMax = document.getElementById('rating-max');
+
+		[ratingMin, ratingMax].forEach(input => {
+			if (input) {
+				input.addEventListener('input', () => applyFiltersAndSort());
+				input.addEventListener('change', () => applyFiltersAndSort());
+			}
+		});
+	}
+
+	function initTagFilter() {
+		const tagFilter = document.getElementById('tag-filter');
+		if (tagFilter) {
+			tagFilter.addEventListener('change', () => applyFiltersAndSort());
+		}
+	}
+
+	function initSortButtons() {
+		const ascBtn = document.getElementById('sort-rating-asc');
+		const descBtn = document.getElementById('sort-rating-desc');
+		const resetBtn = document.getElementById('sort-reset');
+		
+		if (ascBtn) {
+			ascBtn.addEventListener('click', () => {
+				currentSort = 'asc';
+				updateSortButtonStates();
+				applyFiltersAndSort();
+			});
+		}
+
+		if (descBtn) {
+			descBtn.addEventListener('click', () => {
+				currentSort = 'desc';
+				updateSortButtonStates();
+				applyFiltersAndSort();
+			});
+		}
+
+		if (resetBtn) {
+			resetBtn.addEventListener('click', () => {
+				currentSort = 'none';
+				resetToOriginalOrder();
+				applyFiltersAndSort();
+			});
+		}
+	}
+
+	function initClearFilters() {
+		const clearBtn = document.getElementById('clear-filters');
+		if (clearBtn) {
+			clearBtn.addEventListener('click', () => {
+				// Reset rating inputs
+				const ratingMin = document.getElementById('rating-min');
+				const ratingMax = document.getElementById('rating-max');
+				if (ratingMin) ratingMin.value = '';
+				if (ratingMax) ratingMax.value = '';
+
+				// Reset tag filter
+				const tagFilter = document.getElementById('tag-filter');
+				if (tagFilter) tagFilter.value = '';
+
+				// Reset sort
+				currentSort = 'none';
+				resetToOriginalOrder();
+				updateSortButtonStates();
+
+				// Apply and save
+				applyFiltersAndSort();
+			});
+		}
 	}
 
 	// Initialize on page load
@@ -521,16 +1084,19 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 		let solvedCount = 0;
 		let attemptedCount = 0;
 		
+		// Store original row order
+		originalRows = Array.from(problemRows);
+		
 		// Mark solved and attempted problems
 		problemRows.forEach((row) => {
 			const problemId = row.getAttribute('data-problem-id');
 			if (!problemId) return;
 			
 			if (solvedSet.has(problemId)) {
-				markAsSolved(row as HTMLElement);
+				markAsSolved(row);
 				solvedCount++;
 			} else if (attemptedSet.has(problemId)) {
-				markAsAttempted(row as HTMLElement);
+				markAsAttempted(row);
 				attemptedCount++;
 			}
 		});
@@ -538,8 +1104,23 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 		// Update progress UI
 		updateProgressUI(solvedCount, attemptedCount, totalCount);
 		
-		// Initialize filter toggle
+		// Initialize all controls
 		initFilterToggle(solvedCount, totalCount);
+		initColumnToggles();
+		initZenMode();
+		initThemeToggle();
+		
+		// Load per-page filters BEFORE initializing filter listeners
+		loadPageFilters();
+		updateSortButtonStates();
+		
+		initRatingFilter();
+		initTagFilter();
+		initSortButtons();
+		initClearFilters();
+		
+		// Apply loaded filters
+		applyFiltersAndSort();
 		
 		console.log(`Progress: ${solvedCount} solved, ${attemptedCount} attempted, ${totalCount} total`);
 	});
