@@ -1,223 +1,67 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import laddersIndex from '../../data/ladders/index.json';
-import laddersMetadata from '../../data/ladders/metadata.json';
-
-// Type definitions
-interface LadderOverride {
-	displayName?: string;
-	difficultyLabel?: string;
-	division?: string;
-	problemType?: string;
-	isExtra?: boolean;
-}
-
-interface Problem {
-	id: number;
-	name: string;
-	contestId: number;
-	problemId: string;
-	difficulty: number;
-	rating: number | null;
-	tags: string[];
-}
-
-interface LadderData {
-	id: number;
-	name: string;
-	type: string;
-	description: string;
-	difficultyLevel: number;
-	problemCount: number;
-	problems: Array<{
-		position: number;
-		name: string;
-		contestId: number;
-		problemId: string;
-		difficulty?: number;
-		rating?: number;
-		tags?: string[];
-	}>;
-}
+import type { LadderData, DisplayProblem, AnalyticsRange, LadderType } from '../../types';
+import {
+	laddersIndex,
+	getLadderOverride,
+	getRatingLevelsSorted,
+	getRatingLevel,
+	processProblems,
+	getAllTags,
+	getRatingRange,
+	formatLadderNumber,
+	calculateAnalyticsRanges,
+	getProblemUrl,
+} from '../../utils/ladders';
 
 // Import all ladder JSON files
 const ladderModules = import.meta.glob<{ default: LadderData }>('../../data/ladders/ladder-*.json', { eager: true });
 
 export function getStaticPaths() {
 	const ids = [
-		...laddersIndex.rating.map(l => l.id),
-		...laddersIndex.division.map(l => l.id),
-		...laddersIndex.extra.map(l => l.id)
+		...laddersIndex.rating.map((l) => l.id),
+		...laddersIndex.division.map((l) => l.id),
+		...laddersIndex.extra.map((l) => l.id),
 	];
-	return ids.map(id => ({ params: { id: String(id) } }));
+	return ids.map((id) => ({ params: { id: String(id) } }));
 }
 
 const { id } = Astro.params;
-const ladderId = parseInt(id as string);
+const ladderId = parseInt(id!, 10);
 
 // Find the ladder data from imported modules
-const ladderKey = Object.keys(ladderModules).find(key => key.includes(`ladder-${id}.json`));
+const ladderKey = Object.keys(ladderModules).find((key) => key.includes(`ladder-${id}.json`));
 const ladderData: LadderData | null = ladderKey ? ladderModules[ladderKey].default : null;
 
 if (!ladderData) {
 	return Astro.redirect('/404');
 }
 
-// Type for rating level data
-type RatingLevel = { name: string; min: number; max: number; color: string; textClass: string };
-
-// Get metadata for display
-const overrides = laddersMetadata.ladderOverrides as Record<string, LadderOverride>;
-const ratingLevels = laddersMetadata.ratingLevels as Record<string, RatingLevel>;
-const meta: LadderOverride = overrides[id as string] || {};
-
-// Sorted rating levels array for iteration (levels 1-10)
-const ratingLevelsSorted = Object.entries(ratingLevels)
-	.map(([level, data]) => ({ level: parseInt(level), ...data }))
-	.sort((a, b) => a.level - b.level);
-
-// Build ladder object with display metadata
+const override = getLadderOverride(ladderId);
 const ladderDifficultyLevel = ladderData.difficultyLevel || 1;
+const ratingLevel = getRatingLevel(ladderDifficultyLevel);
+const ladderType = ladderData.type as LadderType;
+
 const ladder = {
 	id: ladderData.id,
-	name: meta.displayName || ladderData.name,
-	description: ladderData.description || '',
+	name: override?.displayName ?? ladderData.name,
+	description: ladderData.description ?? '',
 	difficulty: ladderDifficultyLevel,
-	difficultyLabel: meta.difficultyLabel || ratingLevels[String(ladderDifficultyLevel)]?.name || 'Unknown',
-	type: ladderData.type,
-	division: meta.division || null,
-	problemType: meta.problemType || null,
-	isExtra: meta.isExtra || false
+	difficultyLabel: override?.difficultyLabel ?? ratingLevel.name,
+	type: ladderType,
+	division: override?.division ?? null,
+	problemType: override?.problemType ?? null,
+	isExtra: override?.isExtra ?? false,
 };
 
-// Map problems from scraped data
-const problems: Problem[] = ladderData.problems.map((p) => ({
-	id: p.position,
-	name: p.name,
-	contestId: p.contestId,
-	problemId: p.problemId,
-	difficulty: p.difficulty || 1,
-	rating: p.rating || null,
-	tags: p.tags || []
-}));
-
-// Get all unique tags for filtering
-const allTags = [...new Set(problems.flatMap(p => p.tags))].sort();
-
-// Get min/max ratings for filtering
-const ratingsWithValues = problems.filter(p => p.rating !== null).map(p => p.rating as number);
-const minRating = ratingsWithValues.length > 0 ? Math.min(...ratingsWithValues) : 800;
-const maxRating = ratingsWithValues.length > 0 ? Math.max(...ratingsWithValues) : 3500;
-
-// Calculate initial progress (will be updated client-side)
+const problems: readonly DisplayProblem[] = processProblems(ladderData);
+const allTags = getAllTags(problems);
+const { min: minRating, max: maxRating } = getRatingRange(problems);
 const solvedCount = 0;
 const progressPercent = 0;
-
-// Calculate dynamic sliding window of 4 rating categories for analytics
-function getAnalyticsRanges() {
-	const levels = ratingLevelsSorted;
-	
-	// Count problems per rating level
-	const counts = levels.map((lvl, idx) => ({
-		...lvl,
-		idx,
-		count: problems.filter(p => {
-			const r = p.rating || 0;
-			return r >= lvl.min && r <= lvl.max;
-		}).length
-	}));
-	
-	// Find the level with the most problems (peak)
-	let peakIdx = 0;
-	let peakCount = 0;
-	counts.forEach((c, idx) => {
-		if (c.count > peakCount) {
-			peakCount = c.count;
-			peakIdx = idx;
-		}
-	});
-	
-	// Build sliding window: 1 before peak, peak, peak+1, everything after
-	const windowStart = Math.max(0, peakIdx - 1);
-	const displayRanges: Array<{ label: string; count: number; textClass: string }> = [];
-	
-	// Card 1: Everything up to windowStart (inclusive)
-	if (windowStart > 0) {
-		displayRanges.push({
-			label: `≤ ${levels[windowStart].name}`,
-			count: problems.filter(p => (p.rating || 0) <= levels[windowStart].max).length,
-			textClass: levels[windowStart].textClass
-		});
-	} else {
-		displayRanges.push({
-			label: levels[0].name,
-			count: counts[0].count,
-			textClass: levels[0].textClass
-		});
-	}
-	
-	// Card 2: The range after card 1
-	const c2Idx = windowStart > 0 ? windowStart + 1 : 1;
-	if (c2Idx < levels.length) {
-		displayRanges.push({
-			label: levels[c2Idx].name,
-			count: counts[c2Idx].count,
-			textClass: levels[c2Idx].textClass
-		});
-	}
-	
-	// Card 3: Next range after card 2
-	const c3Idx = c2Idx + 1;
-	if (c3Idx < levels.length) {
-		displayRanges.push({
-			label: levels[c3Idx].name,
-			count: counts[c3Idx].count,
-			textClass: levels[c3Idx].textClass
-		});
-	}
-	
-	// Card 4: Everything from c3Idx+1 onwards
-	const c4StartIdx = c3Idx + 1;
-	if (c4StartIdx < levels.length) {
-		displayRanges.push({
-			label: `≥ ${levels[c4StartIdx].name}`,
-			count: problems.filter(p => (p.rating || 0) >= levels[c4StartIdx].min).length,
-			textClass: levels[c4StartIdx].textClass
-		});
-	} else if (c3Idx < levels.length) {
-		const lastIdx = levels.length - 1;
-		displayRanges.push({
-			label: `≥ ${levels[lastIdx].name}`,
-			count: problems.filter(p => (p.rating || 0) >= levels[lastIdx].min).length,
-			textClass: levels[lastIdx].textClass
-		});
-	}
-	
-	// Ensure we have exactly 4 cards
-	while (displayRanges.length < 4) {
-		displayRanges.push({ label: 'N/A', count: 0, textClass: 'text-gray-500' });
-	}
-	
-	return displayRanges.slice(0, 4);
-}
-
-const analyticsRanges = getAnalyticsRanges();
-
-// Get ladder number for display
-function getLadderNumber(ladderId: number, type: string): string {
-	if (type === 'rating') {
-		const index = laddersIndex.rating.findIndex(l => l.id === ladderId);
-		return index >= 0 ? String(index + 1).padStart(2, '0') : String(ladderId);
-	} else if (type === 'division') {
-		return meta.division ? `${meta.division.toUpperCase().replace('DIVISION ', 'DIV.')}` : String(ladderId);
-	} else if (type === 'extra') {
-		const index = laddersIndex.extra.findIndex(l => l.id === ladderId);
-		return `EX-${index >= 0 ? String(index + 1).padStart(2, '0') : ladderId}`;
-	}
-	return String(ladderId);
-}
-
-const ladderNumber = getLadderNumber(ladderId, ladder.type);
+const analyticsRanges: readonly AnalyticsRange[] = calculateAnalyticsRanges(problems);
+const ladderNumber = formatLadderNumber(ladderId, ladderType);
+const pageData = { ladderId };
 ---
 
 <Layout title={`${ladder.name} | A2OJ Refreshed`}>
@@ -329,7 +173,6 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 					<div class="flex-1">
 						<div class="flex items-center justify-between mb-3">
 							<span class="engineering-card-label">SOLVED</span>
-							<span class="engineering-progress-count">{solvedCount}<span class="text-slate-400 dark:text-slate-500"> / {problems.length}</span></span>
 						</div>
 						<div class="engineering-progress-bar">
 							<div 
@@ -340,7 +183,7 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 					</div>
 					<div class="engineering-stat-box engineering-stat-box-accent">
 						<span class="engineering-stat-label">COMPLETION</span>
-						<span class="engineering-stat-value-lg text-teal-600 dark:text-teal-400">{progressPercent}%</span>
+						<span class="engineering-progress-count text-teal-600 dark:text-teal-400">{solvedCount}<span class="text-slate-400 dark:text-slate-500"> / {problems.length}</span></span>
 					</div>
 				</div>
 			</div>
@@ -371,8 +214,7 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 				<div class="section-header-corner"></div>
 			</div>
 			
-			<!-- Filter & Sort Controls Panel (collapses in Zen Mode) -->
-			<div id="filter-panel" class="engineering-filter-panel mb-4 filter-panel-animated">
+		<div id="filter-panel" class="engineering-filter-panel mb-4 filter-panel-animated">
 				<div class="engineering-card-corner engineering-card-corner-tl"></div>
 				<div class="engineering-card-corner engineering-card-corner-br"></div>
 				
@@ -402,7 +244,7 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 								</svg>
 								Tags
 							</button>
-							<button id="toggle-problemid" class="column-toggle-btn active" data-column="problemid" title="Toggle Problem ID (CF-XXX/X)">
+							<button id="toggle-problemid" class="column-toggle-btn active" data-column="problemId" title="Toggle Problem ID (CF-XXX/X)">
 								<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -442,10 +284,9 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 								</svg>
 							</button>
 						</div>
-					</div>
-					
-					<!-- Tag Filter (only shown when tags column visible) -->
-					<div id="tag-filter-group" class="filter-group">
+				</div>
+				
+				<div id="tag-filter-group" class="filter-group">
 						<span class="filter-group-label">FILTER BY TAG</span>
 						<select id="tag-filter" class="tag-filter-select">
 							<option value="">All Tags</option>
@@ -455,7 +296,6 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 						</select>
 					</div>
 					
-					<!-- Clear Filters -->
 					<button id="clear-filters" class="clear-filters-btn">
 						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -591,573 +431,11 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 	</main>
 </Layout>
 
-<script define:vars={{ ladderId }}>
-	// Get ladder ID for per-page filter storage
-	const LADDER_ID = ladderId;
-	
-	// Global storage keys (shared across all pages)
-	const GLOBAL_COLUMN_VISIBILITY_KEY = 'global_column_visibility';
-	const GLOBAL_HIDE_SOLVED_KEY = 'global_hide_solved';
-	
-	// Per-page storage keys (unique per ladder)
-	const getPageFilterKey = () => `ladder_${LADDER_ID}_filters`;
+<!-- Page Data for Client-Side Script -->
+<script type="application/json" id="page-data" set:html={JSON.stringify(pageData)}></script>
 
-	// Load problem status from localStorage
-	function loadProblemStatus() {
-		const solvedStr = localStorage.getItem('cf_solved');
-		const attemptedStr = localStorage.getItem('cf_attempted');
-		
-		let solved = [];
-		let attempted = [];
-		
-		try {
-			if (solvedStr) solved = JSON.parse(solvedStr);
-		} catch (e) { /* ignore */ }
-		
-		try {
-			if (attemptedStr) attempted = JSON.parse(attemptedStr);
-		} catch (e) { /* ignore */ }
-		
-		return { solved, attempted };
-	}
-
-	function markAsSolved(row) {
-		row.classList.add('problem-row-solved');
-		const statusCell = row.querySelector('.status-cell');
-		if (statusCell) {
-			statusCell.innerHTML = `
-				<div class="engineering-status engineering-status-solved">
-					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-					</svg>
-				</div>
-			`;
-		}
-	}
-
-	function markAsAttempted(row) {
-		row.classList.add('problem-row-attempted');
-		const statusCell = row.querySelector('.status-cell');
-		if (statusCell) {
-			statusCell.innerHTML = `
-				<div class="engineering-status engineering-status-attempted">
-					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-					</svg>
-				</div>
-			`;
-		}
-	}
-
-	function updateProgressUI(solvedCount, attemptedCount, totalCount) {
-		const progressPercent = totalCount > 0 ? Math.round((solvedCount / totalCount) * 100) : 0;
-		
-		const progressFill = document.querySelector('.engineering-progress-fill');
-		if (progressFill) {
-			progressFill.style.width = `${progressPercent}%`;
-		}
-		
-		const progressCount = document.querySelector('.engineering-progress-count');
-		if (progressCount) {
-			progressCount.innerHTML = `${solvedCount}<span class="text-slate-400 dark:text-slate-500"> / ${totalCount}</span>`;
-		}
-		
-		const completionStat = document.querySelector('.engineering-stat-value-lg');
-		if (completionStat) {
-			completionStat.textContent = `${progressPercent}%`;
-		}
-	}
-
-	// Column visibility state (GLOBAL - shared across all pages)
-	const columnVisibility = {
-		difficulty: true,
-		rating: true,
-		tags: true,
-		problemid: true
-	};
-	
-	// Current sort state (per-page)
-	let currentSort = 'none';
-	
-	// Store original row order
-	let originalRows = [];
-
-	function updateColumnVisibility() {
-		const table = document.getElementById('problems-table');
-		if (!table) return;
-
-		// Difficulty column
-		const difficultyHeader = table.querySelector('.difficulty-header');
-		const difficultyCells = table.querySelectorAll('.difficulty-cell');
-		if (difficultyHeader) {
-			difficultyHeader.style.display = columnVisibility.difficulty ? '' : 'none';
-		}
-		difficultyCells.forEach((cell) => {
-			cell.style.display = columnVisibility.difficulty ? '' : 'none';
-		});
-
-		// Rating column
-		const ratingHeader = table.querySelector('.rating-header');
-		const ratingCells = table.querySelectorAll('.rating-cell');
-		if (ratingHeader) {
-			ratingHeader.style.display = columnVisibility.rating ? '' : 'none';
-		}
-		ratingCells.forEach((cell) => {
-			cell.style.display = columnVisibility.rating ? '' : 'none';
-		});
-
-		// Tags column
-		const tagsHeader = table.querySelector('.tags-header');
-		const tagsCells = table.querySelectorAll('.tags-cell');
-		if (tagsHeader) {
-			tagsHeader.style.display = columnVisibility.tags ? '' : 'none';
-		}
-		tagsCells.forEach((cell) => {
-			cell.style.display = columnVisibility.tags ? '' : 'none';
-		});
-
-		// Show/hide tag filter based on tags visibility
-		const tagFilterGroup = document.getElementById('tag-filter-group');
-		if (tagFilterGroup) {
-			tagFilterGroup.style.display = columnVisibility.tags ? '' : 'none';
-		}
-
-		// Problem ID (CF-XXX/X metadata)
-		const tableBody = document.querySelector('.engineering-table-body');
-		if (tableBody) {
-			if (columnVisibility.problemid) {
-				tableBody.classList.remove('hide-problemid');
-			} else {
-				tableBody.classList.add('hide-problemid');
-			}
-		}
-
-		// Update toggle button states
-		document.querySelectorAll('.column-toggle-btn').forEach((btn) => {
-			const column = btn.getAttribute('data-column');
-			if (column && columnVisibility[column] !== undefined) {
-				btn.classList.toggle('active', columnVisibility[column]);
-			}
-		});
-
-		// Save to GLOBAL localStorage (shared across all pages)
-		localStorage.setItem(GLOBAL_COLUMN_VISIBILITY_KEY, JSON.stringify(columnVisibility));
-	}
-
-	// Save current filter state to per-page localStorage
-	function savePageFilters() {
-		const ratingMinEl = document.getElementById('rating-min');
-		const ratingMaxEl = document.getElementById('rating-max');
-		const tagFilterEl = document.getElementById('tag-filter');
-		
-		const filters = {
-			ratingMin: ratingMinEl?.value || '',
-			ratingMax: ratingMaxEl?.value || '',
-			selectedTag: tagFilterEl?.value || '',
-			sort: currentSort
-		};
-		
-		localStorage.setItem(getPageFilterKey(), JSON.stringify(filters));
-	}
-
-	// Load filter state from per-page localStorage
-	function loadPageFilters() {
-		const saved = localStorage.getItem(getPageFilterKey());
-		if (!saved) return;
-		
-		try {
-			const filters = JSON.parse(saved);
-			
-			const ratingMinEl = document.getElementById('rating-min');
-			const ratingMaxEl = document.getElementById('rating-max');
-			const tagFilterEl = document.getElementById('tag-filter');
-			
-			if (ratingMinEl && filters.ratingMin) ratingMinEl.value = filters.ratingMin;
-			if (ratingMaxEl && filters.ratingMax) ratingMaxEl.value = filters.ratingMax;
-			if (tagFilterEl && filters.selectedTag) tagFilterEl.value = filters.selectedTag;
-			if (filters.sort) currentSort = filters.sort;
-		} catch (e) { /* ignore */ }
-	}
-
-	function applyFiltersAndSort() {
-		const tableBody = document.querySelector('.engineering-table-body');
-		if (!tableBody) return;
-
-		const ratingMinEl = document.getElementById('rating-min');
-		const ratingMaxEl = document.getElementById('rating-max');
-		const tagFilterEl = document.getElementById('tag-filter');
-		const ratingMinVal = ratingMinEl ? ratingMinEl.value : '';
-		const ratingMaxVal = ratingMaxEl ? ratingMaxEl.value : '';
-		const ratingMin = ratingMinVal ? parseInt(ratingMinVal) : 0;
-		const ratingMax = ratingMaxVal ? parseInt(ratingMaxVal) : 99999;
-		const selectedTag = tagFilterEl ? tagFilterEl.value : '';
-
-		// Get all rows
-		let rows = Array.from(tableBody.querySelectorAll('.engineering-table-row'));
-
-		// If no original rows stored, store them
-		if (originalRows.length === 0) {
-			originalRows = [...rows];
-		}
-
-		// Apply rating filter
-		rows.forEach((row) => {
-			const rating = parseInt(row.getAttribute('data-rating') || '0');
-			const tags = row.getAttribute('data-tags') || '';
-			
-			let visible = true;
-			
-			// Rating filter (always apply)
-			if (rating > 0) {
-				if (rating < ratingMin || rating > ratingMax) {
-					visible = false;
-				}
-			}
-			
-			// Tag filter (only when tags visible)
-			if (columnVisibility.tags && selectedTag && visible) {
-				const tagList = tags.split(',');
-				if (!tagList.includes(selectedTag)) {
-					visible = false;
-				}
-			}
-
-			row.classList.toggle('filter-hidden', !visible);
-		});
-
-		// Apply sort if active
-		if (currentSort !== 'none') {
-			rows = rows.filter(row => !row.classList.contains('filter-hidden'));
-			rows.sort((a, b) => {
-				const ratingA = parseInt(a.getAttribute('data-rating') || '0');
-				const ratingB = parseInt(b.getAttribute('data-rating') || '0');
-				return currentSort === 'asc' ? ratingA - ratingB : ratingB - ratingA;
-			});
-
-			// Re-append sorted rows
-			rows.forEach(row => tableBody.appendChild(row));
-			
-			// Append hidden rows at the end
-			originalRows.forEach(row => {
-				if (row.classList.contains('filter-hidden')) {
-					tableBody.appendChild(row);
-				}
-			});
-		}
-
-		// Update filter count display
-		const visibleCount = Array.from(tableBody.querySelectorAll('.engineering-table-row:not(.filter-hidden)')).length;
-		const filterCount = document.getElementById('filter-count');
-		if (filterCount) {
-			const totalRows = originalRows.length || tableBody.querySelectorAll('.engineering-table-row').length;
-			if (visibleCount < totalRows) {
-				filterCount.textContent = `${visibleCount} of ${totalRows}`;
-				filterCount.classList.remove('hidden');
-			} else {
-				filterCount.classList.add('hidden');
-			}
-		}
-
-		// Save filter state for this page
-		savePageFilters();
-	}
-
-	function resetToOriginalOrder() {
-		const tableBody = document.querySelector('.engineering-table-body');
-		if (!tableBody || originalRows.length === 0) return;
-
-		originalRows.forEach(row => tableBody.appendChild(row));
-		currentSort = 'none';
-		updateSortButtonStates();
-	}
-
-	function updateSortButtonStates() {
-		const ascBtn = document.getElementById('sort-rating-asc');
-		const descBtn = document.getElementById('sort-rating-desc');
-		const resetBtn = document.getElementById('sort-reset');
-		if (ascBtn) ascBtn.classList.toggle('active', currentSort === 'asc');
-		if (descBtn) descBtn.classList.toggle('active', currentSort === 'desc');
-		if (resetBtn) resetBtn.classList.toggle('active', currentSort === 'none');
-	}
-
-	function initFilterToggle(solvedCount, totalCount) {
-		const toggleBtn = document.getElementById('hide-solved-toggle');
-		const filterCount = document.getElementById('filter-count');
-		const tableBody = document.querySelector('.engineering-table-body');
-		
-		if (!toggleBtn || !tableBody) return;
-		
-		// Load from GLOBAL storage (shared across all pages)
-		const isHideSolvedActive = localStorage.getItem(GLOBAL_HIDE_SOLVED_KEY) === 'true';
-		
-		function updateFilterState(active) {
-			if (active) {
-				tableBody.classList.add('hide-solved');
-				toggleBtn.classList.add('active');
-				const textSpan = toggleBtn.querySelector('.filter-toggle-text');
-				if (textSpan) textSpan.textContent = 'Show All';
-			} else {
-				tableBody.classList.remove('hide-solved');
-				toggleBtn.classList.remove('active');
-				const textSpan = toggleBtn.querySelector('.filter-toggle-text');
-				if (textSpan) textSpan.textContent = 'Hide Solved';
-			}
-			applyFiltersAndSort();
-		}
-		
-		updateFilterState(isHideSolvedActive);
-		
-		toggleBtn.addEventListener('click', () => {
-			const isActive = tableBody.classList.contains('hide-solved');
-			const newState = !isActive;
-			updateFilterState(newState);
-			// Save to GLOBAL storage (shared across all pages)
-			localStorage.setItem(GLOBAL_HIDE_SOLVED_KEY, String(newState));
-		});
-	}
-
-	function initColumnToggles() {
-		// Load saved visibility from GLOBAL storage
-		const saved = localStorage.getItem(GLOBAL_COLUMN_VISIBILITY_KEY);
-		if (saved) {
-			try {
-				const parsed = JSON.parse(saved);
-				Object.assign(columnVisibility, parsed);
-			} catch (e) { /* ignore */ }
-		}
-
-		// Set up toggle buttons
-		document.querySelectorAll('.column-toggle-btn').forEach((btn) => {
-			btn.addEventListener('click', () => {
-				const column = btn.getAttribute('data-column');
-				if (column && columnVisibility[column] !== undefined) {
-					columnVisibility[column] = !columnVisibility[column];
-					updateColumnVisibility();
-					applyFiltersAndSort();
-				}
-			});
-		});
-
-		// Initial update
-		updateColumnVisibility();
-	}
-
-	function initZenMode() {
-		const zenModeBtn = document.getElementById('zen-mode-btn');
-		const filterPanel = document.getElementById('filter-panel');
-		if (!zenModeBtn) return;
-
-		// Store previous state for toggling back
-		let previousState = null;
-		let zenActive = false;
-
-		// Load zen mode state from localStorage
-		const savedZenState = localStorage.getItem('zen_mode_active');
-		if (savedZenState === 'true') {
-			// Apply zen mode immediately without animation on page load
-			zenActive = true;
-			zenModeBtn.classList.add('active');
-			if (filterPanel) filterPanel.classList.add('zen-hidden');
-			
-			// Hide all columns
-			columnVisibility.difficulty = false;
-			columnVisibility.rating = false;
-			columnVisibility.tags = false;
-			columnVisibility.problemid = false;
-			updateColumnVisibility();
-		}
-
-		zenModeBtn.addEventListener('click', () => {
-			if (zenActive) {
-				// Exiting Zen Mode
-				zenActive = false;
-				zenModeBtn.classList.remove('active');
-				localStorage.setItem('zen_mode_active', 'false');
-				
-				// Show filter panel with animation
-				if (filterPanel) filterPanel.classList.remove('zen-hidden');
-				
-				// Restore previous visibility state
-				if (previousState) {
-					Object.assign(columnVisibility, previousState);
-				} else {
-					columnVisibility.difficulty = true;
-					columnVisibility.rating = true;
-					columnVisibility.tags = true;
-					columnVisibility.problemid = true;
-				}
-				updateColumnVisibility();
-				applyFiltersAndSort();
-				
-			} else {
-				// Entering Zen Mode
-				zenActive = true;
-				zenModeBtn.classList.add('active');
-				localStorage.setItem('zen_mode_active', 'true');
-				
-				// Save current state before hiding
-				previousState = { ...columnVisibility };
-				
-				// Hide filter panel with animation
-				if (filterPanel) filterPanel.classList.add('zen-hidden');
-				
-				// Hide all columns
-				columnVisibility.difficulty = false;
-				columnVisibility.rating = false;
-				columnVisibility.tags = false;
-				columnVisibility.problemid = false;
-				updateColumnVisibility();
-				applyFiltersAndSort();
-			}
-		});
-	}
-
-	function initThemeToggle() {
-		const btn = document.getElementById('theme-toggle');
-		if (!btn) return;
-
-		updateThemeIcons(document.documentElement.classList.contains('dark'));
-
-		btn.addEventListener('click', () => {
-			const isDark = document.documentElement.classList.toggle('dark');
-			localStorage.setItem('theme', isDark ? 'dark' : 'light');
-			updateThemeIcons(isDark);
-		});
-	}
-
-	function updateThemeIcons(isDark) {
-		const btn = document.getElementById('theme-toggle');
-		if (!btn) return;
-
-		btn.querySelector('.sun-icon')?.classList.toggle('hidden', isDark);
-		btn.querySelector('.moon-icon')?.classList.toggle('hidden', !isDark);
-		btn.querySelector('.dark-label')?.classList.toggle('hidden', isDark);
-		btn.querySelector('.light-label')?.classList.toggle('hidden', !isDark);
-	}
-
-	function initRatingFilter() {
-		const ratingMin = document.getElementById('rating-min');
-		const ratingMax = document.getElementById('rating-max');
-
-		[ratingMin, ratingMax].forEach(input => {
-			if (input) {
-				input.addEventListener('input', () => applyFiltersAndSort());
-				input.addEventListener('change', () => applyFiltersAndSort());
-			}
-		});
-	}
-
-	function initTagFilter() {
-		const tagFilter = document.getElementById('tag-filter');
-		if (tagFilter) {
-			tagFilter.addEventListener('change', () => applyFiltersAndSort());
-		}
-	}
-
-	function initSortButtons() {
-		const ascBtn = document.getElementById('sort-rating-asc');
-		const descBtn = document.getElementById('sort-rating-desc');
-		const resetBtn = document.getElementById('sort-reset');
-		
-		if (ascBtn) {
-			ascBtn.addEventListener('click', () => {
-				currentSort = 'asc';
-				updateSortButtonStates();
-				applyFiltersAndSort();
-			});
-		}
-
-		if (descBtn) {
-			descBtn.addEventListener('click', () => {
-				currentSort = 'desc';
-				updateSortButtonStates();
-				applyFiltersAndSort();
-			});
-		}
-
-		if (resetBtn) {
-			resetBtn.addEventListener('click', () => {
-				currentSort = 'none';
-				resetToOriginalOrder();
-				applyFiltersAndSort();
-			});
-		}
-	}
-
-	function initClearFilters() {
-		const clearBtn = document.getElementById('clear-filters');
-		if (clearBtn) {
-			clearBtn.addEventListener('click', () => {
-				// Reset rating inputs
-				const ratingMin = document.getElementById('rating-min');
-				const ratingMax = document.getElementById('rating-max');
-				if (ratingMin) ratingMin.value = '';
-				if (ratingMax) ratingMax.value = '';
-
-				// Reset tag filter
-				const tagFilter = document.getElementById('tag-filter');
-				if (tagFilter) tagFilter.value = '';
-
-				// Reset sort
-				currentSort = 'none';
-				resetToOriginalOrder();
-				updateSortButtonStates();
-
-				// Apply and save
-				applyFiltersAndSort();
-			});
-		}
-	}
-
-	// Initialize on page load
-	document.addEventListener('DOMContentLoaded', () => {
-		const { solved, attempted } = loadProblemStatus();
-		const solvedSet = new Set(solved);
-		const attemptedSet = new Set(attempted);
-		
-		const problemRows = document.querySelectorAll('[data-problem-id]');
-		const totalCount = problemRows.length;
-		let solvedCount = 0;
-		let attemptedCount = 0;
-		
-		// Store original row order
-		originalRows = Array.from(problemRows);
-		
-		// Mark solved and attempted problems
-		problemRows.forEach((row) => {
-			const problemId = row.getAttribute('data-problem-id');
-			if (!problemId) return;
-			
-			if (solvedSet.has(problemId)) {
-				markAsSolved(row);
-				solvedCount++;
-			} else if (attemptedSet.has(problemId)) {
-				markAsAttempted(row);
-				attemptedCount++;
-			}
-		});
-		
-		// Update progress UI
-		updateProgressUI(solvedCount, attemptedCount, totalCount);
-		
-		// Initialize all controls
-		initFilterToggle(solvedCount, totalCount);
-		initColumnToggles();
-		initZenMode();
-		initThemeToggle();
-		
-		// Load per-page filters BEFORE initializing filter listeners
-		loadPageFilters();
-		updateSortButtonStates();
-		
-		initRatingFilter();
-		initTagFilter();
-		initSortButtons();
-		initClearFilters();
-		
-		// Apply loaded filters
-		applyFiltersAndSort();
-		
-		console.log(`Progress: ${solvedCount} solved, ${attemptedCount} attempted, ${totalCount} total`);
-	});
+<!-- Client-Side Script (TypeScript compiled) -->
+<script>
+	import '../../scripts/ladder-page';
 </script>
+

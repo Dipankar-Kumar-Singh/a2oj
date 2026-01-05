@@ -1,71 +1,54 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import quotes from '../data/quotes.json';
-import laddersIndex from '../data/ladders/index.json';
-import laddersMetadata from '../data/ladders/metadata.json';
+import type { Quote, LadderData } from '../types';
+import { laddersIndex, getLadderOverride } from '../utils/ladders';
+import quotesJson from '../data/quotes.json';
 
-// Type definitions
-type LadderOverride = {
-	displayName?: string;
-	difficultyLabel?: string;
-	division?: string;
-	problemType?: string;
-	isExtra?: boolean;
-};
-
-// Helper function to get display name and metadata
-function getLadderMeta(id: number): LadderOverride {
-	const overrides = laddersMetadata.ladderOverrides as Record<string, LadderOverride>;
-	return overrides[String(id)] || {};
-}
-
-// Load all ladder files to get problem IDs for progress calculation
-const ladderFiles = import.meta.glob('../data/ladders/ladder-*.json', { eager: true });
-const ladderProblems: Record<string, string[]> = {};
+const quotes = quotesJson as readonly Quote[];
+const ladderFiles = import.meta.glob<{ default: LadderData }>('../data/ladders/ladder-*.json', { eager: true });
+const ladderProblems: Record<string, readonly string[]> = {};
 
 for (const path in ladderFiles) {
-	const ladderData = ladderFiles[path] as { default: { id: number; problems: { contestId: number; problemId: string }[] } };
-	const data = ladderData.default;
-	if (data && data.id && data.problems) {
+	const data = ladderFiles[path].default;
+	if (data?.id && data?.problems) {
 		ladderProblems[String(data.id)] = data.problems.map(p => `${p.contestId}${p.problemId}`);
 	}
 }
 
-// Rating-based ladders with metadata
 const ladders = laddersIndex.rating.map((ladder, index) => {
-	const meta = getLadderMeta(ladder.id);
+	const override = getLadderOverride(ladder.id);
 	return {
 		id: ladder.id,
-		name: meta.displayName || ladder.name,
+		name: override?.displayName ?? ladder.name,
 		count: ladder.problemCount,
-		difficulty: meta.difficultyLabel || 'Unknown',
-		index: index + 1
+		difficulty: override?.difficultyLabel ?? 'Unknown',
+		index: index + 1,
 	};
 });
 
-// Division-based ladders with metadata
 const divisionLadders = laddersIndex.division.map((ladder) => {
-	const meta = getLadderMeta(ladder.id);
+	const override = getLadderOverride(ladder.id);
 	return {
 		id: ladder.id,
-		name: meta.displayName || ladder.name,
+		name: override?.displayName ?? ladder.name,
 		count: ladder.problemCount,
-		division: meta.division || 'Division',
-		problemType: meta.problemType || ''
+		division: override?.division ?? 'Division',
+		problemType: override?.problemType ?? '',
 	};
 });
 
-// Extra ladders with metadata
 const extraLadders = laddersIndex.extra.map((ladder, index) => {
-	const meta = getLadderMeta(ladder.id);
+	const override = getLadderOverride(ladder.id);
 	return {
 		id: ladder.id,
-		name: meta.displayName || ladder.name,
+		name: override?.displayName ?? ladder.name,
 		count: ladder.problemCount,
-		difficulty: meta.difficultyLabel || 'Unknown',
-		index: index + 1
+		difficulty: override?.difficultyLabel ?? 'Unknown',
+		index: index + 1,
 	};
 });
+
+const pageData = { ladderProblems };
 ---
 
 <Layout title="A2OJ Refreshed - Practice Ladders">
@@ -163,7 +146,6 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 			</div>
 		</div>
 
-		<!-- Rating-Based Ladders -->
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
 			<div class="mb-12">
 				<div class="section-header">
@@ -218,7 +200,6 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 			</div>
 		</div>
 
-		<!-- Division-Based Ladders -->
 		<div class="py-16 relative">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="mb-12">
@@ -265,7 +246,6 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 			</div>
 		</div>
 
-		<!-- Extra Ladders Section -->
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
 			<div class="mb-12">
 				<div class="section-header">
@@ -323,11 +303,9 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 			</div>
 		</div>
 
-		<!-- Footer -->
 		<footer class="relative py-16 border-t border-slate-200 dark:border-slate-800/50">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="text-center">
-					<!-- Original A2OJ Ladder Credit -->
 					<div class="mb-8">
 						<span class="engineering-card-label">ORIGINAL A2OJ LADDER BY</span>
 						<a 
@@ -344,7 +322,6 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 						</a>
 					</div>
 					
-					<!-- Contact Links -->
 					<div class="flex flex-col items-center gap-4">
 						<span class="engineering-card-label">CONTACT</span>
 						<div class="flex flex-wrap items-center justify-center gap-4">
@@ -409,434 +386,14 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 	</main>
 </Layout>
 
-<!-- Quotes Data for Client-Side Rotation -->
+<!-- Page Data for Client-Side Scripts -->
 <script type="application/json" id="quotes-data" set:html={JSON.stringify(quotes)}></script>
+<script type="application/json" id="page-data" set:html={JSON.stringify(pageData)}></script>
 
-<!-- Ladder Problems Data for Progress Calculation -->
-<script type="application/json" id="ladder-problems-data" set:html={JSON.stringify(ladderProblems)}></script>
-
+<!-- Client-Side Scripts (TypeScript compiled) -->
 <script>
-	// Quote Rotation System
-	interface Quote {
-		quote: string;
-		author: string;
-		context: string;
-		source_url: string;
-	}
-
-	class QuoteRotator {
-		private quotes: Quote[] = [];
-		private currentIndex: number = 0;
-		private rotationInterval: number | null = null;
-		private readonly ROTATION_INTERVAL_MS = 30000; // 30 seconds
-		private readonly STORAGE_KEY = 'quote_rotation_state';
-
-		constructor() {
-			this.loadQuotes();
-			this.loadState();
-			this.displayCurrentQuote();
-			this.startRotation();
-		}
-
-		private loadQuotes(): void {
-			const quotesData = document.getElementById('quotes-data');
-			if (quotesData) {
-				try {
-					this.quotes = JSON.parse(quotesData.textContent || '[]');
-				} catch (e) {
-					console.error('Failed to parse quotes data:', e);
-				}
-			}
-		}
-
-		private loadState(): void {
-			const savedState = localStorage.getItem(this.STORAGE_KEY);
-			if (savedState && this.quotes.length > 0) {
-				try {
-					const state = JSON.parse(savedState);
-					// Always advance to next quote on page refresh
-					this.currentIndex = ((state.index || 0) + 1) % this.quotes.length;
-				} catch (e) {
-					this.currentIndex = 0;
-				}
-			} else {
-				// First visit - start at index 0
-				this.currentIndex = 0;
-			}
-		}
-
-		private saveState(): void {
-			localStorage.setItem(this.STORAGE_KEY, JSON.stringify({
-				index: this.currentIndex,
-				lastUpdate: Date.now()
-			}));
-		}
-
-		private displayCurrentQuote(): void {
-			if (this.quotes.length === 0) return;
-
-			const quote = this.quotes[this.currentIndex];
-			const quoteText = document.getElementById('quote-text');
-			const quoteAuthor = document.getElementById('quote-author');
-			const quoteSourceLink = document.getElementById('quote-source-link') as HTMLAnchorElement;
-
-			if (quoteText && quoteAuthor && quoteSourceLink) {
-				// Fade out
-				const container = document.getElementById('quote-container');
-				if (container) {
-					container.classList.add('quote-fade-out');
-					
-					setTimeout(() => {
-						// Update content
-						quoteText.textContent = `"${quote.quote}"`;
-						quoteAuthor.textContent = `— ${quote.author}`;
-						quoteSourceLink.href = quote.source_url;
-						quoteSourceLink.title = quote.context;
-						
-						// Fade in
-						container.classList.remove('quote-fade-out');
-						container.classList.add('quote-fade-in');
-						
-						setTimeout(() => {
-							container.classList.remove('quote-fade-in');
-						}, 500);
-					}, 300);
-				}
-			}
-
-			this.saveState();
-		}
-
-		private nextQuote(): void {
-			if (this.quotes.length === 0) return;
-			this.currentIndex = (this.currentIndex + 1) % this.quotes.length;
-			this.displayCurrentQuote();
-		}
-
-		private startRotation(): void {
-			this.rotationInterval = window.setInterval(() => {
-				this.nextQuote();
-			}, this.ROTATION_INTERVAL_MS);
-		}
-	}
-
-	// Initialize quote rotator when DOM is ready
-	document.addEventListener('DOMContentLoaded', () => {
-		new QuoteRotator();
-	});
-
-	// Codeforces API Integration
-	interface CodeforcesSubmission {
-		id: number;
-		contestId: number;
-		problem: {
-			contestId: number;
-			index: string;
-			name: string;
-			rating?: number;
-			tags: string[];
-		};
-		verdict: string;
-		programmingLanguage: string;
-	}
-
-	interface CodeforcesResponse {
-		status: string;
-		result: CodeforcesSubmission[];
-		comment?: string;
-	}
-
-	// Constants
-	const AUTO_REFRESH_THRESHOLD = 5 * 60 * 1000; // 5 minutes in milliseconds
-
-	interface ProblemStatus {
-		solved: Set<string>;
-		attempted: Set<string>; // Attempted but not solved
-	}
-
-	async function fetchProblemStatus(handle: string): Promise<ProblemStatus> {
-		const response = await fetch(
-			`https://codeforces.com/api/user.status?handle=${handle}`
-		);
-		
-		if (!response.ok) {
-			throw new Error('Failed to fetch data from Codeforces');
-		}
-		
-		const data: CodeforcesResponse = await response.json();
-		
-		if (data.status !== 'OK') {
-			throw new Error(data.comment || 'User not found');
-		}
-		
-		// Track solved and attempted problems separately
-		const solvedSet = new Set<string>();
-		const attemptedSet = new Set<string>();
-		
-		data.result.forEach(sub => {
-			const problemId = `${sub.problem.contestId}${sub.problem.index}`;
-			if (sub.verdict === 'OK') {
-				solvedSet.add(problemId);
-			} else if (sub.verdict !== undefined) {
-				// Any other verdict means attempted
-				attemptedSet.add(problemId);
-			}
-		});
-		
-		// Remove solved problems from attempted (if solved later)
-		solvedSet.forEach(id => attemptedSet.delete(id));
-		
-		return { solved: solvedSet, attempted: attemptedSet };
-	}
-
-	function saveProblemStatus(handle: string, status: ProblemStatus): void {
-		localStorage.setItem('cf_handle', handle);
-		localStorage.setItem('cf_solved', JSON.stringify(Array.from(status.solved)));
-		localStorage.setItem('cf_attempted', JSON.stringify(Array.from(status.attempted)));
-		localStorage.setItem('cf_last_updated', new Date().toISOString());
-	}
-
-	function loadStoredHandle(): string | null {
-		return localStorage.getItem('cf_handle');
-	}
-
-	function getLastUpdated(): Date | null {
-		const timestamp = localStorage.getItem('cf_last_updated');
-		return timestamp ? new Date(timestamp) : null;
-	}
-
-	function formatTimeAgo(date: Date): string {
-		const now = new Date();
-		const diffMs = now.getTime() - date.getTime();
-		const diffMins = Math.floor(diffMs / 60000);
-		const diffHours = Math.floor(diffMs / 3600000);
-		const diffDays = Math.floor(diffMs / 86400000);
-
-		if (diffMins < 1) return 'Just now';
-		if (diffMins < 60) return `${diffMins}m ago`;
-		if (diffHours < 24) return `${diffHours}h ago`;
-		return `${diffDays}d ago`;
-	}
-
-	function updateSyncTimeDisplay(): void {
-		const lastSyncEl = document.getElementById('last-sync');
-		const lastUpdated = getLastUpdated();
-		
-		if (lastSyncEl && lastUpdated) {
-			lastSyncEl.textContent = formatTimeAgo(lastUpdated);
-			lastSyncEl.title = `Last synced: ${lastUpdated.toLocaleString()}`;
-		}
-	}
-
-	// Update ladder progress on homepage
-	function updateLadderProgress(): void {
-		const ladderProblemsEl = document.getElementById('ladder-problems-data');
-		if (!ladderProblemsEl) return;
-		
-		let ladderProblems: Record<string, string[]> = {};
-		try {
-			ladderProblems = JSON.parse(ladderProblemsEl.textContent || '{}');
-		} catch (e) {
-			console.error('Failed to parse ladder problems data');
-			return;
-		}
-		
-		// Get solved problems from localStorage
-		const solvedStr = localStorage.getItem('cf_solved');
-		if (!solvedStr) return;
-		
-		let solvedProblems: string[] = [];
-		try {
-			solvedProblems = JSON.parse(solvedStr);
-		} catch (e) {
-			return;
-		}
-		
-		const solvedSet = new Set(solvedProblems);
-		
-		// Update each ladder card
-		const ladderCards = document.querySelectorAll('[data-ladder-id]');
-		ladderCards.forEach((card) => {
-			const ladderId = card.getAttribute('data-ladder-id');
-			if (!ladderId || !ladderProblems[ladderId]) return;
-			
-			const problems = ladderProblems[ladderId];
-			const totalCount = problems.length;
-			let solvedCount = 0;
-			
-			problems.forEach(problemId => {
-				if (solvedSet.has(problemId)) {
-					solvedCount++;
-				}
-			});
-			
-			const percent = totalCount > 0 ? Math.round((solvedCount / totalCount) * 100) : 0;
-			
-			// Update progress bar
-			const progressFill = card.querySelector('.ladder-progress-fill') as HTMLElement;
-			if (progressFill) {
-				progressFill.style.width = `${percent}%`;
-			}
-			
-			// Update percentage text
-			const percentText = card.querySelector('.ladder-progress-percent');
-			if (percentText) {
-				percentText.textContent = `${percent}%`;
-			}
-		});
-	}
-
-	// Initialize on page load
-	document.addEventListener('DOMContentLoaded', () => {
-		const input = document.getElementById('cf-handle-input') as HTMLInputElement;
-		const button = document.getElementById('track-button') as HTMLButtonElement;
-		const syncStatus = document.getElementById('sync-status') as HTMLDivElement;
-		const syncButton = document.getElementById('sync-button') as HTMLButtonElement;
-		
-		// Update ladder progress immediately
-		updateLadderProgress();
-		
-		// Load stored handle if exists
-		const storedHandle = loadStoredHandle();
-		if (storedHandle && input) {
-			input.value = storedHandle;
-			
-			// Show sync status if user is already tracked
-			if (syncStatus) {
-				syncStatus.classList.remove('hidden');
-				syncStatus.classList.add('flex');
-				updateSyncTimeDisplay();
-			}
-		}
-		
-		// Update sync time display every minute
-		setInterval(updateSyncTimeDisplay, 60000);
-
-		// Sync function (reusable for both buttons)
-		async function syncProgress(showAlert = true): Promise<boolean> {
-			const handle = input?.value.trim();
-			
-			if (!handle) {
-				if (showAlert) alert('⚠️ Please enter a Codeforces handle');
-				return false;
-			}
-			
-			// Update button states
-			button.disabled = true;
-			if (syncButton) syncButton.disabled = true;
-			
-			const originalButtonHTML = button.innerHTML;
-			button.innerHTML = '<span class="engineering-button-icon">⏳</span> Syncing...';
-			
-			// Add spinning animation to sync button
-			if (syncButton) {
-				syncButton.classList.add('syncing');
-			}
-			
-			try {
-				const problemStatus = await fetchProblemStatus(handle);
-				saveProblemStatus(handle, problemStatus);
-				
-				// Show success
-				button.innerHTML = '<span class="engineering-button-icon">✓</span> Synced!';
-				updateSyncTimeDisplay();
-				
-				// Show sync status if not already visible
-				if (syncStatus && syncStatus.classList.contains('hidden')) {
-					syncStatus.classList.remove('hidden');
-					syncStatus.classList.add('flex');
-				}
-				
-				// Reload page to show updated progress
-				setTimeout(() => {
-					window.location.reload();
-				}, 800);
-				
-				return true;
-				
-			} catch (error) {
-				console.error('Error fetching Codeforces data:', error);
-				if (showAlert) {
-					alert(`❌ ${error instanceof Error ? error.message : 'Failed to fetch user data. Please check the handle and try again.'}`);
-				}
-				button.innerHTML = originalButtonHTML;
-				button.disabled = false;
-				if (syncButton) {
-					syncButton.disabled = false;
-					syncButton.classList.remove('syncing');
-				}
-				return false;
-			}
-		}
-		
-		// Handle Track button click
-		button?.addEventListener('click', () => syncProgress(true));
-		
-		// Handle Sync button click
-		syncButton?.addEventListener('click', () => syncProgress(true));
-		
-		// Allow Enter key to submit
-		input?.addEventListener('keypress', (e) => {
-			if (e.key === 'Enter') {
-				syncProgress(true);
-			}
-		});
-
-		// Auto-refresh when returning to tab after 5+ minutes
-		let lastVisibleTime = Date.now();
-		
-		document.addEventListener('visibilitychange', () => {
-			if (document.visibilityState === 'visible') {
-				const timeAway = Date.now() - lastVisibleTime;
-				const storedHandle = loadStoredHandle();
-				
-				// If user was away for 5+ minutes and has a tracked handle
-				if (timeAway >= AUTO_REFRESH_THRESHOLD && storedHandle) {
-					console.log(`Away for ${Math.round(timeAway / 60000)} minutes, auto-syncing...`);
-					syncProgress(false); // Silent sync (no alert on error)
-				}
-			} else {
-				lastVisibleTime = Date.now();
-			}
-		});
-
-		// Global Control Bar - Zen Mode Toggle
-		const zenModeBtn = document.getElementById('zen-mode-btn');
-		if (zenModeBtn) {
-			// Load current zen mode state
-			const zenActive = localStorage.getItem('zen_mode_active') === 'true';
-			if (zenActive) {
-				zenModeBtn.classList.add('active');
-			}
-
-			zenModeBtn.addEventListener('click', () => {
-				const isActive = zenModeBtn.classList.toggle('active');
-				localStorage.setItem('zen_mode_active', isActive ? 'true' : 'false');
-			});
-		}
-
-		// Global Control Bar - Theme Toggle
-		const themeBtn = document.getElementById('theme-toggle');
-		if (themeBtn) {
-			updateThemeIcons(document.documentElement.classList.contains('dark'));
-
-			themeBtn.addEventListener('click', () => {
-				const isDark = document.documentElement.classList.toggle('dark');
-				localStorage.setItem('theme', isDark ? 'dark' : 'light');
-				updateThemeIcons(isDark);
-			});
-		}
-
-		function updateThemeIcons(isDark: boolean) {
-			const btn = document.getElementById('theme-toggle');
-			if (!btn) return;
-
-			btn.querySelector('.sun-icon')?.classList.toggle('hidden', isDark);
-			btn.querySelector('.moon-icon')?.classList.toggle('hidden', !isDark);
-			btn.querySelector('.dark-label')?.classList.toggle('hidden', isDark);
-			btn.querySelector('.light-label')?.classList.toggle('hidden', !isDark);
-		}
-	});
+	import '../scripts/quote-rotator';
+	import '../scripts/home-page';
 </script>
 
 <style>

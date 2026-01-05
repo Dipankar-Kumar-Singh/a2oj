@@ -1,11 +1,17 @@
 ---
+/**
+ * Main layout component
+ * Wraps all pages with common HTML structure, styles, and theme initialization
+ */
 import '../styles/global.css';
+import { STORAGE_KEYS } from '../types';
 
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
+const themeStorageKey = STORAGE_KEYS.THEME;
 ---
 
 <!doctype html>
@@ -21,9 +27,9 @@ const { title } = Astro.props;
 		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 		<title>{title}</title>
 		<!-- Initialize theme before page render to prevent flash -->
-		<script is:inline>
+		<script is:inline define:vars={{ themeStorageKey }}>
 			(function() {
-				const theme = localStorage.getItem('theme');
+				const theme = localStorage.getItem(themeStorageKey);
 				if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
 					document.documentElement.classList.add('dark');
 				} else {
