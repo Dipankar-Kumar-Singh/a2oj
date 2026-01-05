@@ -20,6 +20,18 @@ function getLadderMeta(id: number): LadderOverride {
 	return overrides[String(id)] || {};
 }
 
+// Load all ladder files to get problem IDs for progress calculation
+const ladderFiles = import.meta.glob('../data/ladders/ladder-*.json', { eager: true });
+const ladderProblems: Record<string, string[]> = {};
+
+for (const path in ladderFiles) {
+	const ladderData = ladderFiles[path] as { default: { id: number; problems: { contestId: number; problemId: string }[] } };
+	const data = ladderData.default;
+	if (data && data.id && data.problems) {
+		ladderProblems[String(data.id)] = data.problems.map(p => `${p.contestId}${p.problemId}`);
+	}
+}
+
 // Rating-based ladders with metadata
 const ladders = laddersIndex.rating.map((ladder, index) => {
 	const meta = getLadderMeta(ladder.id);
@@ -137,7 +149,7 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{ladders.map((ladder) => (
-					<a href={`/ladder/${ladder.id}`} class="block card-hover">
+					<a href={`/ladder/${ladder.id}`} class="block card-hover" data-ladder-id={ladder.id}>
 						<div class="engineering-card">
 							<div class="engineering-card-corner engineering-card-corner-tl"></div>
 							<div class="engineering-card-corner engineering-card-corner-tr"></div>
@@ -164,10 +176,10 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 							<div class="flex items-center justify-between mt-4">
 								<span class="engineering-card-badge">{ladder.difficulty}</span>
 								<div class="flex items-center gap-2">
-									<div class="w-24 bg-slate-200 dark:bg-slate-700 h-1">
-										<div class="bg-teal-500 h-1" style="width: 0%"></div>
+									<div class="ladder-progress-bar w-24 bg-slate-200 dark:bg-slate-700 h-1">
+										<div class="ladder-progress-fill bg-teal-500 h-1" style="width: 0%"></div>
 									</div>
-									<span class="engineering-card-percent">0%</span>
+									<span class="ladder-progress-percent engineering-card-percent">0%</span>
 								</div>
 							</div>
 						</div>
@@ -242,7 +254,7 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{extraLadders.map((ladder) => (
-					<a href={`/ladder/${ladder.id}`} class="block card-hover">
+					<a href={`/ladder/${ladder.id}`} class="block card-hover" data-ladder-id={ladder.id}>
 						<div class="engineering-card engineering-card-purple">
 							<div class="engineering-card-corner engineering-card-corner-tl"></div>
 							<div class="engineering-card-corner engineering-card-corner-tr"></div>
@@ -269,10 +281,10 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 							<div class="flex items-center justify-between mt-4">
 								<span class="engineering-card-badge engineering-card-badge-purple">{ladder.difficulty}</span>
 								<div class="flex items-center gap-2">
-									<div class="w-24 bg-slate-200 dark:bg-slate-700 h-1">
-										<div class="bg-purple-500 h-1" style="width: 0%"></div>
+									<div class="ladder-progress-bar w-24 bg-slate-200 dark:bg-slate-700 h-1">
+										<div class="ladder-progress-fill bg-purple-500 h-1" style="width: 0%"></div>
 									</div>
-									<span class="engineering-card-percent">0%</span>
+									<span class="ladder-progress-percent engineering-card-percent">0%</span>
 								</div>
 							</div>
 						</div>
@@ -306,6 +318,9 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 
 <!-- Quotes Data for Client-Side Rotation -->
 <script type="application/json" id="quotes-data" set:html={JSON.stringify(quotes)}></script>
+
+<!-- Ladder Problems Data for Progress Calculation -->
+<script type="application/json" id="ladder-problems-data" set:html={JSON.stringify(ladderProblems)}></script>
 
 <script>
 	// Quote Rotation System
@@ -520,12 +535,73 @@ const extraLadders = laddersIndex.extra.map((ladder, index) => {
 		}
 	}
 
+	// Update ladder progress on homepage
+	function updateLadderProgress(): void {
+		const ladderProblemsEl = document.getElementById('ladder-problems-data');
+		if (!ladderProblemsEl) return;
+		
+		let ladderProblems: Record<string, string[]> = {};
+		try {
+			ladderProblems = JSON.parse(ladderProblemsEl.textContent || '{}');
+		} catch (e) {
+			console.error('Failed to parse ladder problems data');
+			return;
+		}
+		
+		// Get solved problems from localStorage
+		const solvedStr = localStorage.getItem('cf_solved');
+		if (!solvedStr) return;
+		
+		let solvedProblems: string[] = [];
+		try {
+			solvedProblems = JSON.parse(solvedStr);
+		} catch (e) {
+			return;
+		}
+		
+		const solvedSet = new Set(solvedProblems);
+		
+		// Update each ladder card
+		const ladderCards = document.querySelectorAll('[data-ladder-id]');
+		ladderCards.forEach((card) => {
+			const ladderId = card.getAttribute('data-ladder-id');
+			if (!ladderId || !ladderProblems[ladderId]) return;
+			
+			const problems = ladderProblems[ladderId];
+			const totalCount = problems.length;
+			let solvedCount = 0;
+			
+			problems.forEach(problemId => {
+				if (solvedSet.has(problemId)) {
+					solvedCount++;
+				}
+			});
+			
+			const percent = totalCount > 0 ? Math.round((solvedCount / totalCount) * 100) : 0;
+			
+			// Update progress bar
+			const progressFill = card.querySelector('.ladder-progress-fill') as HTMLElement;
+			if (progressFill) {
+				progressFill.style.width = `${percent}%`;
+			}
+			
+			// Update percentage text
+			const percentText = card.querySelector('.ladder-progress-percent');
+			if (percentText) {
+				percentText.textContent = `${percent}%`;
+			}
+		});
+	}
+
 	// Initialize on page load
 	document.addEventListener('DOMContentLoaded', () => {
 		const input = document.getElementById('cf-handle-input') as HTMLInputElement;
 		const button = document.getElementById('track-button') as HTMLButtonElement;
 		const syncStatus = document.getElementById('sync-status') as HTMLDivElement;
 		const syncButton = document.getElementById('sync-button') as HTMLButtonElement;
+		
+		// Update ladder progress immediately
+		updateLadderProgress();
 		
 		// Load stored handle if exists
 		const storedHandle = loadStoredHandle();
