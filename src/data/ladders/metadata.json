@@ -1,52 +1,52 @@
 {
   "difficultyLabels": {
-    "1": "Beginner",
-    "2": "Easy",
-    "3": "Medium",
-    "4": "Medium-Hard",
-    "5": "Hard",
-    "6": "Very Hard",
-    "7": "Expert",
-    "8": "Master",
-    "9": "Grandmaster",
-    "10": "Legendary"
+    "1": "Newbie",
+    "2": "Pupil",
+    "3": "Specialist",
+    "4": "Expert",
+    "5": "Candidate Master",
+    "6": "Master",
+    "7": "International Master",
+    "8": "Grandmaster",
+    "9": "Int. Grandmaster",
+    "10": "Legendary GM"
   },
   "difficultyColors": {
-    "1": "teal",
-    "2": "cyan",
-    "3": "sky",
-    "4": "amber",
-    "5": "orange",
-    "6": "rose",
-    "7": "red",
-    "8": "fuchsia",
-    "9": "purple",
-    "10": "violet"
+    "1": "gray",
+    "2": "green",
+    "3": "cyan",
+    "4": "blue",
+    "5": "violet",
+    "6": "orange",
+    "7": "orange",
+    "8": "red",
+    "9": "red",
+    "10": "red"
   },
   "ladderOverrides": {
     "11": {
       "displayName": "Rating < 1300",
-      "difficultyLabel": "Beginner"
+      "difficultyLabel": "Newbie / Pupil"
     },
     "12": {
       "displayName": "1300 ≤ Rating ≤ 1399",
-      "difficultyLabel": "Easy"
+      "difficultyLabel": "Pupil"
     },
     "13": {
       "displayName": "1400 ≤ Rating ≤ 1499",
-      "difficultyLabel": "Medium"
+      "difficultyLabel": "Specialist"
     },
     "14": {
       "displayName": "1500 ≤ Rating ≤ 1599",
-      "difficultyLabel": "Medium-Hard"
+      "difficultyLabel": "Specialist"
     },
     "15": {
       "displayName": "1600 ≤ Rating ≤ 1699",
-      "difficultyLabel": "Hard"
+      "difficultyLabel": "Expert"
     },
     "16": {
       "displayName": "1700 ≤ Rating ≤ 1799",
-      "difficultyLabel": "Very Hard"
+      "difficultyLabel": "Expert"
     },
     "17": {
       "displayName": "1800 ≤ Rating ≤ 1899",
@@ -54,19 +54,19 @@
     },
     "18": {
       "displayName": "1900 ≤ Rating ≤ 1999",
-      "difficultyLabel": "Master"
+      "difficultyLabel": "Candidate Master"
     },
     "19": {
       "displayName": "2000 ≤ Rating ≤ 2099",
-      "difficultyLabel": "Grandmaster"
+      "difficultyLabel": "Candidate Master"
     },
     "20": {
       "displayName": "2100 ≤ Rating ≤ 2199",
-      "difficultyLabel": "Legendary"
+      "difficultyLabel": "Master"
     },
     "21": {
       "displayName": "Rating ≥ 2200",
-      "difficultyLabel": "Legendary"
+      "difficultyLabel": "Master+"
     },
     "4": {
       "displayName": "Div. 2, Problem A",
@@ -105,32 +105,32 @@
     },
     "22": {
       "displayName": "Rating < 1300 (Extra)",
-      "difficultyLabel": "Beginner",
+      "difficultyLabel": "Newbie / Pupil",
       "isExtra": true
     },
     "23": {
       "displayName": "1300 ≤ Rating ≤ 1399 (Extra)",
-      "difficultyLabel": "Easy",
+      "difficultyLabel": "Pupil",
       "isExtra": true
     },
     "24": {
       "displayName": "1400 ≤ Rating ≤ 1499 (Extra)",
-      "difficultyLabel": "Medium",
+      "difficultyLabel": "Specialist",
       "isExtra": true
     },
     "25": {
       "displayName": "1500 ≤ Rating ≤ 1599 (Extra)",
-      "difficultyLabel": "Medium-Hard",
+      "difficultyLabel": "Specialist",
       "isExtra": true
     },
     "26": {
       "displayName": "1600 ≤ Rating ≤ 1699 (Extra)",
-      "difficultyLabel": "Hard",
+      "difficultyLabel": "Expert",
       "isExtra": true
     },
     "27": {
       "displayName": "1700 ≤ Rating ≤ 1799 (Extra)",
-      "difficultyLabel": "Very Hard",
+      "difficultyLabel": "Expert",
       "isExtra": true
     },
     "28": {
@@ -140,22 +140,22 @@
     },
     "29": {
       "displayName": "1900 ≤ Rating ≤ 1999 (Extra)",
-      "difficultyLabel": "Master",
+      "difficultyLabel": "Candidate Master",
       "isExtra": true
     },
     "30": {
       "displayName": "2000 ≤ Rating ≤ 2099 (Extra)",
-      "difficultyLabel": "Grandmaster",
+      "difficultyLabel": "Candidate Master",
       "isExtra": true
     },
     "31": {
       "displayName": "2100 ≤ Rating ≤ 2199 (Extra)",
-      "difficultyLabel": "Legendary",
+      "difficultyLabel": "Master",
       "isExtra": true
     },
     "32": {
       "displayName": "Rating ≥ 2200 (Extra)",
-      "difficultyLabel": "Legendary",
+      "difficultyLabel": "Master+",
       "isExtra": true
     }
   }
