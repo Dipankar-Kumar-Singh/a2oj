@@ -223,6 +223,18 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 					<h2 class="section-header-title text-lg">All Problems</h2>
 				</div>
 				<div class="section-header-line flex-1"></div>
+				
+				<!-- Filter Toggle -->
+				<div class="filter-toggle-container">
+					<button id="hide-solved-toggle" class="filter-toggle-btn" title="Hide solved problems">
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+						</svg>
+						<span class="filter-toggle-text">Hide Solved</span>
+					</button>
+					<span id="filter-count" class="filter-count hidden"></span>
+				</div>
+				
 				<div class="section-header-corner"></div>
 			</div>
 			
@@ -365,32 +377,60 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 </Layout>
 
 <script>
-	// Load solved problems from localStorage and update UI
-	function loadSolvedProblems(): string[] {
+	// Load problem status from localStorage
+	function loadProblemStatus(): { solved: string[]; attempted: string[] } {
 		const solvedStr = localStorage.getItem('cf_solved');
-		if (!solvedStr) return [];
+		const attemptedStr = localStorage.getItem('cf_attempted');
+		
+		let solved: string[] = [];
+		let attempted: string[] = [];
+		
 		try {
-			return JSON.parse(solvedStr);
-		} catch {
-			return [];
+			if (solvedStr) solved = JSON.parse(solvedStr);
+		} catch { /* ignore */ }
+		
+		try {
+			if (attemptedStr) attempted = JSON.parse(attemptedStr);
+		} catch { /* ignore */ }
+		
+		return { solved, attempted };
+	}
+
+	function markAsSolved(row: HTMLElement): void {
+		// Add solved background class to the row
+		row.classList.add('problem-row-solved');
+		
+		// Update status cell
+		const statusCell = row.querySelector('.status-cell');
+		if (statusCell) {
+			statusCell.innerHTML = `
+				<div class="engineering-status engineering-status-solved">
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+					</svg>
+				</div>
+			`;
 		}
 	}
 
-	function updateProblemStatus(problemId: string, row: HTMLElement): void {
+	function markAsAttempted(row: HTMLElement): void {
+		// Add attempted background class to the row
+		row.classList.add('problem-row-attempted');
+		
+		// Update status cell
 		const statusCell = row.querySelector('.status-cell');
-		if (!statusCell) return;
-
-		// Replace pending indicator with solved checkmark
-		statusCell.innerHTML = `
-			<div class="engineering-status engineering-status-solved">
-				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-				</svg>
-			</div>
-		`;
+		if (statusCell) {
+			statusCell.innerHTML = `
+				<div class="engineering-status engineering-status-attempted">
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+					</svg>
+				</div>
+			`;
+		}
 	}
 
-	function updateProgressUI(solvedCount: number, totalCount: number): void {
+	function updateProgressUI(solvedCount: number, attemptedCount: number, totalCount: number): void {
 		const progressPercent = totalCount > 0 ? Math.round((solvedCount / totalCount) * 100) : 0;
 		
 		// Update progress bar fill
@@ -411,9 +451,10 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 			completionStat.textContent = `${progressPercent}%`;
 		}
 		
-		// Update Quick Stats "COMPLETE" card
+		// Update Quick Stats cards
 		const statCards = document.querySelectorAll('.engineering-stat-card');
 		if (statCards.length >= 4) {
+			// Update "COMPLETE" card (last one)
 			const completeCard = statCards[3];
 			const completeValue = completeCard.querySelector('.engineering-stat-card-value');
 			if (completeValue) {
@@ -422,25 +463,84 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 		}
 	}
 
+	// Filter toggle functionality
+	function initFilterToggle(solvedCount: number, totalCount: number): void {
+		const toggleBtn = document.getElementById('hide-solved-toggle');
+		const filterCount = document.getElementById('filter-count');
+		const tableBody = document.querySelector('.engineering-table-body');
+		
+		if (!toggleBtn || !tableBody) return;
+		
+		// Load saved filter state
+		const isHideSolvedActive = localStorage.getItem('hide_solved') === 'true';
+		
+		function updateFilterState(active: boolean): void {
+			if (active) {
+				tableBody?.classList.add('hide-solved');
+				toggleBtn?.classList.add('active');
+				if (filterCount) {
+					const remaining = totalCount - solvedCount;
+					filterCount.textContent = `${remaining} shown`;
+					filterCount.classList.remove('hidden');
+				}
+				// Update button text
+				const textSpan = toggleBtn?.querySelector('.filter-toggle-text');
+				if (textSpan) textSpan.textContent = 'Show All';
+			} else {
+				tableBody?.classList.remove('hide-solved');
+				toggleBtn?.classList.remove('active');
+				if (filterCount) {
+					filterCount.classList.add('hidden');
+				}
+				// Update button text
+				const textSpan = toggleBtn?.querySelector('.filter-toggle-text');
+				if (textSpan) textSpan.textContent = 'Hide Solved';
+			}
+		}
+		
+		// Apply initial state
+		updateFilterState(isHideSolvedActive);
+		
+		// Toggle on click
+		toggleBtn.addEventListener('click', () => {
+			const isActive = tableBody.classList.contains('hide-solved');
+			const newState = !isActive;
+			updateFilterState(newState);
+			localStorage.setItem('hide_solved', String(newState));
+		});
+	}
+
 	// Initialize on page load
 	document.addEventListener('DOMContentLoaded', () => {
-		const solvedProblems = loadSolvedProblems();
+		const { solved, attempted } = loadProblemStatus();
+		const solvedSet = new Set(solved);
+		const attemptedSet = new Set(attempted);
+		
 		const problemRows = document.querySelectorAll('[data-problem-id]');
 		const totalCount = problemRows.length;
 		let solvedCount = 0;
+		let attemptedCount = 0;
 		
-		// Count and mark solved problems
+		// Mark solved and attempted problems
 		problemRows.forEach((row) => {
 			const problemId = row.getAttribute('data-problem-id');
-			if (problemId && solvedProblems.includes(problemId)) {
-				updateProblemStatus(problemId, row as HTMLElement);
+			if (!problemId) return;
+			
+			if (solvedSet.has(problemId)) {
+				markAsSolved(row as HTMLElement);
 				solvedCount++;
+			} else if (attemptedSet.has(problemId)) {
+				markAsAttempted(row as HTMLElement);
+				attemptedCount++;
 			}
 		});
 		
-		// Always update progress UI (even if 0 solved)
-		updateProgressUI(solvedCount, totalCount);
+		// Update progress UI
+		updateProgressUI(solvedCount, attemptedCount, totalCount);
 		
-		console.log(`Progress: ${solvedCount}/${totalCount} problems solved`);
+		// Initialize filter toggle
+		initFilterToggle(solvedCount, totalCount);
+		
+		console.log(`Progress: ${solvedCount} solved, ${attemptedCount} attempted, ${totalCount} total`);
 	});
 </script>
