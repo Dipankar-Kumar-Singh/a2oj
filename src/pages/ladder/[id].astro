@@ -486,38 +486,38 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 				<div class="engineering-stat-card">
 					<div class="engineering-card-corner engineering-card-corner-tl"></div>
 					<div class="engineering-card-corner engineering-card-corner-br"></div>
-					<span class="engineering-card-label">EASY</span>
-					<div class="engineering-stat-card-value text-teal-600 dark:text-teal-400">
-						{problems.filter(p => p.difficulty === 1).length}
+					<span class="engineering-card-label">RATING &lt; 1400</span>
+					<div class="engineering-stat-card-value text-gray-600 dark:text-gray-400">
+						{problems.filter(p => (p.rating || 0) < 1400).length}
 					</div>
 					<span class="engineering-card-unit">PROBLEMS</span>
 				</div>
 				<div class="engineering-stat-card">
 					<div class="engineering-card-corner engineering-card-corner-tl"></div>
 					<div class="engineering-card-corner engineering-card-corner-br"></div>
-					<span class="engineering-card-label">MEDIUM</span>
+					<span class="engineering-card-label">1400 - 1799</span>
 					<div class="engineering-stat-card-value text-cyan-600 dark:text-cyan-400">
-						{problems.filter(p => p.difficulty === 2).length}
+						{problems.filter(p => (p.rating || 0) >= 1400 && (p.rating || 0) < 1800).length}
 					</div>
 					<span class="engineering-card-unit">PROBLEMS</span>
 				</div>
 				<div class="engineering-stat-card">
 					<div class="engineering-card-corner engineering-card-corner-tl"></div>
 					<div class="engineering-card-corner engineering-card-corner-br"></div>
-					<span class="engineering-card-label">HARD</span>
-					<div class="engineering-stat-card-value text-amber-600 dark:text-amber-400">
-						{problems.filter(p => p.difficulty === 3).length}
+					<span class="engineering-card-label">1800 - 2099</span>
+					<div class="engineering-stat-card-value text-blue-600 dark:text-blue-400">
+						{problems.filter(p => (p.rating || 0) >= 1800 && (p.rating || 0) < 2100).length}
 					</div>
 					<span class="engineering-card-unit">PROBLEMS</span>
 				</div>
 				<div class="engineering-stat-card">
 					<div class="engineering-card-corner engineering-card-corner-tl"></div>
 					<div class="engineering-card-corner engineering-card-corner-br"></div>
-					<span class="engineering-card-label">COMPLETE</span>
-					<div class="engineering-stat-card-value text-teal-600 dark:text-teal-400">
-						{progressPercent}%
+					<span class="engineering-card-label">RATING ≥ 2100</span>
+					<div class="engineering-stat-card-value text-orange-600 dark:text-orange-400">
+						{problems.filter(p => (p.rating || 0) >= 2100).length}
 					</div>
-					<span class="engineering-card-unit">SOLVED</span>
+					<span class="engineering-card-unit">PROBLEMS</span>
 				</div>
 			</div>
 		</div>
@@ -598,15 +598,6 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 		const completionStat = document.querySelector('.engineering-stat-value-lg');
 		if (completionStat) {
 			completionStat.textContent = `${progressPercent}%`;
-		}
-		
-		const statCards = document.querySelectorAll('.engineering-stat-card');
-		if (statCards.length >= 4) {
-			const completeCard = statCards[3];
-			const completeValue = completeCard.querySelector('.engineering-stat-card-value');
-			if (completeValue) {
-				completeValue.textContent = `${progressPercent}%`;
-			}
 		}
 	}
 
