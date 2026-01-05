@@ -366,12 +366,6 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 
 <script>
 	// Load solved problems from localStorage and update UI
-	interface SolvedData {
-		handle: string;
-		solved: string[];
-		lastUpdated: string;
-	}
-
 	function loadSolvedProblems(): string[] {
 		const solvedStr = localStorage.getItem('cf_solved');
 		if (!solvedStr) return [];
@@ -396,42 +390,46 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 		`;
 	}
 
-	function updateProgressBar(solvedCount: number, totalCount: number): void {
-		const progressPercent = Math.round((solvedCount / totalCount) * 100);
+	function updateProgressUI(solvedCount: number, totalCount: number): void {
+		const progressPercent = totalCount > 0 ? Math.round((solvedCount / totalCount) * 100) : 0;
 		
-		// Update progress fill
+		// Update progress bar fill
 		const progressFill = document.querySelector('.engineering-progress-fill') as HTMLElement;
 		if (progressFill) {
 			progressFill.style.width = `${progressPercent}%`;
 		}
 		
-		// Update progress text
-		const progressText = document.querySelectorAll('.engineering-progress-stat-value');
-		if (progressText.length >= 2) {
-			progressText[0].textContent = solvedCount.toString();
-			progressText[1].textContent = `${progressPercent}%`;
+		// Update solved count text (e.g., "5 / 100")
+		const progressCount = document.querySelector('.engineering-progress-count') as HTMLElement;
+		if (progressCount) {
+			progressCount.innerHTML = `${solvedCount}<span class="text-slate-400 dark:text-slate-500"> / ${totalCount}</span>`;
 		}
 		
-		// Update completion stat
-		const completeStatValue = document.querySelector('.engineering-stat-card:last-child .engineering-stat-card-value');
-		if (completeStatValue) {
-			completeStatValue.textContent = `${progressPercent}%`;
+		// Update completion percentage in stat box
+		const completionStat = document.querySelector('.engineering-stat-value-lg') as HTMLElement;
+		if (completionStat) {
+			completionStat.textContent = `${progressPercent}%`;
+		}
+		
+		// Update Quick Stats "COMPLETE" card
+		const statCards = document.querySelectorAll('.engineering-stat-card');
+		if (statCards.length >= 4) {
+			const completeCard = statCards[3];
+			const completeValue = completeCard.querySelector('.engineering-stat-card-value');
+			if (completeValue) {
+				completeValue.textContent = `${progressPercent}%`;
+			}
 		}
 	}
 
 	// Initialize on page load
 	document.addEventListener('DOMContentLoaded', () => {
 		const solvedProblems = loadSolvedProblems();
-		
-		if (solvedProblems.length === 0) {
-			console.log('No solved problems data found');
-			return;
-		}
-		
-		// Update each problem row
 		const problemRows = document.querySelectorAll('[data-problem-id]');
+		const totalCount = problemRows.length;
 		let solvedCount = 0;
 		
+		// Count and mark solved problems
 		problemRows.forEach((row) => {
 			const problemId = row.getAttribute('data-problem-id');
 			if (problemId && solvedProblems.includes(problemId)) {
@@ -440,9 +438,9 @@ const ladderNumber = getLadderNumber(ladderId, ladder.type);
 			}
 		});
 		
-		// Update progress indicators
-		updateProgressBar(solvedCount, problemRows.length);
+		// Always update progress UI (even if 0 solved)
+		updateProgressUI(solvedCount, totalCount);
 		
-		console.log(`Updated ${solvedCount}/${problemRows.length} problems as solved`);
+		console.log(`Progress: ${solvedCount}/${totalCount} problems solved`);
 	});
 </script>
