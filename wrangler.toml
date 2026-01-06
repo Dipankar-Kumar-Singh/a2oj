@@ -1,0 +1,4 @@
+# Cloudflare Pages configuration
+name = "a2oj-refreshed"
+pages_build_output_dir = "dist"
+
