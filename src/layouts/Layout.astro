@@ -22,13 +22,9 @@ const themeStorageKey = STORAGE_KEYS.THEME;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<!-- Preconnect to Google Fonts (keep these for faster connection) -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<!-- Load fonts asynchronously to prevent render blocking -->
-		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
-		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+		<!-- Preload local fonts for faster loading -->
+		<link rel="preload" href="/fonts/plus-jakarta-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="/fonts/plus-jakarta-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 		<title>{title}</title>
 		<!-- Initialize theme before page render to prevent flash -->
 		<script is:inline define:vars={{ themeStorageKey }}>
@@ -48,6 +44,52 @@ const themeStorageKey = STORAGE_KEYS.THEME;
 </html>
 
 <style is:global>
+	/* Local font definitions - Plus Jakarta Sans */
+	@font-face {
+		font-family: 'Plus Jakarta Sans';
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+		src: url('/fonts/plus-jakarta-sans-latin-400-normal.woff2') format('woff2');
+	}
+	@font-face {
+		font-family: 'Plus Jakarta Sans';
+		font-style: normal;
+		font-weight: 500;
+		font-display: swap;
+		src: url('/fonts/plus-jakarta-sans-latin-500-normal.woff2') format('woff2');
+	}
+	@font-face {
+		font-family: 'Plus Jakarta Sans';
+		font-style: normal;
+		font-weight: 600;
+		font-display: swap;
+		src: url('/fonts/plus-jakarta-sans-latin-600-normal.woff2') format('woff2');
+	}
+	@font-face {
+		font-family: 'Plus Jakarta Sans';
+		font-style: normal;
+		font-weight: 700;
+		font-display: swap;
+		src: url('/fonts/plus-jakarta-sans-latin-700-normal.woff2') format('woff2');
+	}
+	
+	/* Local font definitions - JetBrains Mono */
+	@font-face {
+		font-family: 'JetBrains Mono';
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+		src: url('/fonts/jetbrains-mono-latin-400-normal.woff2') format('woff2');
+	}
+	@font-face {
+		font-family: 'JetBrains Mono';
+		font-style: normal;
+		font-weight: 500;
+		font-display: swap;
+		src: url('/fonts/jetbrains-mono-latin-500-normal.woff2') format('woff2');
+	}
+
 	* {
 		font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 	}
@@ -58,13 +100,6 @@ const themeStorageKey = STORAGE_KEYS.THEME;
 	
 	html {
 		scroll-behavior: smooth;
-	}
-	
-	/* Reduce font weight variations to minimize download size */
-	@supports (font-display: swap) {
-		* {
-			font-display: swap;
-		}
 	}
 
 	/* Royal Premium Dark Mode - Deep Navy */
