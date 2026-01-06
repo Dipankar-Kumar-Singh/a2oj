@@ -1,6 +1,6 @@
 {
 	"main": "dist/_worker.js/index.js",
-	"name": "a2oj-refreshed",
+	"name": "a2oj",
   "compatibility_date": "2026-01-06",
   "compatibility_flags": [
     "nodejs_compat",
