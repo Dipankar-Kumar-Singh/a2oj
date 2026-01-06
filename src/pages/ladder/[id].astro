@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ProfileBar from '../../components/ProfileBar.astro';
 import type { LadderData, DisplayProblem, AnalyticsRange, LadderType } from '../../types';
 import {
 	laddersIndex,
@@ -77,25 +78,8 @@ const pageData = { ladderId };
 					<span>BACK TO LADDERS</span>
 				</a>
 				
-				<!-- Settings Controls -->
-				<div class="flex items-center gap-2">
-					<button id="zen-mode-btn" class="engineering-icon-btn with-label" title="Zen Mode - Hide all filters">
-						<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-							<circle cx="12" cy="12" r="9" />
-							<circle cx="12" cy="12" r="3" />
-						</svg>
-						<span class="btn-label">ZEN</span>
-					</button>
-					<button id="theme-toggle" class="engineering-icon-btn" title="Toggle Dark Mode">
-						<svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-							<circle cx="12" cy="12" r="4" />
-							<path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414" />
-						</svg>
-						<svg class="w-4 h-4 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-							<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-						</svg>
-					</button>
-				</div>
+				<!-- Profile Bar with ZEN button -->
+				<ProfileBar showZenButton={true} />
 			</div>
 			
 			<!-- Main Header Box -->

@@ -1,5 +1,6 @@
 import { STORAGE_KEYS, getPageFiltersKey, DEFAULT_COLUMN_VISIBILITY } from '../types';
 import type { PageFilters } from '../types';
+import { initProfileBar } from './profile-bar';
 
 interface ProblemStatus {
   readonly solved: readonly string[];
@@ -410,28 +411,7 @@ function initZenMode(): void {
   });
 }
 
-function updateThemeIcons(isDark: boolean): void {
-  const btn = document.getElementById('theme-toggle');
-  if (!btn) return;
-
-  btn.querySelector('.sun-icon')?.classList.toggle('hidden', isDark);
-  btn.querySelector('.moon-icon')?.classList.toggle('hidden', !isDark);
-  btn.querySelector('.dark-label')?.classList.toggle('hidden', isDark);
-  btn.querySelector('.light-label')?.classList.toggle('hidden', !isDark);
-}
-
-function initThemeToggle(): void {
-  const btn = document.getElementById('theme-toggle');
-  if (!btn) return;
-
-  updateThemeIcons(document.documentElement.classList.contains('dark'));
-
-  btn.addEventListener('click', () => {
-    const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem(STORAGE_KEYS.THEME, isDark ? 'dark' : 'light');
-    updateThemeIcons(isDark);
-  });
-}
+// Theme toggle is now handled by initProfileBar from profile-bar.ts
 
 function initRatingFilter(): void {
   const ratingMin = document.getElementById('rating-min') as HTMLInputElement | null;
@@ -628,8 +608,14 @@ export function initLadderPage(pageData: { ladderId: number }): void {
 
   initFilterToggle();
   initColumnToggles();
-  initZenMode();
-  initThemeToggle();
+  initZenMode(); // Ladder page has its own ZEN mode with column visibility logic
+  
+  // Initialize profile bar (handles theme toggle, profile tracking)
+  initProfileBar({
+    onSyncSuccess: () => applyFiltersAndSort(),
+    autoRefresh: true,
+    skipZenMode: true, // ZEN mode is handled above with ladder-specific column visibility logic
+  });
 
   loadPageFilters();
   updateSortButtonStates();

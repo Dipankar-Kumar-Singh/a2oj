@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ProfileBar from '../components/ProfileBar.astro';
 import type { Quote, LadderData } from '../types';
 import { laddersIndex, getLadderOverride } from '../utils/ladders';
 import quotesJson from '../data/quotes.json';
@@ -79,49 +80,13 @@ const pageData = { ladderProblems };
 					</div>
 				</div>
 
-				<!-- Header Row: Project Label + User Input -->
-				<div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
-					<!-- Project Label -->
+				<!-- Header Row: Dynamic based on tracking state -->
+				<div id="header-row" class="header-row mt-6">
 					<div class="engineering-hero-label">
 						<span class="engineering-hero-label-text">PROJECT // A2OJ.REFRESHED</span>
 					</div>
 					
-					<!-- User Handle Input -->
-					<div class="flex items-end gap-3">
-						<div class="engineering-hero-input-box-compact">
-							<span class="engineering-input-label">USER.HANDLE</span>
-							<input 
-								type="text" 
-								id="cf-handle-input"
-								placeholder="Enter your Codeforces handle"
-								class="engineering-input-compact"
-							/>
-						</div>
-						<button id="track-button" class="engineering-button-compact">
-							<span class="engineering-button-icon">▶</span>
-							Track
-						</button>
-						<!-- Sync Status (shows when user is tracked) -->
-						<div id="sync-status" class="hidden items-end gap-2">
-							<button id="sync-button" class="engineering-sync-button" title="Refresh progress from Codeforces">
-								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-								</svg>
-							</button>
-							<span id="last-sync" class="engineering-sync-time"></span>
-						</div>
-						
-						<!-- Theme Toggle -->
-						<button id="theme-toggle" class="engineering-icon-btn" title="Toggle Dark Mode">
-							<svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-								<circle cx="12" cy="12" r="4" />
-								<path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414" />
-							</svg>
-							<svg class="w-4 h-4 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-								<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-							</svg>
-						</button>
-					</div>
+					<ProfileBar showZenButton={false} />
 				</div>
 			</div>
 		</div>

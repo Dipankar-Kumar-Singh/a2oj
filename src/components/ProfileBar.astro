@@ -1,0 +1,134 @@
+---
+// ProfileBar.astro - Reusable profile tracking component
+// Shows either the handle input (unlocked) or the user chip (locked)
+interface Props {
+  showZenButton?: boolean;
+}
+
+const { showZenButton = false } = Astro.props;
+---
+
+<div id="profile-bar" class="profile-bar-container">
+  <!-- Unlocked State: Input + Track Button -->
+  <div id="unlocked-state" class="profile-bar-unlocked">
+    <div class="engineering-hero-input-box-compact">
+      <span class="engineering-input-label">USER.HANDLE</span>
+      <input 
+        type="text" 
+        id="cf-handle-input"
+        placeholder="Enter your Codeforces handle"
+        class="engineering-input-compact"
+      />
+    </div>
+    <button id="track-button" class="engineering-button-compact">
+      <span class="engineering-button-icon">▶</span>
+      Track
+    </button>
+  </div>
+  
+  <!-- Locked State: User chip -->
+  <div id="locked-state" class="profile-bar-locked hidden">
+    <div class="user-chip">
+      <div class="user-chip-main">
+        <!-- User avatar (from Codeforces) or fallback icon -->
+        <img 
+          id="user-avatar" 
+          class="user-chip-avatar hidden" 
+          alt="Profile"
+        />
+        <svg id="user-avatar-fallback" class="user-chip-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+        </svg>
+        
+        <!-- Username -->
+        <span id="locked-username" class="user-chip-name"></span>
+        
+        <!-- Edit button (inline with username) -->
+        <button id="edit-handle-button" class="user-chip-action" title="Change Handle">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125" />
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Divider -->
+      <div class="user-chip-divider"></div>
+      
+      <!-- Sync section -->
+      <button id="sync-button" class="user-chip-sync" title="Sync progress from Codeforces">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        <span id="last-sync" class="user-chip-sync-time"></span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Optional ZEN button (for ladder pages) -->
+  {showZenButton && (
+    <button id="zen-mode-btn" class="engineering-icon-btn with-label" title="Zen Mode - Hide all filters">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="9" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+      <span class="btn-label">ZEN</span>
+    </button>
+  )}
+  
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" class="engineering-icon-btn" title="Toggle Dark Mode">
+    <svg class="w-4 h-4 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414" />
+    </svg>
+    <svg class="w-4 h-4 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+      <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+    </svg>
+  </button>
+</div>
+
+<style>
+  .profile-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .profile-bar-unlocked {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.75rem;
+  }
+  
+  .profile-bar-unlocked.hidden {
+    display: none;
+  }
+  
+  .profile-bar-unlocked.hiding {
+    animation: profileBarFadeOut 0.4s ease-out forwards;
+  }
+  
+  .profile-bar-locked {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-bar-locked.hidden {
+    display: none;
+  }
+  
+  .profile-bar-locked.showing {
+    animation: profileBarFadeIn 0.4s ease-out forwards;
+  }
+  
+  @keyframes profileBarFadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+  }
+  
+  @keyframes profileBarFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
