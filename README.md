@@ -1,174 +1,62 @@
-# 🚀 A2OJ Refreshed
+# A2OJ Refreshed
 
-A modern, blazing-fast reimagining of [A2OJ (Ahmed Aly Online Judge)](https://earthshakira.github.io/a2oj-clientside/server/Ladders.html) — structured practice ladders for competitive programming.
+A modern reimagining of [A2OJ Ladders](https://earthshakira.github.io/a2oj-clientside/server/Ladders.html) — structured practice ladders for competitive programming.
 
-Built with **Astro** for maximum performance and minimal JavaScript, featuring a beautiful, modern UI powered by **Tailwind CSS**.
+Built with **Astro** + **Tailwind CSS**.
 
-## ✨ Features
+## Features
 
-- **🎯 Curated Problem Ladders**: 2,200+ problems organized by difficulty rating
-- **📊 Progress Tracking**: Track your solved problems with Codeforces handle integration
-- **⚡ Lightning Fast**: Astro's islands architecture = instant page loads
-- **🎨 Modern UI**: Beautiful gradient design with smooth animations
-- **📱 Fully Responsive**: Works perfectly on desktop, tablet, and mobile
-- **🌙 Dark Mode Ready**: Built-in dark mode support
-- **♿ Accessible**: Semantic HTML with ARIA labels
+- **2,200+ Problems** organized by difficulty rating (11 rating-based + 7 division-based + 11 extra ladders)
+- **Codeforces Integration** — Track your progress automatically by syncing with your handle
+- **Zen Mode** — Hide distractions and focus on solving problems
+- **Dark/Light Mode** — Easy on the eyes
+- **Multi-tag Filtering** — Filter problems by tags with "Any of" or "All of" modes
+- **Offline Progress** — Data saved to localStorage
 
-## 🏗️ Tech Stack
-
-### Why Astro?
-
-As explained in the project philosophy:
-
-- **Zero JS by default** — Only interactive components hydrate
-- **Islands Architecture** — Perfect for content-heavy sites with light interactivity
-- **Instant First Paint** — Pre-rendered HTML loads immediately
-- **Minimal Bundle** — Only the progress tracker needs JavaScript
-
-### Stack Details
-
-- **Framework**: [Astro](https://astro.build) v5.16
-- **Styling**: [Tailwind CSS](https://tailwindcss.com) v4.1
-- **Font**: Inter (Google Fonts)
-- **Icons**: Heroicons (inline SVG)
-- **Deployment**: Ready for Cloudflare Pages / Vercel
-
-## 🎨 UI Highlights
-
-### Homepage
-- **Hero Section**: Gradient background with username input
-- **Stats Cards**: Floating cards showing key metrics
-- **Ladder Grid**: Beautiful card-based layout with:
-  - Color-coded difficulty badges
-  - Progress bars per ladder
-  - Hover animations
-  - Problem count indicators
-
-### Ladder Detail Page
-- **Progress Dashboard**: Visual progress bar with completion percentage
-- **Problems Table**: Clean, sortable table with:
-  - Star-based difficulty indicators
-  - Tag pills for problem categories
-  - Solved/unsolved status icons
-  - Direct links to Codeforces
-  - Contest metadata
-
-### Design Principles
-- **Gradient Accents**: Indigo → Purple for primary actions
-- **Subtle Animations**: Hover effects, fade-ins, translate transforms
-- **Clean Typography**: Inter font for maximum readability
-- **Color-Coded Difficulty**: Visual hierarchy at a glance
-- **Whitespace**: Generous spacing for breathing room
-
-## 📂 Project Structure
-
-```
-/
-├── public/              # Static assets
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro # Base layout with fonts, meta tags
-│   ├── pages/
-│   │   ├── index.astro  # Homepage with ladder overview
-│   │   └── ladder/
-│   │       └── [id].astro # Dynamic ladder detail pages
-│   └── styles/
-│       └── global.css   # Tailwind + custom utilities
-├── astro.config.mjs     # Astro configuration
-├── package.json
-└── tailwind.config.js   # Tailwind v4 config
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+ 
-- npm 10+
-
-### Installation
+## Quick Start
 
 ```bash
-# Clone the repository
-git clone <your-repo-url>
-cd a2oj-refreshed
-
 # Install dependencies
 npm install
 
-# Start development server
+# Start dev server
 npm run dev
+
+# Build for production
+npm run build
 ```
 
-Visit `http://localhost:4321` 🎉
+Visit `http://localhost:4321`
 
-### Build for Production
+## Deploy to Cloudflare Pages
+
+### Via Dashboard (Recommended)
+
+1. Push to GitHub/GitLab
+2. Go to [Cloudflare Dashboard](https://dash.cloudflare.com/) → Workers & Pages → Create → Pages
+3. Connect your repo
+4. Set build settings:
+   - **Build command:** `npm run build`
+   - **Output directory:** `dist`
+5. Deploy!
+
+### Via CLI
 
 ```bash
-# Build static site
-npm run build
-
-# Preview production build
-npm run preview
+npx wrangler pages deploy dist --project-name=a2oj-refreshed
 ```
 
-## 🎯 Key Pages
+## Tech Stack
 
-- **`/`** — Homepage with all ladders
-- **`/ladder/11`** — Ladder 11 (Rating < 1300)
-- **`/ladder/12`** — Ladder 12 (1300 ≤ Rating ≤ 1399)
-- ... and so on for all 18+ ladders
+- [Astro](https://astro.build) v5.16 — Static site generation
+- [Tailwind CSS](https://tailwindcss.com) v4.1 — Styling
+- [Codeforces API](https://codeforces.com/apiHelp) — Progress tracking
 
-## 🔮 Future Enhancements
+## Credits
 
-### Phase 1: Core Functionality
-- [ ] Integrate Codeforces API for real progress tracking
-- [ ] Local storage for offline progress saving
-- [ ] Filter problems by tags, difficulty
-- [ ] Search functionality
-
-### Phase 2: Interactivity
-- [ ] Add a **SolidJS island** for the progress tracker
-- [ ] Username validation & profile fetching
-- [ ] Toggle solved/unsolved status
-- [ ] Export progress as JSON
-
-### Phase 3: Polish
-- [ ] Add problem hints & editorial links
-- [ ] Leaderboard for ladder completion
-- [ ] Dark mode toggle (manual)
-- [ ] Animations on progress changes
-
-## 🎓 Learning Resources
-
-- **Astro Docs**: https://docs.astro.build
-- **Tailwind CSS**: https://tailwindcss.com/docs
-- **Codeforces API**: https://codeforces.com/apiHelp
-- **A2OJ Original**: https://earthshakira.github.io/a2oj-clientside/
-
-## 🤝 Contributing
-
-Contributions are welcome! This is a community project for competitive programmers.
-
-1. Fork the repo
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📜 License
-
-MIT License - feel free to use this for your own projects!
-
-## 💬 Acknowledgments
-
-- **Ahmed Aly** for the original A2OJ concept
-- **Codeforces** for the amazing platform
-- **Astro Team** for the incredible framework
-- **Competitive Programming Community** for the inspiration
+- **Ahmed Aly** — Original A2OJ concept
+- **Codeforces** — Problem data and API
 
 ---
 
-**Built with ❤️ for competitive programmers worldwide**
-
-*"Master Codeforces problems systematically."*
+**Built for competitive programmers worldwide** ⚡
